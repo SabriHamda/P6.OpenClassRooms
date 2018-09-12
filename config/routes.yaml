@@ -1,8 +1,0 @@
-#index:
-#    path: /
-#    controller: App\Controller\FrontendController/HomeController::index
-
-
-frontend-home:
-    path: ['/','/home']
-    controller: App\Controller\FrontendController/HomeController::index
