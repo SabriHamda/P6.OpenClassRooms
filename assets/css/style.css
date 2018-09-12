@@ -1,0 +1,35 @@
+.main-container {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.main-nav {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.main-slider {
+    position: fixed;
+    padding-top: 50px;
+    height: 100vh;
+}
+
+.list-triks {
+    position: absolute;
+    top: 100vh;
+    width: 100vw;
+    height: auto;
+    margin: 0;
+    background: #4b545c;
+    padding-top: 5%;
+}
+
+.trick-card {
+    display: inline-block;
+    width: 300px;
+    margin: 5px;
+    padding-top: 15px;
+}
