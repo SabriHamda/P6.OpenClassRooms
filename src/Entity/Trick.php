@@ -24,7 +24,12 @@ class Trick
     /**
      * @ORM\Column(type="integer")
      */
-    private $category;
+    private $categoryId;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $commentId;
 
     /**
      * @ORM\Column(type="string", length=26)
@@ -42,11 +47,13 @@ class Trick
     private $description;
 
     /**
+     * @ORM\GeneratedValue
      * @ORM\Column(type="datetime", length=26)
      */
     private $createdAt;
 
     /**
+     * @ORM\GeneratedValue
      * @ORM\Column(type="datetime", length=26)
      */
     private $updatedAt;
@@ -70,17 +77,31 @@ class Trick
     /**
      * @return mixed
      */
-    public function getCategory()
+    public function getCategoryId()
     {
-        return $this->category;
+        return $this->categoryId;
     }
 
     /**
-     * @param mixed $category
+     * @param mixed $categoryId
      */
-    public function setCategory($category): void
+    public function setCategoryId($categoryId): void
     {
-        $this->category = $category;
+        $this->categoryId = $categoryId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommentId()
+    {
+        return $this->commentId;
+    }/**
+     * @param mixed $commentId
+     */
+    public function setCommentId($commentId): void
+    {
+        $this->commentId = $commentId;
     }
 
     /**
@@ -144,7 +165,7 @@ class Trick
      */
     public function setCreatedAt($createdAt): void
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime("now");
     }
 
     /**
@@ -160,7 +181,7 @@ class Trick
      */
     public function setUpdatedAt($updatedAt): void
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime("now");
     }
 
 

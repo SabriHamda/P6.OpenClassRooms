@@ -8,7 +8,15 @@
 namespace App\Repository;
 
 
-class TrickRepository
+use App\Entity\Trick;
+use Doctrine\ORM\EntityRepository;
+
+class TrickRepository extends EntityRepository
 {
+    public function getTricks()
+    {
+        $trick = $this->getDoctrine()
+            ->getRepository(Trick::class);
+    }
 
 }
