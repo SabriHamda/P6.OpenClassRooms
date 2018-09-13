@@ -40,8 +40,7 @@ class HomeAction extends Controller
             ->getRepository(Trick::class)
             ->findAll();
 
-        dump($tricks);
-        return new Response($this->twig->render('Frontend/home.html.twig'));
+        return new Response($this->twig->render('Frontend/home.html.twig',['tricks'=>$tricks]));
     }
 
 }
