@@ -9,14 +9,15 @@ namespace App\Repository;
 
 
 use App\Entity\Trick;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class TrickRepository extends EntityRepository
+class TrickRepository extends ServiceEntityRepository
 {
-    public function getTricks()
+
+    public function __construct(RegistryInterface $registry)
     {
-        $trick = $this->getDoctrine()
-            ->getRepository(Trick::class);
+        parent::__construct($registry, Trick::class);
     }
 
 }
