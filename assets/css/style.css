@@ -6,7 +6,7 @@ body{
 
 }
 
-.red-one{
+.red-one, .active{
     color: #D52B1E;
 }
 .main-container {
@@ -21,7 +21,7 @@ body{
     left: 0;
     z-index: 99;
     color: #fffafa;
-    background: #4c4b4b;
+    background: #444343;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
@@ -79,7 +79,7 @@ body{
     margin-top:50px;
 }
 
-.header-title .btn:hover {
+.btn:hover{
     color: #fff;
     background-color: #bf261b;
     border-color: #bf261b;
@@ -96,7 +96,7 @@ body{
     height: auto;
     margin: 0;
     padding-top: 5%;
-    background: #4c4b4b;
+    background: #444343;
     border-top: 1px solid rgba(255, 255, 255, 0.5);
 
 }
@@ -110,4 +110,15 @@ body{
     border-radius: 0;
     text-align: left;
     background: #fffafa;
+    border: none;
+}
+
+.trick-card .btn{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.card-body{
+    height: 200px;
 }
