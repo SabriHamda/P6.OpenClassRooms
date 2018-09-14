@@ -1,15 +1,11 @@
-const $ = require('jquery');
-
 require('bootstrap');
 
-$(document).ready(function(){
-    $(window).scroll(function() {
-        var scrollTop = $(window).scrollTop();
-        var imgPos = (scrollTop / -2 + 'px');
-        var titlePos = (scrollTop / -1 + 'px');
+window.addEventListener('scroll', function(e){
+    let windowScrollTop = this.scrollY;
+    let imgPos = (windowScrollTop / -2 + 'px');
+    let titlePos = (windowScrollTop / -1 + 'px');
 
-        $('.main-header').css('transform', 'translateY(' + imgPos + ')');
-        $('.header-title').css('transform', 'translateX(' + titlePos + ')');
+    document.getElementById('main-header').style.transform = "translate(0, " + imgPos + ")";
+    document.getElementById('header-title').style.transform = "translate(" + titlePos + " ,0)";
 
-    });
 });
