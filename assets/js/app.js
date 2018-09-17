@@ -1,3 +1,5 @@
+const $ = require('jquery');
+
 require('bootstrap');
 
 window.addEventListener('scroll', function(e){
