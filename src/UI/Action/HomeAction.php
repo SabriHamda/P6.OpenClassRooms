@@ -7,14 +7,12 @@
 
 namespace App\UI\Action;
 
-use App\Entity\Trick;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class HomeAction extends Controller
+class HomeAction
 {
     /**
      * @var Environment
@@ -22,12 +20,18 @@ class HomeAction extends Controller
     private $twig;
 
     /**
+     * @var trickRepository
+     */
+    private $trickRepository;
+
+    /**
      * HomeAction constructor.
      * @param $twig
      */
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, TrickRepository $trickRepository)
     {
         $this->twig = $twig;
+        $this->trickRepository = $trickRepository;
     }
 
 
@@ -36,11 +40,9 @@ class HomeAction extends Controller
      */
     public function index()
     {
-        $tricks = $this->getDoctrine()
-            ->getRepository(Trick::class)
-            ->findAll();
+        $tricks = $this->trickRepository->findAll();
 
-        return new Response($this->twig->render('Frontend/home.html.twig',['tricks'=>$tricks]));
+        return new Response($this->twig->render('Frontend/home.html.twig', ['tricks' => $tricks]));
     }
 
 }
