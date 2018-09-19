@@ -1,12 +1,12 @@
-{% include 'frontend/layout.html.twig' %}
+{% extends 'frontend/layout.html.twig' %}
 {% block content %}
     <!=====----- navigation -----=====>
-    {% include('Frontend/parts/navigation.html.twig') %}
+    {% include('frontend/parts/navigation.html.twig') %}
     <!=====----- navigation end-----=====>
 
     <div class="main-container container-fluid">
         <div id="main-header" class="main-header row">
-        <img src="{{ asset('img/bg.jpg') }}" alt="image">
+            <img src="{{ asset('img/bg.jpg') }}" alt="image">
             <div id="header-title" class="header-title">
                 <h1>Les Tricks<br> Typiques de <br><span>Snowboard </span>à Connaître </h1>
                 <h4>La montagne, ça vous gagne!</h4>
@@ -51,7 +51,8 @@
 
                             <!-- Content -->
                             <h5 class="text-uppercase">Snow Tricks</h5>
-                            <p>Qu'elles soient "old school" ou "new school", <br>les prouesses aériennes du snowboard sont toujours d'une beauté à couper le souffle.<br> la preuve en images.</p>
+                            <p>Qu'elles soient "old school" ou "new school", <br>les prouesses aériennes du snowboard
+                                sont toujours d'une beauté à couper le souffle.<br> la preuve en images.</p>
 
                         </div>
                         <!-- Grid column -->
@@ -93,10 +94,12 @@
                                     <a href="https://fr.wikipedia.org/wiki/Snowboard">Wikipedia</a>
                                 </li>
                                 <li>
-                                    <a href="http://www.skiclub-legrandbornand.com/content/lexique-du-snowboarder-0">Lexique du snowboarder</a>
+                                    <a href="http://www.skiclub-legrandbornand.com/content/lexique-du-snowboarder-0">Lexique
+                                        du snowboarder</a>
                                 </li>
                                 <li>
-                                    <a href="https://www.redbull.com/ch-fr/les-tricks-typiques-de-snowboard">Les tricks typiques de snowboard</a>
+                                    <a href="https://www.redbull.com/ch-fr/les-tricks-typiques-de-snowboard">Les tricks
+                                        typiques de snowboard</a>
                                 </li>
                                 <li>
                                     <a href="http://www.skipass.com/forums/sports/snowboard/sujet-67154.html">Forum</a>
@@ -114,7 +117,7 @@
 
                 <!-- Copyright -->
                 <div class="footer-copyright text-center py-3">© 2018 Copyright :
-                    <a href="https://p6.hamda.ch">  www.hamda.ch</a>
+                    <a href="https://p6.hamda.ch"> www.hamda.ch</a>
                 </div>
                 <!-- Copyright -->
 
@@ -124,7 +127,7 @@
     </div>
 
 
-{% endblock %}
+{% endblock content %}
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('build/js/app.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('build/js/app.js') }}"></script>
 {% endblock javascripts %}

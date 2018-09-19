@@ -8,10 +8,16 @@
 namespace App\UI\Action;
 
 use App\Repository\TrickRepository;
+use App\UI\Responder\Interfaces\HomeResponderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
+/**
+ * Class HomeAction
+ * @package App\UI\Action
+ */
 class HomeAction
 {
     /**
@@ -20,7 +26,7 @@ class HomeAction
     private $twig;
 
     /**
-     * @var trickRepository
+     * @var TrickRepository
      */
     private $trickRepository;
 
@@ -37,12 +43,17 @@ class HomeAction
 
     /**
      * @Route("/", name="frontend-home")
+     * @throws
+     * @return Response
      */
-    public function index()
+    public function __invoke(Request $request, HomeResponderInterface $responder)
     {
         $tricks = $this->trickRepository->findAll();
 
-        return new Response($this->twig->render('Frontend/home.html.twig', ['tricks' => $tricks]));
+        return $responder($request, $tricks);
+
     }
+
+
 
 }
