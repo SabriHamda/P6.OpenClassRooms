@@ -9,10 +9,10 @@ namespace App\Repository\Interfaces;
 
 
 /**
- * Interface TrickInterface
+ * Interface TrickRepositoryInterface
  * @package App\Repository\Interfaces
  */
-interface TrickInterface
+interface TrickRepositoryInterface
 {
     /**
      * @return mixed

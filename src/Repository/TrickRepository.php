@@ -9,7 +9,7 @@ namespace App\Repository;
 
 
 use App\Entity\Trick;
-use App\Repository\Interfaces\TrickInterface;
+use App\Repository\Interfaces\TrickRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * Class TrickRepository
  * @package App\Repository
  */
-class TrickRepository extends ServiceEntityRepository implements TrickInterface
+class TrickRepository extends ServiceEntityRepository implements TrickRepositoryInterface
 {
 
     /**
@@ -34,7 +34,7 @@ class TrickRepository extends ServiceEntityRepository implements TrickInterface
      */
     public function findAll()
     {
-        return parent::findAll();
+        return $this->createQueryBuilder("tricks")->getQuery()->getResult();
     }
 
 }
