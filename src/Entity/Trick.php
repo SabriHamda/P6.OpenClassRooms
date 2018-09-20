@@ -10,7 +10,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="TrickRepository")
+ * @ORM\Entity(repositoryClass="\TrickRepository")
  */
 class Trick
 {
@@ -97,8 +97,8 @@ class Trick
     {
         return $this->commentId;
     }/**
-     * @param mixed $commentId
-     */
+ * @param mixed $commentId
+ */
     public function setCommentId($commentId): void
     {
         $this->commentId = $commentId;
