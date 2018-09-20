@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/**
+ * Interface HomeResponderInterface
+ * @package App\UI\Responder\Interfaces
+ */
 interface HomeResponderInterface
 {
     /**

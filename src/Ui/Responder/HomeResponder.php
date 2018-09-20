@@ -13,8 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/**
+ * Class HomeResponder
+ * @package App\UI\Responder
+ */
 class HomeResponder implements HomeResponderInterface
 {
+    /**
+     * @var Environment
+     */
     private $twig;
 
     public function __construct(Environment $twig)
