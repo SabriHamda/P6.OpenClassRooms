@@ -2,7 +2,7 @@
 /**
  * Created by Sabri Hamda.
  * Date: 12.09.18
- * Time: 11:52
+ * Time: 11:52.
  */
 
 namespace App\UI\Action;
@@ -15,8 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 /**
- * Class HomeAction
- * @package App\UI\Action
+ * Class HomeAction.
  */
 class HomeAction
 {
@@ -32,6 +31,7 @@ class HomeAction
 
     /**
      * HomeAction constructor.
+     *
      * @param $twig
      */
     public function __construct(Environment $twig, TrickRepository $trickRepository)
@@ -40,10 +40,11 @@ class HomeAction
         $this->trickRepository = $trickRepository;
     }
 
-
     /**
      * @Route("/", name="frontend-home")
+     *
      * @throws
+     *
      * @return Response
      */
     public function __invoke(Request $request, HomeResponderInterface $responder)
@@ -51,9 +52,5 @@ class HomeAction
         $tricks = $this->trickRepository->findAll();
 
         return $responder($request, $tricks);
-
     }
-
-
-
 }

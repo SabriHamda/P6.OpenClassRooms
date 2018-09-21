@@ -2,11 +2,10 @@
 /**
  * Created by Sabri Hamda.
  * Date: 12.09.18
- * Time: 21:07
+ * Time: 21:07.
  */
 
 namespace App\Repository;
-
 
 use App\Entity\Trick;
 use App\Repository\Interfaces\TrickRepositoryInterface;
@@ -14,14 +13,13 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * Class TrickRepository
- * @package App\Repository
+ * Class TrickRepository.
  */
 class TrickRepository extends ServiceEntityRepository implements TrickRepositoryInterface
 {
-
     /**
      * TrickRepository constructor.
+     *
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
@@ -34,7 +32,6 @@ class TrickRepository extends ServiceEntityRepository implements TrickRepository
      */
     public function findAll()
     {
-        return $this->createQueryBuilder("tricks")->getQuery()->getResult();
+        return $this->createQueryBuilder('tricks')->getQuery()->getResult();
     }
-
 }

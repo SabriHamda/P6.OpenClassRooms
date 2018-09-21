@@ -2,19 +2,17 @@
 /**
  * Created by Sabri Hamda.
  * Date: 12.09.18
- * Time: 22:36
+ * Time: 22:36.
  */
 
 namespace App\DataFixtures;
-
 
 use App\Entity\Trick;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class AppFixtures
- * @package App\DataFixtures
+ * Class AppFixtures.
  */
 class AppFixtures extends Fixture
 {
@@ -24,7 +22,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // create 20 products! Bam!
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $trick = new Trick();
             $trick->setCategoryId(mt_rand(10, 100));
             $trick->setCommentId(mt_rand(10, 100));

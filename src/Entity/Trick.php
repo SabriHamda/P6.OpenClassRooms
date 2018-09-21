@@ -2,7 +2,7 @@
 /**
  * Created by Sabri Hamda.
  * Date: 12.09.18
- * Time: 20:38
+ * Time: 20:38.
  */
 
 namespace App\Entity;
@@ -96,9 +96,11 @@ class Trick
     public function getCommentId()
     {
         return $this->commentId;
-    }/**
- * @param mixed $commentId
- */
+    }
+
+    /**
+     * @param mixed $commentId
+     */
     public function setCommentId($commentId): void
     {
         $this->commentId = $commentId;
@@ -165,7 +167,7 @@ class Trick
      */
     public function setCreatedAt($createdAt): void
     {
-        $this->createdAt = new \DateTime("now");
+        $this->createdAt = new \DateTime('now');
     }
 
     /**
@@ -181,9 +183,6 @@ class Trick
      */
     public function setUpdatedAt($updatedAt): void
     {
-        $this->updatedAt = new \DateTime("now");
+        $this->updatedAt = new \DateTime('now');
     }
-
-
-
 }
