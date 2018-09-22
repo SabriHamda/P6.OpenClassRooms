@@ -9,11 +9,12 @@
         "symfony/asset": "*",
         "symfony/console": "*",
         "symfony/expression-language": "*",
+        "symfony/finder": "*",
         "symfony/flex": "^1.1",
         "symfony/form": "*",
         "symfony/framework-bundle": "*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
+        "symfony/orm-pack": "^1.0",
         "symfony/process": "*",
         "symfony/security-bundle": "*",
         "symfony/serializer-pack": "*",
@@ -25,12 +26,15 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "sensiolabs/security-checker": "^4.1",
+        "symfony/browser-kit": "*",
+        "symfony/css-selector": "*",
         "symfony/debug-pack": "*",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "*",
         "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*",
         "symfony/web-server-bundle": "*"
     },
     "config": {
