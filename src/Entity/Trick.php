@@ -9,57 +9,51 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="\TrickRepository")
- */
+
 class Trick
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
      */
     private $categoryId;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
      */
     private $commentId;
 
     /**
-     * @ORM\Column(type="string", length=26)
+     * @var string
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=126)
+     * @var string
      */
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $description;
 
     /**
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="datetime", length=26)
+     * @var string
      */
     private $createdAt;
 
     /**
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="datetime", length=26)
+     * @var string
      */
     private $updatedAt;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -67,7 +61,7 @@ class Trick
     }
 
     /**
-     * @param mixed $id
+     * @param $id
      */
     public function setId($id): void
     {
@@ -75,7 +69,7 @@ class Trick
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getCategoryId()
     {
@@ -83,7 +77,7 @@ class Trick
     }
 
     /**
-     * @param mixed $categoryId
+     * @param $categoryId
      */
     public function setCategoryId($categoryId): void
     {
@@ -91,7 +85,7 @@ class Trick
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getCommentId()
     {
@@ -99,7 +93,7 @@ class Trick
     }
 
     /**
-     * @param mixed $commentId
+     * @param $commentId
      */
     public function setCommentId($commentId): void
     {
@@ -107,7 +101,7 @@ class Trick
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -115,7 +109,7 @@ class Trick
     }
 
     /**
-     * @param mixed $name
+     * @param $name
      */
     public function setName($name): void
     {
@@ -123,7 +117,7 @@ class Trick
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getImage()
     {
@@ -131,7 +125,7 @@ class Trick
     }
 
     /**
-     * @param mixed $image
+     * @param $image
      */
     public function setImage($image): void
     {
@@ -139,7 +133,7 @@ class Trick
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -147,7 +141,7 @@ class Trick
     }
 
     /**
-     * @param mixed $description
+     * @param $description
      */
     public function setDescription($description): void
     {
@@ -155,7 +149,7 @@ class Trick
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCreatedAt()
     {
@@ -163,7 +157,7 @@ class Trick
     }
 
     /**
-     * @param mixed $createdAt
+     * @param $createdAt
      */
     public function setCreatedAt($createdAt): void
     {
@@ -171,7 +165,7 @@ class Trick
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUpdatedAt()
     {
@@ -179,7 +173,7 @@ class Trick
     }
 
     /**
-     * @param mixed $updatedAt
+     * @param $updatedAt
      */
     public function setUpdatedAt($updatedAt): void
     {
