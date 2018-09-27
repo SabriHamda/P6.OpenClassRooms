@@ -7,7 +7,9 @@
     <div class="main-container container-fluid">
         <div id="main-header" class="main-header row">
             <img src="{{ asset('img/bg.jpg') }}" alt="image">
-            <div id="header-title" class="header-title">
+            <div class="snow1"></div>
+            <div class="snow2"></div>
+            <div class="snow3"></div>            <div id="header-title" class="header-title">
                 <h1>Les Tricks<br> Typiques de <br><span>Snowboard </span>à Connaître </h1>
                 <h4>La montagne, ça vous gagne!</h4>
                 <div class="clearfix"></div>
@@ -15,6 +17,16 @@
             </div>
         </div>
         <div class="main-content row">
+            {% block flash_messages %}
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ message | raw }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
             <div id="list-tricks" class="list-triks row-fluid text-center">
 
 
@@ -128,6 +140,4 @@
 
 
 {% endblock content %}
-{% block javascripts %}
-    <script type="text/javascript" src="{{ asset('build/js/app.js') }}"></script>
-{% endblock javascripts %}
+
