@@ -3,3 +3,9 @@ doctrine_migrations:
     # namespace is arbitrary but should be different from App\Migrations
     # as migrations classes should NOT be autoloaded
     namespace: DoctrineMigrations
+    table_name: 'migration_versions'
+    name: 'Application Migrations'
+    # available in version >= 1.2. Possible values: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+    organize_migrations: false
+    # available in version >= 1.2. Path to your custom migrations template
+    custom_template: ~
