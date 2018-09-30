@@ -93,7 +93,7 @@ class RegisterAction
         $user = new User();
         $form = $this->formfactory->create(UserType::class)->handleRequest($request);
         $validator = Validation::createValidatorBuilder()
-            ->addXmlMapping($this->configPath.'validator/validation.xml')
+            ->addXmlMapping($this->configPath.'validator/register.validation.xml')
             ->getValidator();
 
 
