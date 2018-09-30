@@ -1,0 +1,24 @@
+{% block messages %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="message message-wrapper">
+                <div class="message alert alert-{{ type }} alert-dismissible col-sm-12 col-md-6 text-center"
+                     role="alert">
+                    <button type="button" id="message-btn" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    <div class="jumbotron">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve" width="30%">
+                            <circle style="fill:#25AE88;" cx="25" cy="25" r="25"></circle>
+                            <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="38,15 22,33 12,25 "></polyline>
+                            <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                        </svg>
+                        <h1>Bravo!</h1>
+                        <p>{{ message | raw }}</p>
+
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
