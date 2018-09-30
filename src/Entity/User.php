@@ -151,6 +151,11 @@ class User implements UserInterface
         return $this->updatedAt;
     }
 
+    public function getValidationToken()
+    {
+        return $this->validationToken;
+    }
+
     /**
      *
      */
@@ -170,7 +175,7 @@ class User implements UserInterface
         $this->email = $email;
         $this->password = $password;
         $this->createdAt = new \DateTimeImmutable();
-        $this->validationToken = md5(str_rot13($email));
+        $this->validationToken = bin2hex(random_bytes(32));
         $this->isActive = false;
     }
 }
