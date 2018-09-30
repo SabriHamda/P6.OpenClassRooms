@@ -2,11 +2,10 @@
 /**
  * Created by Sabri Hamda.
  * Date: 26.09.18
- * Time: 17:37
+ * Time: 17:37.
  */
 
 namespace App\Domain\DTO;
-
 
 class UserRegistrationDTO
 {
@@ -25,6 +24,7 @@ class UserRegistrationDTO
 
     /**
      * UserRegistrationDTO constructor.
+     *
      * @param $username
      * @param $email
      * @param $pasword

@@ -2,7 +2,7 @@
 /**
  * Created by Sabri Hamda.
  * Date: 25.09.18
- * Time: 14:50
+ * Time: 14:50.
  */
 
 namespace App\UI\Action;
@@ -55,11 +55,12 @@ class RegisterAction
 
     /**
      * RegisterAction constructor.
-     * @param Environment $twig
+     *
+     * @param Environment          $twig
      * @param FormFactoryInterface $formFactory
-     * @param ManagerRegistry $manager
-     * @param FlashBagInterface $flash
-     * @param RedirectResponse $redirectResponse
+     * @param ManagerRegistry      $manager
+     * @param FlashBagInterface    $flash
+     * @param RedirectResponse     $redirectResponse
      */
     public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, ManagerRegistry $manager, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl)
     {
@@ -73,9 +74,12 @@ class RegisterAction
 
     /**
      * @Route("/register", name="user_registration")
-     * @param Request $request
+     *
+     * @param Request                 $request
      * @param EncoderFactoryInterface $encoderFactory
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      */
     public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory, RegisterResponderInterface $responder)
@@ -99,7 +103,7 @@ class RegisterAction
             $entityManager->flush();
 
             // 5) send an email with token
-            $mailer  = new RegistrationMailer($this->mailer,$this->twig);
+            $mailer = new RegistrationMailer($this->mailer, $this->twig);
             $mailer->sendTo($form->getData()->username, $user->getValidationToken());
 
             // 6) redirect to home page with success message

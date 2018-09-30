@@ -2,7 +2,7 @@
 /**
  * Created by Sabri Hamda.
  * Date: 27.09.18
- * Time: 13:23
+ * Time: 13:23.
  */
 
 namespace App\UI\Responder;
@@ -11,7 +11,6 @@ use App\UI\Responder\Interfaces\RegisterResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
-
 
 class RegisterResponder implements RegisterResponderInterface
 {
@@ -27,13 +26,15 @@ class RegisterResponder implements RegisterResponderInterface
      */
     public function __construct(Environment $twig)
     {
-       $this->twig = $twig;
+        $this->twig = $twig;
     }
 
     /**
-     * @param Request $request
+     * @param Request                  $request
      * @param Interfaces\object|object $viewForm
+     *
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

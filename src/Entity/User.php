@@ -2,17 +2,15 @@
 /**
  * Created by Sabri Hamda.
  * Date: 23.09.18
- * Time: 13:48
+ * Time: 13:48.
  */
 
 namespace App\Entity;
 
-
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class User
- * @package App\Entity
+ * Class User.
  */
 class User implements UserInterface
 {
@@ -47,7 +45,7 @@ class User implements UserInterface
     private $roles;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $isActive;
 
@@ -65,7 +63,6 @@ class User implements UserInterface
      * @var string
      */
     private $validationToken;
-
 
     // other properties and methods
 
@@ -156,9 +153,6 @@ class User implements UserInterface
         return $this->validationToken;
     }
 
-    /**
-     *
-     */
     public function eraseCredentials()
     {
     }
@@ -167,6 +161,7 @@ class User implements UserInterface
      * @param string $username
      * @param string $email
      * @param string $password
+     *
      * @throws \Exception
      */
     public function create(string $username, string $email, string $password)
