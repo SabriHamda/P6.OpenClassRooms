@@ -9,6 +9,7 @@ namespace App\UI\Action;
 
 use App\Form\UserType;
 use App\Entity\User;
+use App\Mailer\RegistrationMailer;
 use App\UI\Responder\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,6 +49,11 @@ class RegisterAction
     private $redirectResponse;
 
     /**
+     * @var \Swift_Mailer
+     */
+    private $mailer;
+
+    /**
      * RegisterAction constructor.
      * @param Environment $twig
      * @param FormFactoryInterface $formFactory
@@ -55,13 +61,14 @@ class RegisterAction
      * @param FlashBagInterface $flash
      * @param RedirectResponse $redirectResponse
      */
-    public function __construct(Environment $twig, FormFactoryInterface $formFactory, ManagerRegistry $manager, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl)
+    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, ManagerRegistry $manager, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl)
     {
         $this->twig = $twig;
         $this->formfactory = $formFactory;
         $this->manager = $manager;
         $this->flash = $flash;
         $this->redirectResponse = $generateUrl;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -91,10 +98,12 @@ class RegisterAction
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->flash->add('success', 'je suis le message');
+            // 5) send an email with token
+            $mailer  = new RegistrationMailer($this->mailer,$this->twig);
+            $mailer->sendTo($form->getData()->username, $user->getValidationToken());
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+            // 6) redirect to home page with success message
+            $this->flash->add('success', 'Votre enregistrement a bien été pris en compte, pour valider votre inscription, merci de vous rendre dans votre boite mail.');
 
             return new RedirectResponse($this->redirectResponse->generate('frontend-home'));
         }
