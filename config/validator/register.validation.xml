@@ -13,7 +13,7 @@
                 <option name="min">4</option>
                 <option name="max">20</option>
                 <option name="minMessage">
-                    Lee Nom d'utilisateur doit contenir plus de {{ limit }} characters.
+                    Le Nom d'utilisateur doit contenir plus de {{ limit }} characters.
                 </option>
                 <option name="maxMessage">
                     Le Nom d'utilisateur ne dois pas contenir plus de {{ limit }} characters.
