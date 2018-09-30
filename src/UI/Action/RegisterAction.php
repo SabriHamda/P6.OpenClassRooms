@@ -20,6 +20,8 @@ use Twig\Environment;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegisterAction
 {
@@ -53,6 +55,8 @@ class RegisterAction
      */
     private $mailer;
 
+    private $configPath;
+
     /**
      * RegisterAction constructor.
      *
@@ -62,7 +66,7 @@ class RegisterAction
      * @param FlashBagInterface    $flash
      * @param RedirectResponse     $redirectResponse
      */
-    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, ManagerRegistry $manager, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl)
+    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, ManagerRegistry $manager, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl, string $configPath)
     {
         $this->twig = $twig;
         $this->formfactory = $formFactory;
@@ -70,6 +74,7 @@ class RegisterAction
         $this->flash = $flash;
         $this->redirectResponse = $generateUrl;
         $this->mailer = $mailer;
+        $this->configPath = $configPath;
     }
 
     /**
@@ -87,29 +92,43 @@ class RegisterAction
         // 1) build the form
         $user = new User();
         $form = $this->formfactory->create(UserType::class)->handleRequest($request);
+        $validator = Validation::createValidatorBuilder()
+            ->addXmlMapping($this->configPath.'validator/validation.xml')
+            ->getValidator();
+
 
         // 2) handle the submit (will only happen on POST)
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $encoderFactory->getEncoder(User::class)->encodePassword($form->getData()->password, null);
+            $plainPassword = $form->getData()->password;
+            $encryptedPassword = $encoderFactory->getEncoder(User::class)->encodePassword($form->getData()->password, null);
             $user->create(
                 $form->getData()->username,
                 $form->getData()->email,
-                $password
+                $plainPassword,
+                $encryptedPassword
             );
 
-            // 4) save the User!
-            $entityManager = $this->manager->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            // Use validator to validate form
+            $errors = $validator->validate($user);
+            if (count($errors) > 0){
+                $viewForm = $form->createView();
+                return $responder($request, $viewForm,$errors);
+            }else{
+                // 4) save the User!
+                $entityManager = $this->manager->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            // 5) send an email with token
-            $mailer = new RegistrationMailer($this->mailer, $this->twig);
-            $mailer->sendTo($form->getData()->username, $user->getValidationToken());
+                // 5) send an email with token
+                $mailer = new RegistrationMailer($this->mailer, $this->twig);
+                $mailer->sendTo($form->getData()->username, $user->getValidationToken());
 
-            // 6) redirect to home page with success message
-            $this->flash->add('success', 'Votre enregistrement a bien été pris en compte, pour valider votre inscription, merci de vous rendre dans votre boite mail.');
+                // 6) redirect to home page with success message
+                $this->flash->add('success', 'Votre enregistrement a bien été pris en compte, pour valider votre inscription, merci de vous rendre dans votre boite mail.');
 
-            return new RedirectResponse($this->redirectResponse->generate('frontend-home'));
+                return new RedirectResponse($this->redirectResponse->generate('frontend-home'));
+            }
+
         }
 
         $viewForm = $form->createView();

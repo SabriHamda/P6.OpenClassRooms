@@ -164,11 +164,12 @@ class User implements UserInterface
      *
      * @throws \Exception
      */
-    public function create(string $username, string $email, string $password)
+    public function create(string $username, string $email, string $plainPassword, string $password)
     {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->plainPassword = $plainPassword;
         $this->createdAt = new \DateTimeImmutable();
         $this->validationToken = bin2hex(random_bytes(32));
         $this->isActive = false;

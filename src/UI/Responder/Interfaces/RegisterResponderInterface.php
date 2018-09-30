@@ -23,8 +23,8 @@ interface RegisterResponderInterface
     /**
      * @param Request $request
      * @param $viewForm
-     *
+     * @param null $errors
      * @return Response
      */
-    public function __invoke(Request $request, $viewForm): Response;
+    public function __invoke(Request $request, $viewForm, $errors = null): Response;
 }

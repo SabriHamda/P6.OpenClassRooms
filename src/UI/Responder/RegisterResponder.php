@@ -30,20 +30,19 @@ class RegisterResponder implements RegisterResponderInterface
     }
 
     /**
-     * @param Request                  $request
-     * @param Interfaces\object|object $viewForm
-     *
+     * @param Request $request
+     * @param $viewForm
+     * @param null $errors
      * @return Response
-     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request, $viewForm): Response
+    public function __invoke(Request $request, $viewForm, $errors = null): Response
     {
         $response = new Response($this->twig->render(
             'frontend/register.html.twig',
-            array('form' => $viewForm)
+            array('form' => $viewForm, 'errors' => $errors)
         ));
         return $response;
     }
