@@ -12,15 +12,54 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use App\Repository\Interfaces\UserRepositoryInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
+/**
+ * Class UserRepository
+ * @package App\Repository
+ */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
+    /**
+     * UserRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
     }
 
-    public function findAll()
+    /**
+     * @return array
+     */
+    public function findAll(): array
     {
         return $this->createQueryBuilder('user')->getQuery()->getResult();
+    }
+
+    /**
+     * @param array $criteria
+     * @param array|null $orderBy
+     * @return mixed|null|object
+     */
+    public function findOneBy(array $criteria, array $orderBy = null)
+    {
+        return parent::findOneBy($criteria, $orderBy);
+    }
+
+    /**
+     * @param $user
+     * @return mixed|void
+     */
+    public function save($user)
+    {
+        $this->_em->persist($user);
+        $this->_em->flush();
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public function update()
+    {
+        $this->_em->flush();
     }
 }
