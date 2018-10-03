@@ -43,4 +43,9 @@ interface UserRepositoryInterface
      */
     public function update();
 
+    /**
+     * @param $user
+     * @return mixed
+     */
+    public function remove($user);
 }
