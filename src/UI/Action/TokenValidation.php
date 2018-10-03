@@ -25,7 +25,7 @@ class TokenValidation
     private $twig;
 
     /**
-     * @var FlashBag
+     * @var FlashBagInterface
      */
     private $flash;
 
@@ -46,7 +46,7 @@ class TokenValidation
      * @param UserRepository $userRepository
      * @param FlashBagInterface $flash
      */
-    public function __construct(\Twig_Environment $twig, ManagerRegistry $manager, UserRepository $userRepository,FlashBagInterface $flash)
+    public function __construct(\Twig_Environment $twig, ManagerRegistry $manager, UserRepository $userRepository, FlashBagInterface $flash)
     {
         $this->twig = $twig;
         $this->flash = $flash;
@@ -66,17 +66,21 @@ class TokenValidation
     public function __invoke($token, TokenValidationResponder $responder)
     {
         $user = $this->userRepository->findOneBy(['validationToken' => $token]);
-        if ($user){
 
-            //validation des 24h du token
-            $user->validate($token);
-            $this->userRepository->update();
-            $this->flash->add('success', 'Votre compte a été valider avec succé, vous pouvez vous loguer en cliquant <a href="/login">ici</a>.');
-
-        }else {
-            $this->flash->add('danger', 'Ce compte n\'existe pas ou a déja été validé' );
+        if ($user) {
+            //if token existe in DB since 24h, remove user go to registration
+            if ($user->validationDateDiff() > 0) {
+                $this->userRepository->remove($user);
+                $this->flash->add('danger', 'Désolé <strong>temp écoulé</strong> , vous disposez de 24h pour valider votre adresse mail<br>Pour vous renregistrer merci de <a href="/register">cliquez ici</a>.');
+            } else {
+                $user->validate($token);
+                $this->userRepository->update();
+                $this->flash->add('success', 'Votre compte a été valider avec succé, vous pouvez vous loguer en cliquant <a href="/login">ici</a>.');
+            }
+        } else {
+            $this->flash->add('danger', 'Ce compte n\'existe pas.');
         }
 
-        return $responder($user,$this->flash);
+        return $responder($user, $this->flash);
     }
 }
