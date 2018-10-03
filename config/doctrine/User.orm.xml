@@ -29,6 +29,7 @@
                 <option name="fixed"/>
             </options>
         </field>
+        <field name="roles" type="array" column="role" nullable="true"/>
         <field name="createdAt" type="datetime_immutable" column="created_at" nullable="false">
             <options>
                 <option name="default">CURRENT_TIMESTAMP</option>
