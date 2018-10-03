@@ -23,12 +23,18 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('username', TextType::class)
+            ->add('username', TextType::class,[
+                'attr'=>[
+                    'maxlength'=> 20,
+                    'minlength'=> 4
+                ]
+                ])
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les deux mot de passe ne sont pas identiques',
                 'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
+                'error_bubbling' => true
             ))
         ;
     }
@@ -44,6 +50,7 @@ class UserType extends AbstractType
                     $form->get('password')->getData()
                 );
             },
+            'validation_groups'=> ['UserRegistrationDTO']
         ));
     }
 }
