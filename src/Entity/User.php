@@ -160,8 +160,8 @@ class User implements UserInterface
     /**
      * @param string $username
      * @param string $email
+     * @param string $plainPassword
      * @param string $password
-     *
      * @throws \Exception
      */
     public function create(string $username, string $email, string $plainPassword, string $password)
@@ -173,5 +173,16 @@ class User implements UserInterface
         $this->createdAt = new \DateTimeImmutable();
         $this->validationToken = bin2hex(random_bytes(32));
         $this->isActive = false;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function validate(string $token)
+    {
+        $this->isActive = true;
+        $this->roles[] = 'ROLE_USER';
+        $this->validationToken = null;
+        $this->validationToken = $token;
     }
 }
