@@ -185,4 +185,15 @@ class User implements UserInterface
         $this->validationToken = null;
         $this->validationToken = $token;
     }
+
+    /**
+     * @return int
+     */
+    public function validationDateDiff()
+    {
+        $createdAt = $this->getCreatedAt();
+        $toDay = date_create('NOW');
+        $diff = date_diff($createdAt, $toDay);
+        return $diff->format('%a');
+    }
 }
