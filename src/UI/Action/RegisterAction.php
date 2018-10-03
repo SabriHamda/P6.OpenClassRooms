@@ -9,12 +9,12 @@ namespace App\UI\Action;
 
 use App\Form\UserType;
 use App\Entity\User;
+use App\Repository\Interfaces\UserRepositoryInterface;
 use App\Mailer\RegistrationMailer;
 use App\UI\Responder\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Twig\Environment;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -23,6 +23,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+
+/**
+ * Class RegisterAction
+ * @package App\UI\Action
+ */
 class RegisterAction
 {
     /**
@@ -34,11 +39,6 @@ class RegisterAction
      * @var FormFactoryInterface
      */
     private $formfactory;
-
-    /**
-     * @var ManagerRegistry
-     */
-    private $manager;
 
     /**
      * @var FlashBagInterface
@@ -55,26 +55,36 @@ class RegisterAction
      */
     private $mailer;
 
+    /**
+     * @var string
+     */
     private $configPath;
 
     /**
-     * RegisterAction constructor.
-     *
-     * @param Environment          $twig
-     * @param FormFactoryInterface $formFactory
-     * @param ManagerRegistry      $manager
-     * @param FlashBagInterface    $flash
-     * @param RedirectResponse     $redirectResponse
+     * @var Validation
      */
-    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, ManagerRegistry $manager, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl, string $configPath)
+    private $validator;
+
+
+    /**
+     * RegisterAction constructor.
+     * @param Environment $twig
+     * @param \Swift_Mailer $mailer
+     * @param FormFactoryInterface $formFactory
+     * @param FlashBagInterface $flash
+     * @param UrlGeneratorInterface $generateUrl
+     * @param string $configPath
+     * @param ValidatorInterface $validator
+     */
+    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl, string $configPath,ValidatorInterface $validator)
     {
         $this->twig = $twig;
         $this->formfactory = $formFactory;
-        $this->manager = $manager;
         $this->flash = $flash;
         $this->redirectResponse = $generateUrl;
         $this->mailer = $mailer;
         $this->configPath = $configPath;
+        $this->validator = $validator;
     }
 
     /**
@@ -87,14 +97,11 @@ class RegisterAction
      *
      * @throws \Exception
      */
-    public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory, RegisterResponderInterface $responder)
+    public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory,UserRepositoryInterface $userRepository, RegisterResponderInterface $responder)
     {
         // 1) build the form
         $user = new User();
         $form = $this->formfactory->create(UserType::class)->handleRequest($request);
-        $validator = Validation::createValidatorBuilder()
-            ->addXmlMapping($this->configPath.'validator/register.validation.xml')
-            ->getValidator();
 
 
         // 2) handle the submit (will only happen on POST)
@@ -109,16 +116,14 @@ class RegisterAction
             );
 
             // Use validator to validate form
-            $errors = $validator->validate($user);
+            $errors = $this->validator
+                ->validate($user);
             if (count($errors) > 0){
                 $viewForm = $form->createView();
                 return $responder($request, $viewForm,$errors);
             }else{
                 // 4) save the User!
-                $entityManager = $this->manager->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-
+                $userRepository->save($user);
                 // 5) send an email with token
                 $mailer = new RegistrationMailer($this->mailer, $this->twig);
                 $mailer->sendTo($form->getData()->username, $user->getValidationToken());
