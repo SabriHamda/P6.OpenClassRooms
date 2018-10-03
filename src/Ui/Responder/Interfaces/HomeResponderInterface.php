@@ -25,9 +25,8 @@ interface HomeResponderInterface
 
     /**
      * @param Request $request
-     * @param array   $trick
-     *
-     * @return mixed
+     * @param array $tricks
+     * @return Response
      */
     public function __invoke(Request $request, array $tricks): Response;
 }
