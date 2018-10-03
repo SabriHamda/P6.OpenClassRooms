@@ -9,6 +9,7 @@
 
     {{ form_start(form,{'attr':{'class':'register-form','method':'post'}}) }}
     <div class="form-group">
+        {{ form_errors(form) }}
             {% for error in errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error.message }}
@@ -36,6 +37,7 @@
             {{ form_widget(form.password.second,{ 'attr': {'class': 'pimp'} }) }}
             <span class="form-loader"></span>
         </div>
+    {{ form_errors(form.password) }}
         <div class="form-group">
             <small><a href="#">deja un compte ? </a></small>
         </div>

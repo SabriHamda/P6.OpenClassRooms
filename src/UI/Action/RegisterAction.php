@@ -89,12 +89,14 @@ class RegisterAction
 
     /**
      * @Route("/register", name="user_registration")
-     *
-     * @param Request                 $request
+     * @param Request $request
      * @param EncoderFactoryInterface $encoderFactory
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     *
+     * @param UserRepositoryInterface $userRepository
+     * @param RegisterResponderInterface $responder
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      * @throws \Exception
      */
     public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory,UserRepositoryInterface $userRepository, RegisterResponderInterface $responder)

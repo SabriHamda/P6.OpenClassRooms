@@ -21,8 +21,10 @@
 <body>
 
 {% block content %}{% endblock %}
+{% include('messages/messages.html.twig') %}
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('build/js/app.js') }}"></script>
 {% endblock javascripts %}
+
 </body>
 </html>

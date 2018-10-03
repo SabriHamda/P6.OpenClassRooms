@@ -31,8 +31,8 @@ class HomeAction
 
     /**
      * HomeAction constructor.
-     *
-     * @param $twig
+     * @param Environment $twig
+     * @param TrickRepository $trickRepository
      */
     public function __construct(Environment $twig, TrickRepository $trickRepository)
     {
@@ -42,9 +42,8 @@ class HomeAction
 
     /**
      * @Route("/", name="frontend-home")
-     *
-     * @throws
-     *
+     * @param Request $request
+     * @param HomeResponderInterface $responder
      * @return Response
      */
     public function __invoke(Request $request, HomeResponderInterface $responder)
