@@ -1,5 +1,5 @@
 framework:
-    validation: {enabled: true}
+    validation: { enabled: true }
     csrf_protection: ~
     secret: '%env(APP_SECRET)%'
     #default_locale: en
