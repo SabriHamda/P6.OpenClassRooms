@@ -43,6 +43,10 @@ class User implements UserInterface
      * @var string
      */
     private $roles;
+    /**
+     * @var string
+     */
+    private $image;
 
     /**
      * @var bool
@@ -117,9 +121,17 @@ class User implements UserInterface
     }
 
     /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    /**
      * @return bool
      */
-    public function getisActive()
+    public function getIsActive()
     {
         return $this->isActive;
     }
