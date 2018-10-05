@@ -17,6 +17,10 @@ body {
   width: 100vw;
   background-color: $darken-color !important;
   z-index: 999;
+  .nav-profile{
+    line-height: 30px;
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .navbar:after {
