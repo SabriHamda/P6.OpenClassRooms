@@ -54,5 +54,11 @@
                 </option>
             </constraint>
         </property>
+        <property name="image">
+            <constraint name="Image">
+                <option name="mimeTypesMessage"/>
+
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
