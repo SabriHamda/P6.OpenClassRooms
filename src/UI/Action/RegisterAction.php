@@ -13,6 +13,7 @@ use App\Repository\Interfaces\UserRepositoryInterface;
 use App\Mailer\RegistrationMailer;
 use App\UI\Responder\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -22,8 +23,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
-
+use App\Services\FileUploader;
+use Symfony\Component\HttpFoundation\File\File;
 /**
  * Class RegisterAction
  * @package App\UI\Action
@@ -65,6 +66,11 @@ class RegisterAction
      */
     private $validator;
 
+    /**
+     * @var string
+     */
+    private $targetDirectory;
+
 
     /**
      * RegisterAction constructor.
@@ -75,8 +81,9 @@ class RegisterAction
      * @param UrlGeneratorInterface $generateUrl
      * @param string $configPath
      * @param ValidatorInterface $validator
+     * @param $targetDirectory
      */
-    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl, string $configPath,ValidatorInterface $validator)
+    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl, string $configPath, ValidatorInterface $validator, $targetDirectory)
     {
         $this->twig = $twig;
         $this->formfactory = $formFactory;
@@ -85,6 +92,7 @@ class RegisterAction
         $this->mailer = $mailer;
         $this->configPath = $configPath;
         $this->validator = $validator;
+        $this->targetDirectory = $targetDirectory;
     }
 
     /**
@@ -93,39 +101,52 @@ class RegisterAction
      * @param EncoderFactoryInterface $encoderFactory
      * @param UserRepositoryInterface $userRepository
      * @param RegisterResponderInterface $responder
+     * @param FileUploader $fileUploader
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      * @throws \Exception
      */
-    public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory,UserRepositoryInterface $userRepository, RegisterResponderInterface $responder)
+    public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory, UserRepositoryInterface $userRepository, RegisterResponderInterface $responder,FileUploader $fileUploader)
     {
         // 1) build the form
         $user = new User();
         $form = $this->formfactory->create(UserType::class)->handleRequest($request);
 
-
         // 2) handle the submit (will only happen on POST)
         if ($form->isSubmitted() && $form->isValid()) {
+
             $plainPassword = $form->getData()->password;
+            $image = $form->getData()->image;
+            $hashedFileName = "";
+            if ($image) {
+                $hashedFileName = md5(uniqid()) . '.' . $image->getClientOriginalExtension();
+            }
             $encryptedPassword = $encoderFactory->getEncoder(User::class)->encodePassword($form->getData()->password, null);
             $user->create(
                 $form->getData()->username,
                 $form->getData()->email,
                 $plainPassword,
-                $encryptedPassword
+                $encryptedPassword,
+                $hashedFileName
             );
 
+            //Upload file in directory
+            if ($image) {
+                $fileUploader->upload($image, $hashedFileName);
+            }
             // Use validator to validate form
             $errors = $this->validator
                 ->validate($user);
-            if (count($errors) > 0){
+            if (count($errors) > 0) {
                 $viewForm = $form->createView();
-                return $responder($request, $viewForm,$errors);
-            }else{
+                return $responder($request, $viewForm, $errors);
+            } else {
+
                 // 4) save the User!
                 $userRepository->save($user);
+
                 // 5) send an email with token
                 $mailer = new RegistrationMailer($this->mailer, $this->twig);
                 $mailer->sendTo($form->getData()->username, $user->getValidationToken());
