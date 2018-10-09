@@ -5,19 +5,36 @@
 
 namespace App\Services;
 
+use App\Services\Interfaces\FileUploaderInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 
-class FileUploader
+/**
+ * Class FileUploader
+ * @package App\Services
+ */
+class FileUploader implements FileUploaderInterface
 {
+    /**
+     * @var
+     */
     private $targetDirectory;
 
-    public function __construct($targetDirectory)
+    /**
+     * FileUploader constructor.
+     * @param $targetDirectory
+     */
+    public function __construct(string $targetDirectory)
     {
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function upload($file,$hashedFileName)
+    /**
+     * @param string $file
+     * @param string $hashedFileName
+     * @return mixed|string
+     */
+    public function upload(string $file, string $hashedFileName)
     {
 
         $objFile = new File($file);
@@ -31,7 +48,10 @@ class FileUploader
         return $hashedFileName;
     }
 
-    public function getTargetDirectory()
+    /**
+     * @return string
+     */
+    public function getTargetDirectory():string
     {
         return $this->targetDirectory;
     }
