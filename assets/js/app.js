@@ -23,3 +23,4 @@ function hide(elements) {
         elements[index].style.display = 'none';
     }
 }
+
