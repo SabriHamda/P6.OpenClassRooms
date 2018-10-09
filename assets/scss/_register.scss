@@ -11,7 +11,6 @@
   border: 0;
   box-shadow: none;
 }
-
 .pimp{
   border:none;
   background: transparent;
@@ -26,6 +25,39 @@
       width: 10%;
       height: 1px;
       background: #D52B1E;
+  }
+
+  .form-control-file{
+    .custom-file-input{
+      display: none;
+    }
+    .custom-file-label{
+      background: none;
+      border:none;
+    }
+    .custom-file-label::after {
+      position: relative;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-size: xx-large;
+      content: "\f093";
+      top: -70px;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      display: block;
+      color: $white-snow;
+      width: 80px;
+      height: 80px;
+      line-height: 70px;
+      text-align: center;
+      background-color: $red-color;
+      border-radius: 80px;
+      margin-left: auto;
+      margin-right: auto;
+      cursor: pointer;
+      border: none;
+    }
   }
 
 }
