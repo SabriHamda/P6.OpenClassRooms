@@ -123,7 +123,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImage()
     {
         return $this->image;
     }
@@ -174,9 +174,10 @@ class User implements UserInterface
      * @param string $email
      * @param string $plainPassword
      * @param string $password
+     * @param string $image
      * @throws \Exception
      */
-    public function create(string $username, string $email, string $plainPassword, string $password)
+    public function create(string $username, string $email, string $plainPassword, string $password, string $image)
     {
         $this->username = $username;
         $this->email = $email;
@@ -185,6 +186,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTimeImmutable();
         $this->validationToken = bin2hex(random_bytes(32));
         $this->isActive = false;
+        $this->image = $image;
     }
 
     /**
