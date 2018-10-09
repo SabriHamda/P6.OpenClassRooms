@@ -14,7 +14,7 @@
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="image" type="string" column="image" length="64" nullable="true">
+        <field name="image" type="string" column="image" length="255" nullable="true">
             <options>
                 <option name="fixed"/>
                 <option name="default">
