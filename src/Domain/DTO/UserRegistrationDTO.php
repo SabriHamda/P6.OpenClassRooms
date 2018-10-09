@@ -23,16 +23,22 @@ class UserRegistrationDTO
     public $password;
 
     /**
+     * @var string
+     */
+    public $image;
+
+    /**
      * UserRegistrationDTO constructor.
-     *
      * @param $username
      * @param $email
-     * @param $pasword
+     * @param $password
+     * @param $image
      */
-    public function __construct($username, $email, $password)
+    public function __construct($username, $email, $password,$image)
     {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->image = $image;
     }
 }
