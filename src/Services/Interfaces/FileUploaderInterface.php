@@ -5,6 +5,7 @@
 
 namespace App\Services\Interfaces;
 
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Interface FileUploaderInterface
@@ -21,15 +22,15 @@ interface FileUploaderInterface
 
 
     /**
-     * @param string $file
+     * @param File $image
      * @param string $hashedFileName
      * @return mixed
      */
-    public function upload(string $file, string $hashedFileName);
+    public function upload(File $image, string $hashedFileName);
 
 
     /**
      * @return string
      */
-    public function getTargetDirectory() :string ;
+    public function getTargetDirectory(): string;
 }
