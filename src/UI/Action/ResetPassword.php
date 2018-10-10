@@ -71,7 +71,7 @@ class ResetPassword
             }else{
                 $this->flash->add('danger', 'Cet email n\'existe pas, si vous vous étes trompé merci de renouveler votre demande.<br> si vous n\'etes pas encore inscrit vous pouvez le faire par <a href="/register">ici</a>' );
 
-                return new RedirectResponse($this->redirectResponse->generate('frontend-home'));
+                return new RedirectResponse($this->redirectResponse->generate('reset-password'));
             }
         }
         return $responder($request,$viewForm);
