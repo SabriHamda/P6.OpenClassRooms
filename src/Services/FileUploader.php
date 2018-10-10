@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\File;
 class FileUploader implements FileUploaderInterface
 {
     /**
-     * @var
+     * @var string
      */
     private $targetDirectory;
 
@@ -30,17 +30,14 @@ class FileUploader implements FileUploaderInterface
     }
 
     /**
-     * @param string $file
+     * @param File $image
      * @param string $hashedFileName
      * @return mixed|string
      */
-    public function upload(string $file, string $hashedFileName)
+    public function upload(File $image, string $hashedFileName)
     {
-
-        $objFile = new File($file);
-
         try {
-            $objFile->move($this->getTargetDirectory(), $hashedFileName);
+            $image->move($this->getTargetDirectory(), $hashedFileName);
         } catch (FileException $e) {
             return $e->getMessage();
         }
