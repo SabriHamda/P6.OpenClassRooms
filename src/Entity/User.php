@@ -68,7 +68,11 @@ class User implements UserInterface
      */
     private $validationToken;
 
-    // other properties and methods
+    /**
+     * @var
+     */
+    private $resetPasswordToken;
+
 
     /**
      * @return string
@@ -160,11 +164,33 @@ class User implements UserInterface
         return $this->updatedAt;
     }
 
+    /**
+     * @return string
+     */
     public function getValidationToken()
     {
         return $this->validationToken;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getResetPasswordToken()
+    {
+        return $this->resetPasswordToken;
+    }
+
+    /**
+     * @param $resetPasswordToken
+     */
+    public function setResetPasswordToken($resetPasswordToken)
+    {
+        $this->resetPasswordToken = $resetPasswordToken;
+    }
+
+    /**
+     *
+     */
     public function eraseCredentials()
     {
     }
