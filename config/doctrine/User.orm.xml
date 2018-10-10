@@ -27,7 +27,12 @@
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="validationToken" type="string" column="token" length="64" nullable="false">
+        <field name="validationToken" type="string" column="validation_token" length="64" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="resetPasswordToken" type="string" column="reset_password_token" length="64" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
