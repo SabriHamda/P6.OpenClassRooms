@@ -7,6 +7,7 @@
 
 namespace App\UI\Action;
 
+use App\Entity\Media;
 use App\Form\UserType;
 use App\Entity\User;
 use App\Repository\Interfaces\UserRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Mailer\RegistrationMailer;
 use App\Services\Interfaces\FileUploaderInterface;
 use App\UI\Responder\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -70,6 +72,11 @@ class RegisterAction
      */
     private $targetDirectory;
 
+    /**
+     * @var string
+     */
+    private $publicAvatarDirectory;
+
 
     /**
      * RegisterAction constructor.
@@ -82,7 +89,7 @@ class RegisterAction
      * @param ValidatorInterface $validator
      * @param $targetDirectory
      */
-    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl, string $configPath, ValidatorInterface $validator, $targetDirectory)
+    public function __construct(Environment $twig, \Swift_Mailer $mailer, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $generateUrl, string $configPath, ValidatorInterface $validator, $targetDirectory, $publicAvatarDirectory)
     {
         $this->twig = $twig;
         $this->formfactory = $formFactory;
@@ -92,6 +99,7 @@ class RegisterAction
         $this->configPath = $configPath;
         $this->validator = $validator;
         $this->targetDirectory = $targetDirectory;
+        $this->publicAvatarDirectory = $publicAvatarDirectory;
     }
 
     /**
@@ -116,25 +124,27 @@ class RegisterAction
         // 2) handle the submit (will only happen on POST)
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $plainPassword = $form->getData()->password;
             $image = $form->getData()->image;
-            $hashedFileName = "";
+            $defaultImage = new File($this->targetDirectory . '/default-user-avatar.png');
+            $media = new Media();
             if ($image) {
-                $hashedFileName = md5(uniqid()) . '.' . $image->getClientOriginalExtension();
+                $avatar = new File($form->getData()->image);
+                $hashedFileName = md5(uniqid()) . '.' . $image->guessExtension();
+                $media->create($hashedFileName, $image->guessExtension(), $image->getSize(), $this->publicAvatarDirectory . $hashedFileName);
+                //Upload file in directory
+                $fileUploader->upload($avatar, $hashedFileName);
+            }else {
+                $image = 'default-user-avatar.png';
+                $media->create($image, $defaultImage->guessExtension(), $defaultImage->getSize(), $this->publicAvatarDirectory . $image);
             }
             $encryptedPassword = $encoderFactory->getEncoder(User::class)->encodePassword($form->getData()->password, null);
             $user->create(
                 $form->getData()->username,
                 $form->getData()->email,
-                $plainPassword,
                 $encryptedPassword,
-                $hashedFileName
+                $media
             );
 
-            //Upload file in directory
-            if ($image) {
-                $fileUploader->upload($image, $hashedFileName);
-            }
             // Use validator to validate form
             $errors = $this->validator
                 ->validate($user);
