@@ -38,7 +38,7 @@ class ResetPasswordResponder implements ResetPasswordResponderInterface
      */
     public function __invoke(Request $request, $viewForm): Response
     {
-        $response = new Response($this->twig->render('frontend/resetPassword.html.twig',['resetPasswordForm'=> $viewForm,'moi'=> $moi]));
+        $response = new Response($this->twig->render('frontend/resetPassword.html.twig',['resetPasswordForm'=> $viewForm]));
         return $response;
     }
 }
