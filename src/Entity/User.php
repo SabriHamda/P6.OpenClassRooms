@@ -7,6 +7,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\MediaInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -32,17 +34,12 @@ class User implements UserInterface
     /**
      * @var string
      */
-    private $plainPassword;
-
-    /**
-     * @var string
-     */
     private $password;
 
     /**
-     * @var string
+     * @var array
      */
-    private $roles;
+    private $roles = [];
     /**
      * @var string
      */
@@ -198,17 +195,16 @@ class User implements UserInterface
     /**
      * @param string $username
      * @param string $email
-     * @param string $plainPassword
      * @param string $password
      * @param string $image
      * @throws \Exception
      */
-    public function create(string $username, string $email, string $plainPassword, string $password, string $image)
+    public function create(string $username, string $email, string $password, MediaInterface $image)
     {
+        $this->id = Uuid::uuid4();
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
-        $this->plainPassword = $plainPassword;
         $this->createdAt = new \DateTimeImmutable();
         $this->validationToken = bin2hex(random_bytes(32));
         $this->isActive = false;
