@@ -14,7 +14,6 @@ use App\Mailer\RegistrationMailer;
 use App\Services\Interfaces\FileUploaderInterface;
 use App\UI\Responder\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -24,7 +23,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\File\File;
+
 /**
  * Class RegisterAction
  * @package App\UI\Action
@@ -108,7 +107,7 @@ class RegisterAction
      * @throws \Twig_Error_Syntax
      * @throws \Exception
      */
-    public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory, UserRepositoryInterface $userRepository, RegisterResponderInterface $responder,FileUploaderInterface $fileUploader)
+    public function __invoke(Request $request, EncoderFactoryInterface $encoderFactory, UserRepositoryInterface $userRepository, RegisterResponderInterface $responder, FileUploaderInterface $fileUploader)
     {
         // 1) build the form
         $user = new User();
