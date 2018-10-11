@@ -51,6 +51,7 @@ class ResetPassword
      * @param Request $request
      * @param ResetPasswordResponderInterface $responder
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function __invoke(Request $request, ResetPasswordResponderInterface $responder,UserRepositoryInterface $userRepository, ResetPasswordMailerInterface $mailer)
     {
@@ -67,7 +68,7 @@ class ResetPassword
                 $mailer->sendTo($user->getUsername(),$resetPasswordToken);
                 $this->flash->add('success', 'Pour confirmer votre email et modifier votre mot de passe, merci de vous rendre dans votre boite mail.');
 
-                return new RedirectResponse($this->redirectResponse->generate('frontend-home'));
+                return new RedirectResponse($this->redirectResponse->generate('home'));
             }else{
                 $this->flash->add('danger', 'Cet email n\'existe pas, si vous vous étes trompé merci de renouveler votre demande.<br> si vous n\'etes pas encore inscrit vous pouvez le faire par <a href="/register">ici</a>' );
 

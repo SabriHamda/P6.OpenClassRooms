@@ -41,7 +41,7 @@ class HomeAction
     }
 
     /**
-     * @Route("/", name="frontend-home")
+     * @Route("/", name="home")
      * @param Request $request
      * @param HomeResponderInterface $responder
      * @return Response
