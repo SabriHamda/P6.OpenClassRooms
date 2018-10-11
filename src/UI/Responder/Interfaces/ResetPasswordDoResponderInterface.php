@@ -6,6 +6,7 @@
 namespace App\UI\Responder\Interfaces;
 
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -23,8 +24,9 @@ interface ResetPasswordDoResponderInterface
     public function __construct(Environment $twig);
 
     /**
+     * @param Request $request
      * @return Response
      */
-    public function __invoke() :Response;
+    public function __invoke(Request $request,$viewForm) :Response;
 
 }

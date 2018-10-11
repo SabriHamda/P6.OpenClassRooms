@@ -7,6 +7,7 @@ namespace App\UI\Responder;
 
 
 use App\UI\Responder\Interfaces\ResetPasswordDoResponderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -27,14 +28,16 @@ class ResetPasswordDoResponder implements ResetPasswordDoResponderInterface
     }
 
     /**
+     * @param Request $request
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
+     * @throws \Exception
      */
-    public function __invoke() :Response
+    public function __invoke(Request $request,$viewForm) :Response
     {
-        $response = new Response($this->twig->render('frontend/resetPasswordDo.html.twig'));
+        $response = new Response($this->twig->render('frontend/resetPasswordDo.html.twig',['resetPasswordDoForm'=>$viewForm]));
         return $response;
     }
 }
