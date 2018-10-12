@@ -12,9 +12,10 @@ use App\UI\Responder\Interfaces\ResetPasswordResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
 use Symfony\Component\Form\FormFactoryInterface;
-use App\Form\ResetPasswordType;
+use App\Form\Type\ResetPasswordType;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -33,17 +34,20 @@ class ResetPassword
 
     private $flash;
 
+    private $validator;
+
     /**
      * ResetPassword constructor.
      * @param Environment $twig
      * @param FormFactoryInterface $formFactory
      */
-    public function __construct(Environment $twig, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $urlGenerator)
+    public function __construct(Environment $twig, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $urlGenerator, ValidatorInterface $validator)
     {
         $this->twig = $twig;
         $this->formFactory = $formFactory;
         $this->redirectResponse = $urlGenerator;
         $this->flash = $flash;
+        $this->validator = $validator;
     }
 
     /**
@@ -63,12 +67,21 @@ class ResetPassword
             $resetPasswordToken = md5(uniqid());
 
             if ($user){
-                $user->setResetPasswordToken($resetPasswordToken);
-                $userRepository->update();
-                $mailer->sendTo($user->getUsername(),$resetPasswordToken);
-                $this->flash->add('success', 'Pour confirmer votre email et modifier votre mot de passe, merci de vous rendre dans votre boite mail.');
+                // Use validator to validate form
 
-                return new RedirectResponse($this->redirectResponse->generate('home'));
+                $errors = $this->validator->validate($form);
+
+                if (count($errors) > 0) {
+                    $viewForm = $form->createView();
+                    return $responder($request, $viewForm, $errors);
+                }else {
+                    $user->setResetPasswordToken($resetPasswordToken);
+                    $userRepository->update();
+                    $mailer->sendTo($user->getUsername(), $resetPasswordToken);
+                    $this->flash->add('success', 'Pour confirmer votre email et modifier votre mot de passe, merci de vous rendre dans votre boite mail.');
+
+                    return new RedirectResponse($this->redirectResponse->generate('home'));
+                }
             }else{
                 $this->flash->add('danger', 'Cet email n\'existe pas, si vous vous étes trompé merci de renouveler votre demande.<br> si vous n\'etes pas encore inscrit vous pouvez le faire par <a href="/register">ici</a>' );
 
