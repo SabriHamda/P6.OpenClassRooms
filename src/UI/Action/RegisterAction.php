@@ -163,7 +163,7 @@ class RegisterAction
                 // 6) redirect to home page with success message
                 $this->flash->add('success', 'Votre enregistrement a bien été pris en compte, pour valider votre inscription, merci de vous rendre dans votre boite mail.');
 
-                return new RedirectResponse($this->redirectResponse->generate('frontend-home'));
+                return new RedirectResponse($this->redirectResponse->generate('home'));
             }
 
         }
