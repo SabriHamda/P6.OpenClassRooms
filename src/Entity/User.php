@@ -90,14 +90,6 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @return string
-     */
     public function getPassword()
     {
         return $this->password;
@@ -231,5 +223,15 @@ class User implements UserInterface
         $toDay = date_create('NOW');
         $diff = date_diff($createdAt, $toDay);
         return $diff->format('%a');
+    }
+
+    /**
+     * @param string $password
+     */
+    public function updatePassword(string $password): void
+    {
+        $this->password = $password;
+        $this->resetPasswordToken = null;
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }
