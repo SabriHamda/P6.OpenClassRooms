@@ -17,7 +17,7 @@ class ResetPasswordDoDTO
      * ResetPasswordDoDTO constructor.
      * @param $password
      */
-    public function __construct(string $password)
+    public function __construct($password)
     {
         $this->password = $password;
     }
