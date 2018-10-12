@@ -27,6 +27,6 @@ interface ResetPasswordDoResponderInterface
      * @param Request $request
      * @return Response
      */
-    public function __invoke(Request $request,$viewForm) :Response;
+    public function __invoke(Request $request,$viewForm, $errors = null) :Response;
 
 }
