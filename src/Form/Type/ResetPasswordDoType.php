@@ -3,7 +3,7 @@
  * Created by Sabri Hamda <sabri@hamda.ch>
  */
 
-namespace App\Form;
+namespace App\Form\Type;
 
 use App\Domain\DTO\ResetPasswordDoDTO;
 use Symfony\Component\Form\AbstractType;

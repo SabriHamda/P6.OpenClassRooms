@@ -63,17 +63,18 @@ class ResetPassword
         $viewForm = $form->createView();
 
         if ($form->isSubmitted() && $form->isValid()){
+
             $user = $userRepository->findOneBy(['email' => $form->getData()->email]);
             $resetPasswordToken = md5(uniqid());
 
             if ($user){
                 // Use validator to validate form
-
                 $errors = $this->validator->validate($form);
 
                 if (count($errors) > 0) {
-                    $viewForm = $form->createView();
+
                     return $responder($request, $viewForm, $errors);
+
                 }else {
                     $user->setResetPasswordToken($resetPasswordToken);
                     $userRepository->update();

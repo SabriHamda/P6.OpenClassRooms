@@ -8,7 +8,7 @@
 namespace App\UI\Action;
 
 use App\Entity\Media;
-use App\Form\UserType;
+use App\Form\Type\UserType;
 use App\Entity\User;
 use App\Repository\Interfaces\UserRepositoryInterface;
 use App\Mailer\RegistrationMailer;

@@ -6,7 +6,7 @@
 namespace App\UI\Action;
 
 use App\Entity\User;
-use App\Form\ResetPasswordDoType;
+use App\Form\Type\ResetPasswordDoType;
 use App\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Responder\Interfaces\ResetPasswordDoResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

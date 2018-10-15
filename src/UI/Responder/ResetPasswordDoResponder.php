@@ -37,7 +37,7 @@ class ResetPasswordDoResponder implements ResetPasswordDoResponderInterface
      */
     public function __invoke(Request $request,$viewForm, $errors = null) :Response
     {
-        $response = new Response($this->twig->render('frontend/resetPasswordDo.html.twig',['resetPasswordDoForm'=>$viewForm]));
+        $response = new Response($this->twig->render('frontend/resetPasswordDo.html.twig',['resetPasswordDoForm'=>$viewForm,'errors'=>$errors]));
         return $response;
     }
 }

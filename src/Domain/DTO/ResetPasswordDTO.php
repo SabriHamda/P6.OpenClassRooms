@@ -10,7 +10,7 @@ class ResetPasswordDTO
 {
 
     /**
-     * @var string
+     * @var
      */
     public $email;
 
