@@ -73,7 +73,7 @@ class TokenValidation
                 $this->userRepository->remove($user);
                 $this->flash->add('danger', 'Désolé <strong>temp écoulé</strong> , vous disposez de 24h pour valider votre adresse mail<br>Pour vous renregistrer merci de <a href="/register">cliquez ici</a>.');
             } else {
-                $user->validate($token);
+                $user->validate();
                 $this->userRepository->update();
                 $this->flash->add('success', 'Votre compte a été valider avec succé, vous pouvez vous loguer en cliquant <a href="/login">ici</a>.');
             }

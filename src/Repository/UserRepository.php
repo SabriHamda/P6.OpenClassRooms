@@ -46,6 +46,20 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     }
 
     /**
+     * @param string $token
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getUserByValidationToken(string $token)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.validationToken = :token')
+            ->setParameter('token', $token)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
      * @param $user
      * @return mixed|void
      */

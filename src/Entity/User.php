@@ -204,14 +204,15 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $token
+     * This method is executed after token is checked in db
      */
-    public function validate(string $token)
+    public function validate()
     {
         $this->isActive = true;
         $this->roles[] = 'ROLE_USER';
         $this->validationToken = null;
-        $this->validationToken = $token;
+        //$this->validationToken = $token;
+
     }
 
     /**

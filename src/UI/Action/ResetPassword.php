@@ -11,6 +11,7 @@ use App\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Responder\Interfaces\ResetPasswordResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
@@ -32,7 +33,7 @@ class ResetPassword
 
     private $redirectResponse;
 
-    private $flash;
+    private $session;
 
     private $validator;
 
@@ -41,12 +42,12 @@ class ResetPassword
      * @param Environment $twig
      * @param FormFactoryInterface $formFactory
      */
-    public function __construct(Environment $twig, FormFactoryInterface $formFactory, FlashBagInterface $flash, UrlGeneratorInterface $urlGenerator, ValidatorInterface $validator)
+    public function __construct(Environment $twig, FormFactoryInterface $formFactory, SessionInterface $session, UrlGeneratorInterface $urlGenerator, ValidatorInterface $validator)
     {
         $this->twig = $twig;
         $this->formFactory = $formFactory;
         $this->redirectResponse = $urlGenerator;
-        $this->flash = $flash;
+        $this->session = $session;
         $this->validator = $validator;
     }
 
@@ -79,12 +80,11 @@ class ResetPassword
                     $user->setResetPasswordToken($resetPasswordToken);
                     $userRepository->update();
                     $mailer->sendTo($user->getUsername(), $resetPasswordToken);
-                    $this->flash->add('success', 'Pour confirmer votre email et modifier votre mot de passe, merci de vous rendre dans votre boite mail.');
-
+                    $this->session->getFlashBag()->add('success', 'Pour confirmer votre email et modifier votre mot de passe, merci de vous rendre dans votre boite mail.');
                     return new RedirectResponse($this->redirectResponse->generate('home'));
                 }
             }else{
-                $this->flash->add('danger', 'Cet email n\'existe pas, si vous vous étes trompé merci de renouveler votre demande.<br> si vous n\'etes pas encore inscrit vous pouvez le faire par <a href="/register">ici</a>' );
+                $this->session->getFlashBag()->add('errors', 'Cet email n\'existe pas, si vous vous étes trompé merci de renouveler votre demande.' );
 
                 return new RedirectResponse($this->redirectResponse->generate('reset-password'));
             }

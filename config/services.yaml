@@ -17,7 +17,7 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
         bind:
-                    $configPath: '%kernel.project_dir%/config/'
+                    # $configPath: '%kernel.project_dir%/config/'
                     $targetDirectory: '%avatars_directory%'
                     $publicAvatarDirectory: '%public_web_avatar_directory%'
 
