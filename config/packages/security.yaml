@@ -2,13 +2,25 @@ security:
     encoders:
         App\Entity\User: bcrypt
     providers:
-        in_memory: { memory: ~ }
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            provider: in_database
+
+            logout:
+                path: logout
+                target: home
+
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
 
             # activate different ways to authenticate
 
