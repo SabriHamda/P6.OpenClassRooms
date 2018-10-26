@@ -42,13 +42,17 @@
     <button class="btn btn-lg btn-primary" type="submit">
         Envoyer
     </button>
-
         <div class="col-md-12">
             <div class="form-group text-right">
                 <small> Les articles marqués avec un asterisque (*) sont obligatoires.</small>
             </div>
-
+            <div class="form-group text-right">
+                <small><a href="{{ path('reset-password') }}"><i class="fas fa-sign-in-alt"></i> &nbsp; Mot de passe perdu ? </a></small>
+            </div>
         </div>
-    </form>
 </div>
+    </form>
+
+</div>
+
     {% endblock %}
