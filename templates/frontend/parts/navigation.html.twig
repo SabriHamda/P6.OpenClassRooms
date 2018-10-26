@@ -1,34 +1,66 @@
 {% block navigation %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-        <img src="{{ asset('img/logo.png') }}" width="60" height="30" class="d-inline-block align-top" alt="">
-        Snow Tricks
-    </a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('img/logo.png') }}" width="60" height="30" class="d-inline-block align-top" alt="">
+            Snow Tricks
+        </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-            <li>
-                <a class="navbar-brand nav-profile" href="#">
-                    <img src="{{ asset('img/avatar/default-user-avatar.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
-                    Sabri
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Tricks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="register">Register</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            {% set actual_route = app.request.attributes.get('_route') %}
+            <ul class="navbar-nav">
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a class="navbar-brand nav-profile" href="#">
+                            <img src="{{ app.user.image.publicUrl }}" width="40" height="40"
+                                 class="d-inline-block align-top" alt="" style="border-radius:40px;margin-top:-3px;">
+                            &nbsp;{{ app.user.username }}
+                        </a>
+                    </li>
+                {% endif %}
+                {% if actual_route == 'home' %}
+                <li class="nav-item active">
+            {% else %}
+                <li class="nav-item">
+                    {% endif %}
+                    <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                </li>
+                {% if actual_route == 'tricks' %}
+                <li class="nav-item active">
+            {% else %}
+                <li class="nav-item">
+                    {% endif %}
+                    <a class="nav-link" href="{{ path('home') }}">Tricks</a>
+                </li>
+                {% if not is_granted('ROLE_USER') %}
+                    {% if actual_route == 'login' %}
+                        <li class="nav-item active">
+                    {% else %}
+                        <li class="nav-item">
+                    {% endif %}
+                    <a class="nav-link" href="{{ path('login') }}">Login</a>
+                    </li>
+                    {% if actual_route == 'user_registration' %}
+                        <li class="nav-item active">
+                    {% else %}
+                        <li class="nav-item">
+                    {% endif %}
+                    <a class="nav-link" href="{{ path('user_registration') }}">Register</a>
+                    </li>
+                {% else %}
+                    {% if actual_route == 'logout' %}
+                        <li class="nav-item active">
+                    {% else %}
+                        <li class="nav-item">
+                    {% endif %}
+                    <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
 {% endblock navigation %}
