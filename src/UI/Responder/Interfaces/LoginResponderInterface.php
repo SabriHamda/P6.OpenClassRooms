@@ -8,7 +8,7 @@ namespace App\UI\Responder\Interfaces;
 
 use Twig\Environment;
 
-interface SecurityResponderInterface
+interface LoginResponderInterface
 {
 
     /**

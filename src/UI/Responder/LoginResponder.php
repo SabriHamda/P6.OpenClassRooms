@@ -5,11 +5,11 @@
 
 namespace App\UI\Responder;
 
-use App\UI\Responder\Interfaces\SecurityResponderInterface;
+use App\UI\Responder\Interfaces\LoginResponderInterface;
 use Twig\Environment;
 use Symfony\Component\HttpFoundation\Response;
 
-class SecurityResponder implements SecurityResponderInterface
+class LoginResponder implements LoginResponderInterface
 {
 
     /**

@@ -6,19 +6,19 @@
 namespace App\UI\Action;
 
 
-use App\UI\Responder\Interfaces\SecurityResponderInterface;
+use App\UI\Responder\Interfaces\LoginResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityAction
+class LoginAction
 {
     /**
      * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
-     * @param SecurityResponderInterface $responder
+     * @param LoginResponderInterface $responder
      * @return mixed
      */
-    public function __invoke(AuthenticationUtils $authenticationUtils, SecurityResponderInterface $responder)
+    public function __invoke(AuthenticationUtils $authenticationUtils, LoginResponderInterface $responder)
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
