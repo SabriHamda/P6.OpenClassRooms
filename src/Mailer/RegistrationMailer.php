@@ -37,17 +37,19 @@ class RegistrationMailer implements RegistrationMailerInterface
     }
 
     /**
+     * @param string $email
      * @param string $name
-     *
+     * @param $validationToken
+     * @return mixed|void
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function sendTo(string $name, $validationToken)
+    public function sendTo(string $email, string $name, $validationToken)
     {
         $message = (new \Swift_Message('Snow Tricks'))
             ->setFrom('sabri@hamda.ch')
-            ->setTo('sabri@hamda.ch')
+            ->setTo($email)
             ->setBody(
                 $this->twig->render(
                     'emails/registration.html.twig',

@@ -5,7 +5,7 @@
  * Time: 12:40.
  */
 
-namespace App\Form\Type;
+namespace App\UI\Form\Type;
 
 use App\Domain\DTO\UserRegistrationDTO;
 use Symfony\Component\Form\AbstractType;

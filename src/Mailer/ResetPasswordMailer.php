@@ -33,6 +33,7 @@ class ResetPasswordMailer implements ResetPasswordMailerInterface
     }
 
     /**
+     * @param string $email
      * @param string $name
      * @param string $resetPasswordToken
      * @return mixed|void
@@ -40,11 +41,11 @@ class ResetPasswordMailer implements ResetPasswordMailerInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function sendTo(string $name, string $resetPasswordToken)
+    public function sendTo(string $email, string $name, string $resetPasswordToken)
     {
         $message = (new \Swift_Message('Snow Tricks'))
             ->setFrom('sabri@hamda.ch')
-            ->setTo('sabri@hamda.ch')
+            ->setTo($email)
             ->setBody(
                 $this->twig->render(
                     'emails/resetPassword.html.twig',

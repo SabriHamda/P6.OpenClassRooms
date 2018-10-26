@@ -21,9 +21,10 @@ interface RegistrationMailerInterface
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig);
 
     /**
+     * @param string $email
      * @param string $name
-     *
+     * @param $validationToken
      * @return mixed
      */
-    public function sendTo(string $name, $validationToken);
+    public function sendTo(string $email, string $name, $validationToken);
 }

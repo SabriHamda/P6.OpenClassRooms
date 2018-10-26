@@ -3,7 +3,7 @@
  * Created by Sabri Hamda <sabri@hamda.ch>
  */
 
-namespace App\Form\Handler;
+namespace App\UI\Form\Handler;
 
 use App\Entity\User;
 use App\Entity\Media;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class UserHandler
- * @package App\Form\Handler
+ * @package App\UI\Form\Handler
  */
 class UserHandler
 {
@@ -138,7 +138,7 @@ class UserHandler
                 // save the User!
                 $this->userRepository->save($user);
                 // send an email with token
-                $this->registrationMailer->sendTo($form->getData()->username, $user->getValidationToken());
+                $this->registrationMailer->sendTo($form->getData()->email, $form->getData()->username,  $user->getValidationToken());
                 return true;
         }
         return false;

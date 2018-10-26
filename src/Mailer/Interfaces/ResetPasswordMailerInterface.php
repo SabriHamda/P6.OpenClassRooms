@@ -18,10 +18,11 @@ interface ResetPasswordMailerInterface
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig);
 
     /**
+     * @param string $email
      * @param string $name
      * @param string $resetPasswordToken
      * @return mixed
      */
-    public function sendTo(string $name, string $resetPasswordToken);
+    public function sendTo(string $email, string $name, string $resetPasswordToken);
 
 }

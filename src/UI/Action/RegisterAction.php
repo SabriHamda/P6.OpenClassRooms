@@ -7,8 +7,8 @@
 
 namespace App\UI\Action;
 
-use App\Form\Handler\UserHandler;
-use App\Form\Type\UserType;
+use App\UI\Form\Handler\UserHandler;
+use App\UI\Form\Type\UserType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

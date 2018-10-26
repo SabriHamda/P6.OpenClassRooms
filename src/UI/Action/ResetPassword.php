@@ -16,8 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
 use Symfony\Component\Form\FormFactoryInterface;
-use App\Form\Type\ResetPasswordType;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use App\UI\Form\Type\ResetPasswordType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
@@ -79,7 +78,7 @@ class ResetPassword
                 }else {
                     $user->setResetPasswordToken($resetPasswordToken);
                     $userRepository->update();
-                    $mailer->sendTo($user->getUsername(), $resetPasswordToken);
+                    $mailer->sendTo($user->getEmail(), $user->getUsername(), $resetPasswordToken);
                     $this->session->getFlashBag()->add('success', 'Pour confirmer votre email et modifier votre mot de passe, merci de vous rendre dans votre boite mail.');
                     return new RedirectResponse($this->redirectResponse->generate('home'));
                 }
