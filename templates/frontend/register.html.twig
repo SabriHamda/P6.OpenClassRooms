@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     <label>* Nom d'utilisateur</label>
-                    {{ form_widget(form.username,{ 'attr': {'class': 'pimp'} }) }}
+                    {{ form_widget(form.username,{ 'attr': {'class': 'pimp', 'autofocus':'true'} }) }}
                     <span class="form-loader"></span>
                     {{ form_errors(form.username) }}
                 </div>
