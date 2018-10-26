@@ -4,9 +4,6 @@
 /public/bundles/
 /var/
 /vendor/
-/var/cache/dev/
-/var/cache/prod/
-/var/cache/test/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
