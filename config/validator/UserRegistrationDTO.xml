@@ -24,6 +24,7 @@
             <constraint name="NotBlank">
                 <option name="message">Tous les champs doivent être remplis.</option>
             </constraint>
+            <constraint name="App\Validator\Constraints\UniqueEmailPDOConstraint" />
             <constraint name="Email">
                 <option name="message">L'email "{{ value }}" n'est pas valide.</option>
                 <option name="checkMX">true</option>
