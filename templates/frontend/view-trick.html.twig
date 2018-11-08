@@ -5,39 +5,46 @@
     <!=====----- navigation end-----=====>
 
     <div class="main-container container-fluid">
-        <div id="main-header" class="main-header row">
-            <img src="{{ asset('img/bg.jpg') }}" alt="image">
-            <div class="snow1"></div>
-            <div class="snow2"></div>
-            <div class="snow3"></div>            <div id="header-title" class="header-title">
-                <h1>Les Tricks<br> Typiques de <br><span>Snowboard </span>à Connaître </h1>
-                <h4>La montagne, ça vous gagne!</h4>
-                <div class="clearfix"></div>
-                <a class="btn btn-primary" href="#" role="button">En savoir plus</a>
-            </div>
-        </div>
-        <div class="main-content row">
-            <div id="list-tricks" class="list-tricks row-fluid text-center">
 
+        <div class="main-content row" style="top:100px">
+            <div class="single-trick">
 
-                {% for trick in tricks %}
-                    <div class="card trick-card col-lg-3 col-md-3">
-            <span class="card-pattern">
-               <ul>
-                   <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                   <li><a href="#"><i class="far fa-edit"></i></a></li>
-                   <li><a href="#"><i class="far fa-share-square"></i></a></li>
-                   <li><a href="#"><i class="fas fa-search-plus"></i></a></li>
-               </ul>
-            </span>
-                        <img class="card-img-top" src="{{ trick.image }}" alt="card trick-card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ trick.name }}</h5>
-                            <p class="card-text">{{ trick.description }}</p>
-                            <a href="/view-trick/{{ trick.id }}" class="btn btn-primary">En savoir plus</a>
+                <div class="card mb-3 center-block">
+                    <img class="card-img-top" src="https://via.placeholder.com/726x400" alt="Card image cap">
+                    <div class="card-body" style="height: auto">
+                        <div class="list-tricks-images col text-center">
+                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
+                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
+                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
+                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
+                        </div>
+                        <br>
+                        <h5 class="card-title">Nom de la figure</h5>
+                        <p>
+                        <small class="text-muted"><strong>Auteur : </strong> Lilou75</small>
+                        </p>
+                        <br>
+                        <h5 class="card-title">Description</h5>
+                        <p class="card-text">Vestibulum quis massa laoreet, viverra erat sed, fringilla lorem. Sed sagittis diam eget luctus pretium. Nam id ex risus. Donec fringilla purus sit amet nisl efficitur, eget accumsan elit ullamcorper. Nunc dolor nulla, aliquet sit amet ligula at, luctus vehicula turpis. Nunc at rutrum turpis, nec volutpat lacus. Ut eget nisi ex.</p>
+                        <p class="card-text">
+                            <small class="text-muted"><strong>crée le : </strong> 08/11/2018</small>
+                        </p>
+                        <div class="col" style="width:100%">
+                            <h5 class="card-title">Commentaires</h5>
+                            <ul class="list-unstyled">
+                                <li class="media">
+                                    <img class="mr-3" src="https://via.placeholder.com/64x64" alt="profile-image">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">Morgan68</h5>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam interdum tellus a tincidunt dictum. Etiam a ipsum justo. In lacinia convallis tempor. Nullam iaculis et quam non suscipit. Aliquam erat volutpat. Vestibulum non vulputate dui.
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
+
+
             </div>
             <!-- Footer -->
             <footer class="page-footer font-small blue pt-4">

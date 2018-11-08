@@ -115,9 +115,17 @@ body {
   border-left: 100vw solid transparent;
 }
 
-.list-triks{
+.list-tricks{
   margin-top:100px;
   margin-bottom: 100px;
+}
+
+.single-trick{
+  margin: 100px auto 100px auto;
+
+  .card{
+    max-width:1000px;
+  }
 }
 
 .trick-card {
