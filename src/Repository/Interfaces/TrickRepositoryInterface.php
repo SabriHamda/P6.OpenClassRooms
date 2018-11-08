@@ -16,4 +16,9 @@ interface TrickRepositoryInterface
      * @return mixed
      */
     public function findAll();
+
+    /**
+     * @return mixed
+     */
+    public function getTrickById(int $id);
 }
