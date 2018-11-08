@@ -6,7 +6,10 @@
 namespace App\UI\Action;
 
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use App\Repository\Interfaces\TrickRepositoryInterface;
+use App\UI\Responder\Interfaces\ViewTrickResponderInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -22,25 +25,36 @@ class ViewTrick
     private $twig;
 
     /**
+     * @var TrickRepositoryInterface
+     */
+    private $trickRepository;
+
+    /**
      * ViewTrick constructor.
      * @param Environment $twig
+     * @param TrickRepositoryInterface $trickRepository
      */
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, TrickRepositoryInterface $trickRepository)
     {
         $this->twig = $twig;
+        $this->trickRepository = $trickRepository;
     }
 
     /**
      * @Route("view-trick/{id}")
+     * @param Request $request
+     * @param ViewTrickResponderInterface $responder
+     * @param $id
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function index($id)
+    public function __invoke(Request $request,ViewTrickResponderInterface $responder, $id)
     {
-        $response = new Response($this->twig->render('frontend/view-trick.html.twig'));
-        return $response;
+        $trickRepository = $this->trickRepository;
+        $trick = $trickRepository->getTrickById($id);
+        return $responder($trick);
     }
 
 }
