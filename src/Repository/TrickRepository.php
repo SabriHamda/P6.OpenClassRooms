@@ -34,4 +34,18 @@ class TrickRepository extends ServiceEntityRepository implements TrickRepository
     {
         return $this->createQueryBuilder('tricks')->getQuery()->getResult();
     }
+
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getTrickById(int $id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
