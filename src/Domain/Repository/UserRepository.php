@@ -5,16 +5,16 @@
  * Time: 14:08.
  */
 
-namespace App\Repository;
+namespace App\Domain\Repository;
 
 use App\Domain\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use App\Repository\Interfaces\UserRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Class UserRepository
- * @package App\Repository
+ * @package App\Domain\Repository
  */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {

@@ -5,6 +5,8 @@
             Snow Tricks
         </a>
 
+
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,7 +30,8 @@
                     {% endif %}
                     <a class="nav-link" href="{{ path('home') }}">Accueil</a>
                 </li>
-                {% if actual_route == 'tricks' %}
+
+                {% if actual_route == 'tricks' or app.request.server.get('PATH_INFO') == ('/view-trick/'~trick.id|default) %}
                 <li class="nav-item active">
             {% else %}
                 <li class="nav-item">

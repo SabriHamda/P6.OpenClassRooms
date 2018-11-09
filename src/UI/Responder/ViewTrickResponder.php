@@ -6,6 +6,7 @@
 namespace App\UI\Responder;
 
 
+use App\Services\Interfaces\SlugifyInterface;
 use App\UI\Responder\Interfaces\ViewTrickResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -35,6 +36,7 @@ class ViewTrickResponder implements ViewTrickResponderInterface
      */
     public function __invoke($trick) :Response
     {
+
         $response = new Response($this->twig->render('frontend/view-trick.html.twig',['trick'=>$trick]));
         return $response;
 

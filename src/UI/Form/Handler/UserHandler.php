@@ -5,10 +5,10 @@
 
 namespace App\UI\Form\Handler;
 
-use App\Entity\User;
-use App\Entity\Media;
+use App\Domain\Entity\User;
+use App\Domain\Entity\Media;
 use App\Mailer\Interfaces\RegistrationMailerInterface;
-use App\Repository\Interfaces\UserRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\Services\Interfaces\FileUploaderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;

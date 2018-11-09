@@ -5,7 +5,7 @@
 
 namespace App\UI\Action;
 
-use App\Repository\UserRepository;
+use App\Domain\Repository\UserRepository;
 use App\UI\Responder\TokenValidationResponder;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;

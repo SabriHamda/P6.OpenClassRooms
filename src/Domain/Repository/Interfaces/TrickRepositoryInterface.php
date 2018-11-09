@@ -5,7 +5,7 @@
  * Time: 16:07.
  */
 
-namespace App\Repository\Interfaces;
+namespace App\Domain\Repository\Interfaces;
 
 /**
  * Interface TrickRepositoryInterface.

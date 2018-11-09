@@ -5,10 +5,10 @@
  * Time: 21:07.
  */
 
-namespace App\Repository;
+namespace App\Domain\Repository;
 
 use App\Domain\Entity\Trick;
-use App\Repository\Interfaces\TrickRepositoryInterface;
+use App\Domain\Repository\Interfaces\TrickRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

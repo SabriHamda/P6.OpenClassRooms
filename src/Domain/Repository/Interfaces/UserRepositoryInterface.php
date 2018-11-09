@@ -5,18 +5,18 @@
  * Time: 14:09.
  */
 
-namespace App\Repository\Interfaces;
+namespace App\Domain\Repository\Interfaces;
 
 /**
  * Interface UserRepositoryInterface.
  */
 /**
  * Interface UserRepositoryInterface
- * @package App\Repository\Interfaces
+ * @package App\Domain\Repository\Interfaces
  */
 /**
  * Interface UserRepositoryInterface
- * @package App\Repository\Interfaces
+ * @package App\Domain\Repository\Interfaces
  */
 interface UserRepositoryInterface
 {

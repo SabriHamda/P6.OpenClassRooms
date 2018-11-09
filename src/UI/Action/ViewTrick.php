@@ -6,7 +6,8 @@
 namespace App\UI\Action;
 
 
-use App\Repository\Interfaces\TrickRepositoryInterface;
+use App\Domain\Repository\Interfaces\TrickRepositoryInterface;
+use App\Services\Interfaces\SlugifyInterface;
 use App\UI\Responder\Interfaces\ViewTrickResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;

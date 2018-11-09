@@ -7,7 +7,7 @@
 
 namespace App\UI\Action;
 
-use App\Repository\TrickRepository;
+use App\Domain\Repository\TrickRepository;
 use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

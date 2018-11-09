@@ -10,7 +10,7 @@
             <div class="single-trick">
 
                 <div class="card mb-3 center-block">
-                    <img class="card-img-top" src="https://via.placeholder.com/726x400" alt="Card image cap">
+                    <img class="card-img-top" src="{{ trick.image }}" alt="Card image cap">
                     <div class="card-body" style="height: auto">
                         <div class="list-tricks-images col text-center">
                             <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
@@ -22,6 +22,8 @@
                         <h5 class="card-title">{{ trick.name }}</h5>
                         <p>
                         <small class="text-muted"><strong>Auteur : </strong> Lilou75</small>
+                            <br>
+                        <small class="text-muted"><strong>Categorie : </strong></small> <a href="#" class="badge badge-danger">Grabs</a>
                         </p>
                         <br>
                         <h5 class="card-title">Description</h5>

@@ -5,9 +5,9 @@
 
 namespace App\UI\Action;
 
-use App\Entity\User;
+use App\Domain\Entity\User;
 use App\UI\Form\Type\ResetPasswordDoType;
-use App\Repository\Interfaces\UserRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Responder\Interfaces\ResetPasswordDoResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\FormFactoryInterface;

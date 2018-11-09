@@ -33,7 +33,22 @@
                         <img class="card-img-top" src="{{ trick.image }}" alt="card trick-card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{ trick.name }}</h5>
-                            <p class="card-text">{{ trick.description }}</p>
+                            <p>{% set words = trick.description|split(' ', 50) %}
+                            {{ attribute(words, 0)|raw }}
+                                {{ attribute(words, 1)|raw }}
+                                {{ attribute(words, 2)|raw }}
+                                {{ attribute(words, 3)|raw }}
+                                {{ attribute(words, 4)|raw }}
+                                {{ attribute(words, 5)|raw }}
+                                {{ attribute(words, 6)|raw }}
+                                {{ attribute(words, 7)|raw }}
+                                {{ attribute(words, 8)|raw }}
+                                {{ attribute(words, 9)|raw }}
+                                {{ attribute(words, 10)|raw }}
+                                {{ attribute(words, 11)|raw }}
+                                {{ attribute(words, 12)|raw }}
+                            </p>
+                            <!--<p class="card-text">{{ trick.description }}</p>-->
                             <a href="/view-trick/{{ trick.id }}" class="btn btn-primary">En savoir plus</a>
                         </div>
                     </div>

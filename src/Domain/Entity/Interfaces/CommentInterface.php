@@ -6,8 +6,7 @@
 namespace App\Domain\Entity\Interfaces;
 
 
-interface MediaInterface
+interface CommentInterface
 {
-
 
 }

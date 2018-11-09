@@ -3,10 +3,10 @@
  * Created by Sabri Hamda <sabri@hamda.ch>
  */
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
 
-use App\Entity\Interfaces\MediaInterface;
+use App\Domain\Entity\Interfaces\MediaInterface;
 use Ramsey\Uuid\Uuid;
 
 class Media implements MediaInterface

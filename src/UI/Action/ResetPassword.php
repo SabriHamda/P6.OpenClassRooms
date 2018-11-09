@@ -7,7 +7,7 @@ namespace App\UI\Action;
 
 
 use App\Mailer\Interfaces\ResetPasswordMailerInterface;
-use App\Repository\Interfaces\UserRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Responder\Interfaces\ResetPasswordResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

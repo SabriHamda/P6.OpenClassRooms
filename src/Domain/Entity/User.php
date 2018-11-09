@@ -5,9 +5,9 @@
  * Time: 13:48.
  */
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
-use App\Entity\Interfaces\MediaInterface;
+use App\Domain\Entity\Interfaces\MediaInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\User\UserInterface;
 

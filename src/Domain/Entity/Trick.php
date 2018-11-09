@@ -5,14 +5,14 @@
  * Time: 20:38.
  */
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
-use App\Entity\Interfaces\MediaInterface;
+use App\Domain\Entity\Interfaces\MediaInterface;
 use App\Services\Interfaces\SlugifyInterface;
 
 /**
  * Class Trick
- * @package App\Entity
+ * @package App\Domain\Entity
  */
 class Trick
 {
