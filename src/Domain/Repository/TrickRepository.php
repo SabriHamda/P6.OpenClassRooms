@@ -7,7 +7,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Trick;
+use App\Domain\Entity\Trick;
 use App\Repository\Interfaces\TrickRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;

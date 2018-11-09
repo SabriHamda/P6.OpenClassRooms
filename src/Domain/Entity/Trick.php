@@ -7,6 +7,13 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\MediaInterface;
+use App\Services\Interfaces\SlugifyInterface;
+
+/**
+ * Class Trick
+ * @package App\Entity
+ */
 class Trick
 {
     /**
@@ -28,6 +35,11 @@ class Trick
      * @var string
      */
     private $name;
+
+    /**
+     * @var string
+     */
+    private $slug;
 
     /**
      * @var string
@@ -58,27 +70,11 @@ class Trick
     }
 
     /**
-     * @param $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return int
      */
     public function getCategoryId()
     {
         return $this->categoryId;
-    }
-
-    /**
-     * @param $categoryId
-     */
-    public function setCategoryId($categoryId): void
-    {
-        $this->categoryId = $categoryId;
     }
 
     /**
@@ -90,27 +86,11 @@ class Trick
     }
 
     /**
-     * @param $commentId
-     */
-    public function setCommentId($commentId): void
-    {
-        $this->commentId = $commentId;
-    }
-
-    /**
      * @return string
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @param $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
     }
 
     /**
@@ -122,27 +102,11 @@ class Trick
     }
 
     /**
-     * @param $image
-     */
-    public function setImage($image): void
-    {
-        $this->image = $image;
-    }
-
-    /**
      * @return string
      */
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @param $description
-     */
-    public function setDescription($description): void
-    {
-        $this->description = $description;
     }
 
     /**
@@ -156,7 +120,7 @@ class Trick
     /**
      * @param $createdAt
      */
-    public function setCreatedAt($createdAt): void
+    public function setCreatedAt(): void
     {
         $this->createdAt = new \DateTime('now');
     }
@@ -170,10 +134,17 @@ class Trick
     }
 
     /**
-     * @param $updatedAt
+     * @param $name
+     * @param $description
+     * @param MediaInterface $image
+     * @throws \Exception
      */
-    public function setUpdatedAt($updatedAt): void
+    public function create($name,$description,MediaInterface $image)
     {
-        $this->updatedAt = new \DateTime('now');
+        $this->name = $name;
+        $this->slug = SlugifyInterface::slugify($name);
+        $this->image = $image;
+        $this->description = $description;
+        $this->createdAt = new \DateTimeImmutable();
     }
 }
