@@ -12,7 +12,7 @@ use App\Services\Interfaces\SlugifyInterface;
  * Class Slugify
  * @package App\Services
  */
-class Slugify implements SlugifyInterface
+class Slugify
 {
 
     /**

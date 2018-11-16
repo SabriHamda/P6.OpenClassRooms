@@ -7,8 +7,10 @@
 
 namespace App\Domain\Entity;
 
+use App\Domain\Entity\Interfaces\CategoryInterface;
 use App\Domain\Entity\Interfaces\MediaInterface;
-use App\Services\Interfaces\SlugifyInterface;
+use App\Services\Slugify;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class Trick
@@ -42,14 +44,23 @@ class Trick
     private $slug;
 
     /**
-     * @var string
+     * @var
      */
-    private $image;
+    private $media = [];
 
     /**
      * @var string
      */
     private $description;
+
+    /**
+     * @var string
+     */
+    private $category;
+
+    private $user;
+
+    private $userId;
 
     /**
      * @var string
@@ -60,6 +71,23 @@ class Trick
      * @var string
      */
     private $updatedAt;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
 
     /**
      * @return int
@@ -94,11 +122,11 @@ class Trick
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getImage()
+    public function getMedia()
     {
-        return $this->image;
+        return $this->media;
     }
 
     /**
@@ -117,13 +145,6 @@ class Trick
         return $this->createdAt;
     }
 
-    /**
-     * @param $createdAt
-     */
-    public function setCreatedAt(): void
-    {
-        $this->createdAt = new \DateTime('now');
-    }
 
     /**
      * @return string
@@ -134,17 +155,41 @@ class Trick
     }
 
     /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
      * @param $name
      * @param $description
-     * @param MediaInterface $image
+     * @param MediaInterface $media
      * @throws \Exception
      */
-    public function create($name,$description,MediaInterface $image)
+    public function create(string $name,string $description,MediaInterface $media, CategoryInterface $category,User $user)
     {
+        $this->id = Uuid::uuid4();
         $this->name = $name;
-        $this->slug = SlugifyInterface::slugify($name);
-        $this->image = $image;
+        $this->slug = Slugify::slugify($name);
+        $this->media []= $media;
         $this->description = $description;
         $this->createdAt = new \DateTimeImmutable();
+        $this->category = $category;
+        $this->categoryId = $this->category->getId();
+        $this->user = $user;
+        $this->userId = $user->getId();
+
     }
+
 }

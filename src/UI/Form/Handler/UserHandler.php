@@ -27,6 +27,10 @@ class UserHandler
      */
     private $targetDirectory;
 
+    private $targetDefaultDirectory;
+
+    private $publicDefaultDirectory;
+
     /**
      * @var ValidatorInterface
      */
@@ -76,6 +80,8 @@ class UserHandler
     public function __construct(
         $targetDirectory,
         $publicAvatarDirectory,
+        $targetDefaultDirectory,
+        $publicDefaultDirectory,
         ValidatorInterface $validator,
         FileUploaderInterface $fileUploader,
         EncoderFactoryInterface $encoderFactory,
@@ -85,6 +91,8 @@ class UserHandler
     )
     {
         $this->targetDirectory = $targetDirectory;
+        $this->targetDefaultDirectory = $targetDefaultDirectory;
+        $this->publicDefaultDirectory = $publicDefaultDirectory;
         $this->validator = $validator;
         $this->publicAvatarDirectory = $publicAvatarDirectory;
         $this->fileUploader = $fileUploader;
@@ -105,19 +113,19 @@ class UserHandler
         // 2) handle the submit (will only happen on POST)
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->getData()->image;
-            $defaultImage = new File($this->targetDirectory . '/default-user-avatar.png');
+            $defaultImage = new File($this->targetDefaultDirectory . '/default-user-avatar.png');
             $media = new Media();
             //is user choose to upload an image
             if ($image) {
                 $avatar = new File($form->getData()->image);
                 $hashedFileName = md5(uniqid()) . '.' . $image->guessExtension();
-                $media->create($hashedFileName, $image->guessExtension(), $image->getSize(), $this->publicAvatarDirectory . $hashedFileName);
+                $media->createImageMedia($hashedFileName, $image->guessExtension(), $image->getSize(), $this->publicAvatarDirectory . $hashedFileName,null);
                 //Upload file in directory
-                $this->fileUploader->upload($avatar, $hashedFileName);
+                $this->fileUploader->upload($avatar, $hashedFileName, $this->targetDirectory);
                 //if user don't choose an image
             } else {
                 $image = 'default-user-avatar.png';
-                $media->create($image, $defaultImage->guessExtension(), $defaultImage->getSize(), $this->publicAvatarDirectory . $image);
+                $media->createImageMedia($image, $defaultImage->guessExtension(), $defaultImage->getSize(), $this->publicDefaultDirectory . $image,null);
             }
             $encryptedPassword = $this->encoderFactory->getEncoder(User::class)->encodePassword($form->getData()->password, null);
             $user = new User();

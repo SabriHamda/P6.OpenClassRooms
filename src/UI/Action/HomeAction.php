@@ -48,8 +48,8 @@ class HomeAction
      */
     public function __invoke(Request $request, HomeResponderInterface $responder)
     {
-        $tricks = $this->trickRepository->findAll();
 
+        $tricks = $this->trickRepository->findAll();
         return $responder($request, $tricks);
     }
 }

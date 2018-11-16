@@ -8,14 +8,14 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181109133006 extends AbstractMigration
+final class Version20181111151648 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE app_users DROP token');
+        $this->addSql('ALTER TABLE snowtricks_media CHANGE trick_id trick_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:uuid)\'');
     }
 
     public function down(Schema $schema) : void
@@ -23,6 +23,6 @@ final class Version20181109133006 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE app_users ADD token VARCHAR(64) NOT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE snowtricks_media CHANGE trick_id trick_id CHAR(36) NOT NULL COLLATE utf8mb4_unicode_ci COMMENT \'(DC2Type:uuid)\'');
     }
 }

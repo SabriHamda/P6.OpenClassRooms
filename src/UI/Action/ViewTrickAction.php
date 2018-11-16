@@ -7,7 +7,6 @@ namespace App\UI\Action;
 
 
 use App\Domain\Repository\Interfaces\TrickRepositoryInterface;
-use App\Services\Interfaces\SlugifyInterface;
 use App\UI\Responder\Interfaces\ViewTrickResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +17,7 @@ use Twig\Environment;
  * Class ViewTrick
  * @package App\UI\Action
  */
-class ViewTrick
+class ViewTrickAction
 {
     /**
      * @var Environment
@@ -42,19 +41,19 @@ class ViewTrick
     }
 
     /**
-     * @Route("view-trick/{id}")
+     * @Route("view-trick/{slug}")
      * @param Request $request
      * @param ViewTrickResponderInterface $responder
-     * @param $id
+     * @param $slug
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request,ViewTrickResponderInterface $responder, $id)
+    public function __invoke(Request $request,ViewTrickResponderInterface $responder, $slug)
     {
         $trickRepository = $this->trickRepository;
-        $trick = $trickRepository->getTrickById($id);
+        $trick = $trickRepository->getTrickBySlug($slug);
         return $responder($trick);
     }
 

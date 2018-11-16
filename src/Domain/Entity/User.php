@@ -51,6 +51,11 @@ class User implements UserInterface
     private $isActive;
 
     /**
+     * @var
+     */
+    private $trick;
+
+    /**
      * @var string
      */
     private $createdAt;
@@ -108,7 +113,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getRoles()
+    public function getRoles() :array
     {
         return $this->roles;
     }
@@ -127,6 +132,11 @@ class User implements UserInterface
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    public function getTick()
+    {
+        return $this->trick;
     }
 
     /**

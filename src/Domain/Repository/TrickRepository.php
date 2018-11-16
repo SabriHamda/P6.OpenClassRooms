@@ -48,4 +48,28 @@ class TrickRepository extends ServiceEntityRepository implements TrickRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @param string $slug
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getTrickBySlug(string $slug)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param $trick
+     * @return mixed|void
+     */
+    public function save($trick)
+    {
+        $this->_em->persist($trick);
+        $this->_em->flush();
+    }
 }
