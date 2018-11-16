@@ -7,11 +7,14 @@
 
 <div class="main-container container-fluid col-sm-12 col-md-12 col-lg-6">
     <form method="post" class="register-form">
+        <div class="street-titles col-12">
+            <h1>Login</h1>
+        </div>
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Veuillez vous identifier</h1>
+    <h2 class="h2 mb-3 font-weight-normal">Veuillez vous identifier</h2>
         <div class="form-group">
     <label>* Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control pimp" required autofocus>

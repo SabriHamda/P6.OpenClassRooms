@@ -1,0 +1,268 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block content %}
+    <!=====----- navigation -----=====>
+    {% include('frontend/parts/navigation.html.twig') %}
+    <!=====----- navigation end-----=====>
+
+    <div class="main-container container-fluid">
+
+        <div class="main-content row" style="top:100px">
+            <div class="single-trick">
+
+                <div class="card mb-3 center-block">
+                    {{ form_start(form,{'attr':{'class':'add-trick-form','method':'post'}}) }}
+                    <div class="street-titles col-12">
+                        <h1>Ajouter une Figure</h1>
+                    </div>
+                    <h5 class="card-title">Ajouter une  ou plusieurs images</h5>
+                    <h6 class="card-title">Veuillez Uploader une ou plusieurs images</h6>
+                    <div class="form-group form-control-file">
+                        {{ form_widget(form.image) }}
+                        {{ form_errors(form.image) }}
+
+
+                    </div>
+
+
+                    <img id="uploaded-image-0" class="card-img-top" src="{{ asset('img/default/726x400.jpg') }}" alt="Card image cap">
+                    <div class="add-trick-content">
+                        <div class="list-tricks-images col text-center">
+                            <img id="uploaded-image-1" src="{{ asset('img/default/200x200.jpg') }}" alt="trick-image" class="preview img-thumbnail" width="200px" height="200px">
+                            <img id="uploaded-image-2" src="{{ asset('img/default/200x200.jpg') }}" alt="trick-image" class="preview img-thumbnail" width="200px" height="200px">
+                            <img id="uploaded-image-3" src="{{ asset('img/default/200x200.jpg') }}" alt="trick-image" class="preview img-thumbnail" width="200px" height="200px">
+                            <img id="uploaded-image-4" src="{{ asset('img/default/200x200.jpg') }}" alt="trick-image" class="preview img-thumbnail" width="200px" height="200px">
+                        </div>
+                        <br>
+                        <h5 class="card-title">Ajouter une ou plusieurs videos</h5>
+                        <h6 class="card-title">Veuillez saisir url de votre video Youtube ou Dailymotion.</h6>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">Url youtube ou Dailymotion</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="add_trick_videos_0" name="add_trick[videos][0]"><span data-video="1" class="view-video-btn video-1">Voir</span>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">Url youtube ou Dailymotion</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="add_trick_videos_1" name="add_trick[videos][1]"><span data-video="2" class="view-video-btn video-2">Voir</span>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">Url youtube ou Dailymotion</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="add_trick_videos_2" name="add_trick[videos][2]"><span data-video="3" class="view-video-btn video-3">Voir</span>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">Url youtube ou Dailymotion</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="add_trick_videos_3" name="add_trick[videos][3]"><span data-video="4" class="view-video-btn video-4">Voir</span>
+                                </div>
+                        <div class="custom-error"><div style="display:none"> {{ form_row(form.videos) }}</div></div>
+                        <br>
+
+
+                        <div class="list-tricks-videos col text-center">
+                            <iframe class="preview-video-1" width="200" height="200"
+                                    src="{{ asset('img/default/default-video.jpg') }}">
+                            </iframe>
+                            <iframe class="preview-video-2" width="200" height="200"
+                                    src="{{ asset('img/default/default-video.jpg') }}">
+                            </iframe>
+                            <iframe class="preview-video-3" width="200" height="200"
+                                    src="{{ asset('img/default/default-video.jpg') }}">
+                            </iframe>
+                            <iframe class="preview-video-4" width="200" height="200"
+                                    src="{{ asset('img/default/default-video.jpg') }}">
+                            </iframe>
+                        </div>
+                        <br>
+                        <p>
+                            <br>
+                            <small class="text-muted"><strong>Auteur : </strong> {{ app.user.username }}</small>
+                            <br>
+                            <small class="text-muted"><strong>Crée le : </strong><span id="to-day"> 21/12/2012 </span></small>
+                        </p>
+                        <br>
+                            <h5 class="card-title">Groupe :</h5>
+                        <h6>Veuillez selectionner une categorie</h6>
+                        {{ form_row(form.category) }}
+
+                        <h5 class="card-title">Nom de la figure</h5>
+                        <h5 class="card-title">{{ form_widget(form.name) }}</h5>
+                        {{ form_errors(form.name) }}
+                        <h5 class="card-title">Description</h5>
+                        <p class="card-text">
+                            {{ form_widget(form.description) }}
+                            {{ form_errors(form.description) }}
+                        </p>
+
+                        <button type="submit" class="btn btn-primary">Créer</button>
+
+                        {{ form_end(form) }}
+                </div>
+
+
+            </div>
+            <!-- Footer -->
+            <footer class="page-footer font-small blue pt-4">
+
+                <!-- Footer Links -->
+                <div class="container-fluid text-center text-md-left">
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!-- Grid column -->
+                        <div class="col-md-6 mt-md-0 mt-3">
+
+                            <!-- Content -->
+                            <h5 class="text-uppercase">Snow Tricks</h5>
+                            <p>Qu'elles soient "old school" ou "new school", <br>les prouesses aériennes du snowboard
+                                sont toujours d'une beauté à couper le souffle.<br> la preuve en images.</p>
+
+                        </div>
+                        <!-- Grid column -->
+
+                        <hr class="clearfix w-100 d-md-none pb-3">
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 mb-md-0 mb-3">
+
+                            <!-- Links -->
+                            <h5 class="text-uppercase">Menu</h5>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="{{ path('home') }}">Accueil</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('home') }}">Tricks</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('login') }}">Login</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('user_registration') }}">Register</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 mb-md-0 mb-3">
+
+                            <!-- Links -->
+                            <h5 class="text-uppercase">Liens Utiles</h5>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="https://fr.wikipedia.org/wiki/Snowboard">Wikipedia</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.skiclub-legrandbornand.com/content/lexique-du-snowboarder-0">Lexique
+                                        du snowboarder</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.redbull.com/ch-fr/les-tricks-typiques-de-snowboard">Les tricks
+                                        typiques de snowboard</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.skipass.com/forums/sports/snowboard/sujet-67154.html">Forum</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </div>
+                <!-- Footer Links -->
+
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2018 Copyright :
+                    <a href="https://p6.hamda.ch"> www.hamda.ch</a>
+                </div>
+                <!-- Copyright -->
+
+            </footer>
+            <!-- Footer -->
+        </div>
+    </div>
+        <script type="text/javascript">
+            function readURL(input) {
+                let images = input.files.length;
+                if (images > 9){
+                    alert('Le nombre maximum d\'image est 5');
+                }else {
+                    if (input.files && input.files[0]) {
+                        let reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            document.getElementById('uploaded-image-0').setAttribute('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    }
+
+                    if (input.files && input.files[1]) {
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById('uploaded-image-1').setAttribute('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[1]);
+                    }
+
+                    if (input.files && input.files[2]) {
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById('uploaded-image-2').setAttribute('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[2]);
+                    }
+
+                    if (input.files && input.files[3]) {
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById('uploaded-image-3').setAttribute('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[3]);
+                    }
+
+                    if (input.files && input.files[4]) {
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById('uploaded-image-4').setAttribute('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[4]);
+                    }
+                }
+
+            }
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd = '0'+dd
+            }
+
+            if(mm<10) {
+                mm = '0'+mm
+            }
+
+            today = dd + '/' + mm + '/' + yyyy;
+            document.getElementById('to-day').innerHTML = today;
+
+        </script>
+
+
+
+{% endblock content %}
+

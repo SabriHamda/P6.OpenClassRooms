@@ -9,6 +9,10 @@
 
         {{ form_start(form,{'attr':{'class':'register-form','method':'post'}}) }}
         <div class="form-row">
+            <div class="street-titles col-12">
+                <h1>Register</h1>
+            </div>
+            <h2 class="h2 mb-3 font-weight-normal">Veuillez saisir vos informations</h2>
             <div class="w-100">
                 {{ form_errors(form) }}
             </div>
@@ -46,7 +50,7 @@
                 <div class="form-group form-control-file">
                     <label>Image de profile</label><br>
                     <div class="img-rounded">
-                        <img id="preview" src="{{ asset('img/avatar/default-user-avatar.png') }}" alt="image"
+                        <img id="preview" src="{{ asset('img/default/default-user-avatar.png') }}" alt="image"
                              class="text-center" style="max-height:150px;width:150px;height:150px;border-radius:150px;">
                     </div>
                     <br><br>

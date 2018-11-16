@@ -1,5 +1,6 @@
 {% extends 'frontend/layout.html.twig' %}
 {% block content %}
+
     <!=====----- navigation -----=====>
     {% include('frontend/parts/navigation.html.twig') %}
     <!=====----- navigation end-----=====>
@@ -24,32 +25,43 @@
                     <div class="card trick-card col-lg-3 col-md-3">
             <span class="card-pattern">
                <ul>
-                   <li><a href="#"><i class="far fa-trash-alt"></i></a></li>
-                   <li><a href="#"><i class="far fa-edit"></i></a></li>
-                   <li><a href="#"><i class="far fa-share-square"></i></a></li>
-                   <li><a href="#"><i class="fas fa-search-plus"></i></a></li>
+                   {% if app.user %}
+                   {% if trick.user.username == app.user.username %}
+                   <li><a href="#" data-toggle="tooltip" title="Suprimer" data-placement="left"><i class="far fa-trash-alt"></i></a></li>
+                   <li><a href="#" data-toggle="tooltip" title="Modifier" data-placement="left"><i class="far fa-edit"></i></a></li>
+                   {% endif %}
+                   {% endif %}
+                   <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost%3A8000/{{ trick.slug }}" data-toggle="tooltip" title="Partager" data-placement="left"><i class="far fa-share-square"></i></a></li>
+                   <li><a href="view-trick/{{ trick.slug }}" data-toggle="tooltip" title="Voir" data-placement="left"><i class="fas fa-search-plus"></i></a></li>
                </ul>
             </span>
-                        <img class="card-img-top" src="{{ trick.image }}" alt="card trick-card image cap">
+
+                        <img class="card-img-top"
+                                {% for media in trick.media if media.type == 'image' %}
+                             src="{{ media.publicUrl }}"
+                                {% endfor %}
+                             alt="card trick-card image cap" width="300px">
+
                         <div class="card-body">
+                            <small class="text-muted"></small> <a href="#" class="badge badge-danger">{{ trick.category.name }}</a>
                             <h5 class="card-title">{{ trick.name }}</h5>
-                            <p>{% set words = trick.description|split(' ', 50) %}
-                            {{ attribute(words, 0)|raw }}
-                                {{ attribute(words, 1)|raw }}
-                                {{ attribute(words, 2)|raw }}
-                                {{ attribute(words, 3)|raw }}
-                                {{ attribute(words, 4)|raw }}
-                                {{ attribute(words, 5)|raw }}
-                                {{ attribute(words, 6)|raw }}
-                                {{ attribute(words, 7)|raw }}
-                                {{ attribute(words, 8)|raw }}
-                                {{ attribute(words, 9)|raw }}
-                                {{ attribute(words, 10)|raw }}
-                                {{ attribute(words, 11)|raw }}
-                                {{ attribute(words, 12)|raw }}
-                            </p>
+                            {% set words = trick.description|raw|split(' ', 50) %}
+                                {% if words|default|raw %}
+                                <p>{{ words[0]|default }}
+                                {{ words[1]|default }}
+                                {{ words[2]|default }}
+                                {{ words[3]|default }}
+                                {{ words[4]|default }}
+                                {{ words[5]|default }}
+                                {{ words[6]|default }}
+                                {{ words[7]|default }}
+                                {{ words[8]|default }}
+                                {{ words[9]|default }}
+                                    {{ words[10]|default }} ...</p>
+                                {% endif %}
+
                             <!--<p class="card-text">{{ trick.description }}</p>-->
-                            <a href="/view-trick/{{ trick.id }}" class="btn btn-primary">En savoir plus</a>
+                            <a href="/view-trick/{{ trick.slug }}" class="btn btn-primary">En savoir plus</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -142,6 +154,29 @@
             <!-- Footer -->
         </div>
     </div>
+    <script>
+
+
+        //home page
+        window.addEventListener('scroll', function (e) {
+            let windowScrollTop = this.scrollY;
+            let imgPos = (windowScrollTop / -2 + 'px');
+            let titlePos = (windowScrollTop / -1 + 'px');
+
+            document.getElementById('main-header').style.transform = "translate(0, " + imgPos + ")";
+            document.getElementById('header-title').style.transform = "translate(" + titlePos + " ,0)";
+
+        });
+
+
+        // hide messages on click close button
+        document.getElementById('message-btn').addEventListener('click', function (event) {
+            event.preventDefault();
+            hide(document.querySelectorAll('.message'));
+        });
+
+
+    </script>
 
 
 {% endblock content %}

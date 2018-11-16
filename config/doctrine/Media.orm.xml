@@ -3,15 +3,25 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="App\Domain\Entity\Media" table="snowtricks_media" repository-class="App\Domain\Repository\MediaRepository">
-        <id name="uuid" type="uuid" column="uuid"/>
+        <id name="id" type="uuid" column="id"/>
         <field name="name" type="string" column="name" length="50" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
+        <field name="type" type="string" column="type" length="10" nullable="false"/>
         <field name="extension" type="string" column="extension" length="10" nullable="false"/>
         <field name="size" type="integer" column="size" length="64" nullable="false"/>
-        <field name="publicUrl" type="string" column="public_url" length="200" nullable="false"/>
+        <field name="publicUrl" type="string" column="public_url" length="200" nullable="true"/>
         <field name="createdAt" type="datetime_immutable" column="created_at" nullable="false"/>
+
+        <many-to-one field="trick" target-entity="App\Domain\Entity\Trick" inversed-by="media" >
+            <cascade>
+                <cascade-remove />
+            </cascade>
+            <join-column name="trick_id" referenced-column-name="id" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <field name="trickId" type="uuid" nullable="true" />
     </entity>
 </doctrine-mapping>

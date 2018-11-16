@@ -10,20 +10,27 @@
             <div class="single-trick">
 
                 <div class="card mb-3 center-block">
-                    <img class="card-img-top" src="{{ trick.image }}" alt="Card image cap">
+                    {% for image in trick.media if image.type == 'image' %}
+                        {% if loop.first %}
+                    <img class="card-img-top" src="{{ asset(image.publicUrl)  }}" alt="Card image cap">
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
                     <div class="card-body" style="height: auto">
                         <div class="list-tricks-images col text-center">
-                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
-                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
-                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
-                            <img src="https://via.placeholder.com/200x200" alt="trick-image" class="img-thumbnail">
+                            {% for image in trick.media if image.type == 'image' %}
+                                {% if not loop.first %}
+                            <img src="{{ asset(image.publicUrl) }}" alt="trick-image" class="img-thumbnail" width="200px" height="200px">
+                                {% endif %}
+                            {% endfor %}
                         </div>
+
                         <br>
                         <h5 class="card-title">{{ trick.name }}</h5>
                         <p>
-                        <small class="text-muted"><strong>Auteur : </strong> Lilou75</small>
+                        <small class="text-muted"><strong>Auteur : </strong> {{ trick.user.username }}</small>
                             <br>
-                        <small class="text-muted"><strong>Categorie : </strong></small> <a href="#" class="badge badge-danger">Grabs</a>
+                        <small class="text-muted"><strong>Categorie : </strong></small> <a href="#" class="badge badge-danger">{{ trick.category.name }}</a>
                         </p>
                         <br>
                         <h5 class="card-title">Description</h5>
