@@ -89,6 +89,7 @@ class TrickFixture extends Fixture implements DependentFixtureInterface
             $size = 24659;
             $publicUrl = 'img/default/726x400.jpg';
             $this->media->createImageMedia($mediaName, $extension, $size, $publicUrl, $this->trick);
+            $this->media->setType('fixture');
             $this->trick->create($trickName, $trickDescription, $this->media, $this->category, $user);
             $manager->persist($this->trick);
             $manager->persist($this->media);

@@ -161,6 +161,16 @@ class Media implements MediaInterface
     }
 
     /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+
+
+    /**
      * @param $name
      * @param $extension
      * @param $size
