@@ -6,6 +6,7 @@
 namespace App\UI\Action;
 
 
+use App\Services\Slugify;
 use App\UI\Form\Handler\AddTrickHandler;
 use App\UI\Form\Type\AddTrickType;
 use App\UI\Form\Type\ImagesType;
@@ -70,11 +71,13 @@ class AddTrickAction
 
         if ($this->handler->new($form)) {
             // redirect to home page with success message
-            $request->attributes->set('redirect', 'home');
+            $slug = Slugify::slugify($form->getData()->name);
+            $request->attributes->set('redirect', 'view-trick');
             $this->session->getFlashBag()->add('success', 'Trick créé avec succès');
-            return $responder($request, null);
+            return $responder($request, null,null,$slug);
         } else {
-            return $responder($request, $viewForm, $this->handler->getErrors());
+            //$this->session->getFlashBag()->add('danger', 'Il y a quelques erreurs sur cette page.');
+            return $responder($request, $viewForm, $this->handler->getErrors(),null);
         }
 
         return $responder($request, $viewForm);

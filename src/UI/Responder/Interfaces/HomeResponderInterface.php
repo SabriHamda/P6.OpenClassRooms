@@ -9,6 +9,7 @@ namespace App\UI\Responder\Interfaces;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Twig\Environment;
 
 /**
@@ -21,7 +22,7 @@ interface HomeResponderInterface
      *
      * @param Environment $twig
      */
-    public function __construct(Environment $twig);
+    public function __construct(Environment $twig,SessionInterface $session);
 
     /**
      * @param Request $request

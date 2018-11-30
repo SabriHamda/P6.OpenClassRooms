@@ -6,6 +6,7 @@
 namespace App\UI\Responder\Interfaces;
 
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 /**
@@ -17,13 +18,13 @@ interface TokenValidationResponderInterface
     /**
      * TokenValidationResponderInterface constructor.
      * @param Environment $twig
+     * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twig);
+    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator);
 
     /**
      * @param $user
-     * @param $flash
      * @return mixed
      */
-    public function __invoke($user, $flash);
+    public function __invoke($user = null);
 }

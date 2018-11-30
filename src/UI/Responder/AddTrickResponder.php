@@ -45,15 +45,15 @@ class AddTrickResponder implements AddTrickResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Request $request, $viewForm = null, $errors = null): Response
+    public function __invoke(Request $request, $viewForm = null, $errors = null, $slug = null): Response
     {
         $redirect = $request->attributes->get('redirect');
         if ($redirect) {
-            $response = new RedirectResponse($this->urlGenerator->generate($redirect));
+            $response = new RedirectResponse($this->urlGenerator->generate($redirect, ['slug' => $slug]));
         } else {
             $response = new Response($this->twig->render(
                 'frontend/newAddTrick.html.twig',
-                array('form' => $viewForm,'errors' => $errors)
+                array('form' => $viewForm, 'errors' => $errors)
             ));
         }
 

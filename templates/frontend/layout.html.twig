@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{{ asset('build/css/app.css') }}" type="text/css">
 </head>
 <body>
+<!=====----- notifications -----=====>
+{% include('messages/notification.html.twig') %}
+<!=====----- notifications end -----=====>
+
 {% include('frontend/parts/navigation.html.twig') %}
 {% block content %}{% endblock %}
 {% include('messages/messages.html.twig') %}

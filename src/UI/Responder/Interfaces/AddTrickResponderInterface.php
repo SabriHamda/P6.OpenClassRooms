@@ -25,6 +25,6 @@ interface AddTrickResponderInterface
      * @param null $errors
      * @return Response
      */
-    public function __invoke(Request $request, $viewForm = null, $errors = null): Response;
+    public function __invoke(Request $request, $viewForm = null, $errors = null, $slug = null): Response;
 
 }

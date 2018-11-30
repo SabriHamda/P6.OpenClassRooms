@@ -1,0 +1,17 @@
+{% block notification %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <span id="notification-badge" class="badge badge-{{ type }}">
+                {% if type == 'success' %}
+                    <i class="fas fa-check"></i> {{ message }}
+                {% elseif type == 'danger' %}
+                    <i class="fas fa-times"></i> {{ message }}
+                {% elseif type == 'info' %}
+                    <i class="fas fa-info-circle"></i> {{ message }}
+                {% elseif type == 'warning' %}
+                    <i class="fas fa-exclamation-triangle"></i> {{ message }}
+                {% endif %}
+            </span>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

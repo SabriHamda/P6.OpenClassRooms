@@ -14,6 +14,7 @@ namespace App\UI\Action;
 use App\Domain\Repository\Interfaces\TrickRepositoryInterface;
 use App\UI\Responder\Interfaces\DeleteTrickResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DeleteTrickAction
@@ -24,12 +25,19 @@ class DeleteTrickAction
     private $trickRepository;
 
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * DeleteTrickAction constructor.
      * @param TrickRepositoryInterface $trickRepository
+     * @param SessionInterface $session
      */
-    public function __construct(TrickRepositoryInterface $trickRepository)
+    public function __construct(TrickRepositoryInterface $trickRepository,SessionInterface $session)
     {
         $this->trickRepository = $trickRepository;
+        $this->session = $session;
     }
 
 
@@ -44,6 +52,7 @@ class DeleteTrickAction
     {
         $trick = $this->trickRepository->getTrickBySlug($slug);
         $this->trickRepository->remove($trick);
+        $this->session->getFlashBag()->add('success', 'Trick suprimé avec succès');
         $response = $responder($request);
         return $response;
 

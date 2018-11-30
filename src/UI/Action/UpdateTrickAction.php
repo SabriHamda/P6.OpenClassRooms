@@ -87,10 +87,12 @@ class UpdateTrickAction
         if ($this->handler->new($form, $trick)) {
             // redirect to home page with success message
             $request->attributes->set('redirect', true);
-            $this->session->getFlashBag()->add('success', 'Trick créé avec succé');
+            $this->session->getFlashBag()->add('success', 'Trick modifée avec succés');
             return $responder($request, null, $trick, $form->getErrors(true));
         } else {
+            $this->session->getFlashBag()->add('danger', 'Il y a quelques erreurs sur cette page.');
             return $responder($request, $viewForm, $trick, $form->getErrors(true));
+
         }
 
 

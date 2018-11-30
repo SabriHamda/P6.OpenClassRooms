@@ -75,9 +75,10 @@ class RegisterAction
         if ($this->userHandler->new($form)) {
             // redirect to home page with success message
             $request->attributes->set('redirect','home');
-            $this->session->getFlashBag()->add('success', 'Votre enregistrement a bien été pris en compte, pour valider votre inscription, merci de vous rendre dans votre boite mail.');
+            $this->session->getFlashBag()->add('success', 'Pour valider votre inscription, merci de vous rendre dans votre boite mail.');
             return $responder($request);
         } else {
+           // $this->session->getFlashBag()->add('danger', 'Il y a quelques erreurs sur cette page.');
             return $responder($request, $viewForm, $this->userHandler->getErrors());
         }
 
