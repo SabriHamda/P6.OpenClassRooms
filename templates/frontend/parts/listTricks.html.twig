@@ -22,7 +22,7 @@
             </span>
 
                 <img class="card-img-top"
-                        {% for media in trick.media if media.type == 'image' %}
+                        {% for media in trick.media if media.type == 'image' or 'fixture' %}
                             src="{{ media.publicUrl }}"
                         {% endfor %}
                      alt="card trick-card image cap" width="300px">

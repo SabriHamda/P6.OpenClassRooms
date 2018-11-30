@@ -25,7 +25,7 @@
                         </a>
                     </h6>
                     <p>
-                        {% for media in trick.media if media.type == 'image' %}
+                        {% for media in trick.media if media.type == 'image' or 'fixture' %}
                             {% if loop.first %}
                                 <img id="uploaded-image-0" class="card-img-top" src="{{ asset(media.publicUrl) }}" alt="Card image cap">
                             {% endif %}
@@ -40,7 +40,7 @@
                     </div>
                     <div class="add-trick-content">
                         <div class="list-tricks-images col text-center">
-                            {% for media in trick.media if media.type == 'image' %}
+                            {% for media in trick.media if media.type == 'image' or 'fixture' %}
                                 {% if not loop.first %}
                                     <div class="preview-smallest" class="col-lg-3">
                                         <img id="uploaded-image-{{ loop.index0 }}" src="{{ asset(media.publicUrl) }}" alt="trick-image" class="preview img-thumbnail" width="200px" height="200px">

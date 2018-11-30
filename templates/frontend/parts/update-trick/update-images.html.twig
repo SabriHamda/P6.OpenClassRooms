@@ -1,6 +1,6 @@
 {% block imagesForm %}
     <div class="mt-2 form-group">
-        {% for media in trick.media if media.type == 'image' %}
+        {% for media in trick.media if media.type == 'image' or 'fixture' %}
             {% if loop.first %}
                 <img id="uploaded-image-0" class="card-img-top" src="{{ asset( media.publicUrl ) }}"
                      alt="Card image cap">
@@ -11,7 +11,7 @@
         {% endfor %}
         <div class="add-trick-content">
             <div class="list-tricks-images row text-center">
-                {% for media in trick.media if media.type == 'image' %}
+                {% for media in trick.media if media.type == 'image' or 'fixture' %}
                     {% if not loop.first %}
                         <div class="col-md-4">
                             <div class="thumbnail">
