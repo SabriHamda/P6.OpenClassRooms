@@ -1,0 +1,68 @@
+@font-face {
+  font-family: $orbitron;
+  src: $orbitron_url;
+}
+.main-header .header-title h1 {
+  color: #fffafa;
+  font-size: 50px;
+  text-align: left;
+  font-weight: 600;
+  line-height: 70px;
+  padding-bottom: 30px;
+  position: relative;
+  font-family: $orbitron, sans-serif;
+}
+.main-content {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100vw;
+  height: auto;
+  margin: 0;
+  background: $main_secondary_color;
+  z-index: 1;
+  &:before {
+    position: absolute;
+    content: '';
+    top: -3.30vw;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 3.35vw solid $main_secondary_color;
+    border-left: 100vw solid transparent;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+  .trick-card{
+    width: auto;
+    height: auto;
+    max-width: -webkit-fill-available;
+    .btn{
+      position: initial;
+    }
+    img{
+      height: auto;
+    }
+    .card-body{
+      position: initial;
+      height: auto;
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+
+}

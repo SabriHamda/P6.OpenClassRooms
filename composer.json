@@ -38,7 +38,7 @@
         "symfony/debug-pack": "*",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "*",
+        "symfony/phpunit-bridge": "4.1.*",
         "symfony/profiler-pack": "*",
         "symfony/web-server-bundle": "*"
     },

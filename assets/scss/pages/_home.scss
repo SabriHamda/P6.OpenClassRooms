@@ -1,0 +1,231 @@
+//@extend-elements
+//original selectors
+//.main-header .header-title .btn, .main-header .btn
+%extend_1 {
+  background: $color_thunderbird_approx;
+  border-color: $color_thunderbird_approx;
+  @include border-radius(0);
+  padding: 10px 30px;
+  margin-top: 50px;
+}
+
+.active {
+  color: $color_thunderbird_approx;
+}
+
+@font-face {
+  font-family: $street_brush;
+  src: $street_brush_url;
+}
+
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $titillium_web, $sans_serif;
+  background: $color_silver_approx;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: $color_soapstone_approx;
+}
+
+.main-header {
+  position: fixed;
+  padding-top: 50px;
+  height: 100vh;
+  z-index: 1;
+  img {
+    width: 100vw;
+    height: 100%;
+  }
+  .header-title {
+    position: absolute;
+    left: 10%;
+    z-index: 10;
+    top: 30%;
+    h1 {
+      color: $color_soapstone_approx;
+      font-size: 50px;
+      text-align: left;
+      font-weight: 600;
+      line-height: 70px;
+      padding-bottom: 30px;
+      position: relative;
+      font-family: $font_awesome, $sans_serif;
+    }
+    h4 {
+      padding: 15px 30px;
+      background: $black_62;
+      text-align: left;
+      font-size: 11px;
+      float: left;
+      text-transform: uppercase;
+      color: $white_71;
+      letter-spacing: 6px;
+      font-weight: 600;
+    }
+    .btn {
+      @extend %extend_1;
+      &:focus {
+
+        @include box-shadow(0 0 0 0.2rem $color_thunderbird_approx);
+      }
+    }
+  }
+  .btn {
+    @extend %extend_1;
+    &:hover {
+      color: $white;
+      background-color: $color_thunderbird_approx;
+      border-color: $color_thunderbird_approx;
+    }
+  }
+}
+
+.list-tricks {
+  margin: 100px auto 100px auto ;
+  line-height: 0;
+  max-width: 1200px;
+}
+
+.trick-card {
+  display: inline-block;
+  max-width: 250px;
+  height: 400px;
+  margin: 20px 10px;
+  padding-left: 0;
+  padding-right: 0;
+
+  @include border-radius(0);
+  text-align: left;
+  background: $color_soapstone_approx;
+  border: none;
+
+  @include box-shadow(0 1px 3px $black_12, 0 1px 2px $black_24);
+
+  @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1));
+  .card-title {
+    margin-top: 0.75rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  &:hover {
+
+    @include box-shadow(0 14px 28px $black_25, 0 10px 10px $black_22);
+    .card-pattern {
+      width: 50px;
+      ul {
+        display: block;
+      }
+    }
+  }
+  img {
+    width: 100%;
+    height: 190px;
+  }
+  .btn {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+
+    @include box-shadow(0 1px 3px $black_12, 0 1px 2px $black_24);
+
+    @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1));
+    &:hover {
+      color: $white;
+      background-color: $color_thunderbird_approx !important;
+      border-color: $color_thunderbird_approx !important;
+
+      @include box-shadow(0 14px 28px $black_25, 0 10px 10px $black_22);
+    }
+  }
+}
+
+.card-body {
+  position: absolute;
+  height: 200px;
+}
+
+.card-pattern {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  width: 0;
+  height: 190px;
+  background: $black_70;
+
+  @include transition(0.3s);
+  > ul {
+    display: none;
+    width: 50px;
+    margin-left: -38px;
+    li {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      width: 50px;
+      height: 47.5px;
+      line-height: 47.5px;
+      text-align: center;
+      a {
+        width: 50px;
+        height: auto;
+        text-align: center;
+        color: $white;
+        &:hover {
+          color: $color_thunderbird_approx;
+          font-size: larger;
+        }
+      }
+    }
+  }
+  > :before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: -50px;
+    width: 0;
+    height: 0;
+    border-bottom: 190px solid $black_70;
+    border-left: 50px solid transparent;
+  }
+}
+
+.btn {
+  background: $color_thunderbird_approx;
+  border-color: $color_thunderbird_approx;
+
+  @include border-radius(0);
+  padding: 10px 30px;
+  margin-top: 50px;
+  &:hover {
+    color: $white;
+    background-color: $color_thunderbird_approx;
+    border-color: $color_thunderbird_approx;
+  }
+}
+
+footer {
+  width: 100vw;
+  margin-top: 100px;
+  color: $color_soapstone_approx;
+  background-color: $main_footer_color;
+  a {
+    color: $white_50;
+    &:hover {
+      text-decoration: none;
+      color: $color_soapstone_approx;
+    }
+  }
+  .footer-copyright {
+    background-color: $main_darken_color;
+  }
+}

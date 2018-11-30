@@ -13,6 +13,6 @@ class VideoExistPDOConstraint extends Constraint
     /**
      * @var string
      */
-    public $message = 'Désolé une des videos selectionées n\'existe pas';
+    public $message = 'L\'url de cette video n\'existe pas';
 
 }

@@ -1,0 +1,52 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block content %}
+    <div class="main-container container-fluid">
+        <!=====----- delete-media popin -----=====>
+        {% include('messages/delete-media.html.twig') %}
+        <!=====----- delete-media popin end -----=====>
+
+        <!=====----- form-errors popin -----=====>
+        {% include('messages/form-errors.html.twig') %}
+        <!=====----- form-errors popin end -----=====>
+
+        <div class="main-content row" style="top:100px">
+            <div class="single-trick">
+                <div class="card mb-3 center-block">
+                    {{ form_start(form,{'attr':{'class':'add-trick-form','method':'post'}}) }}
+
+                    <!=====----- form-header part -----=====>
+                    {% include('frontend/parts/add-trick/add-header.html.twig') %}
+                    <!=====----- form-header part end -----=====>
+
+                    <!=====----- images part -----=====>
+                    {% include('frontend/parts/add-trick/add-images.html.twig') %}
+                    <!=====----- images part end -----=====>
+
+                    <!=====----- videos part -----=====>
+                    {% include('frontend/parts/add-trick/add-videos.html.twig') %}
+                    <!=====----- videos part end -----=====>
+
+                    <!=====----- content part -----=====>
+                    {% include('frontend/parts/add-trick/add-content.html.twig') %}
+                    <!=====----- content part end -----=====>
+
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div id="components">
+                <!=====----- img component -----=====>
+                {% include('frontend/parts/add-trick/components/image-component.html.twig') %}
+                <!=====----- img component end -----=====>
+            </div>
+            <!=====----- footer -----=====>
+            {% include('frontend/parts/footer.html.twig') %}
+            <!=====----- footer end -----=====>
+        </div>
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('build/js/app_add.js') }}"></script>
+    {% endblock %}
+{% endblock content %}
+

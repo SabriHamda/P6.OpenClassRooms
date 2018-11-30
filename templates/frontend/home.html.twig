@@ -1,16 +1,14 @@
 {% extends 'frontend/layout.html.twig' %}
 {% block content %}
-
-    <!=====----- navigation -----=====>
-    {% include('frontend/parts/navigation.html.twig') %}
-    <!=====----- navigation end-----=====>
-
     <div class="main-container container-fluid">
+
+        <!=====----- delete-trick popin -----=====>
+        {% include('messages/delete-trick.html.twig') %}
+        <!=====----- delete-trick popin end -----=====>
+
         <div id="main-header" class="main-header row">
             <img src="{{ asset('img/bg.jpg') }}" alt="image">
-            <div class="snow1"></div>
-            <div class="snow2"></div>
-            <div class="snow3"></div>            <div id="header-title" class="header-title">
+            <div id="header-title" class="header-title">
                 <h1>Les Tricks<br> Typiques de <br><span>Snowboard </span>à Connaître </h1>
                 <h4>La montagne, ça vous gagne!</h4>
                 <div class="clearfix"></div>
@@ -18,165 +16,21 @@
             </div>
         </div>
         <div class="main-content row">
-            <div id="list-tricks" class="list-tricks row-fluid text-center">
 
+            <!=====----- list tricks -----=====>
+            {% include('frontend/parts/listTricks.html.twig') %}
+            <!=====----- list tricks end -----=====>
 
-                {% for trick in tricks %}
-                    <div class="card trick-card col-lg-3 col-md-3">
-            <span class="card-pattern">
-               <ul>
-                   {% if app.user %}
-                   {% if trick.user.username == app.user.username %}
-                   <li><a href="#" data-toggle="tooltip" title="Suprimer" data-placement="left"><i class="far fa-trash-alt"></i></a></li>
-                   <li><a href="#" data-toggle="tooltip" title="Modifier" data-placement="left"><i class="far fa-edit"></i></a></li>
-                   {% endif %}
-                   {% endif %}
-                   <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost%3A8000/{{ trick.slug }}" data-toggle="tooltip" title="Partager" data-placement="left"><i class="far fa-share-square"></i></a></li>
-                   <li><a href="view-trick/{{ trick.slug }}" data-toggle="tooltip" title="Voir" data-placement="left"><i class="fas fa-search-plus"></i></a></li>
-               </ul>
-            </span>
+            <!=====----- footer -----=====>
+            {% include('frontend/parts/footer.html.twig') %}
+            <!=====----- footer end -----=====>
 
-                        <img class="card-img-top"
-                                {% for media in trick.media if media.type == 'image' %}
-                             src="{{ media.publicUrl }}"
-                                {% endfor %}
-                             alt="card trick-card image cap" width="300px">
-
-                        <div class="card-body">
-                            <small class="text-muted"></small> <a href="#" class="badge badge-danger">{{ trick.category.name }}</a>
-                            <h5 class="card-title">{{ trick.name }}</h5>
-                            {% set words = trick.description|raw|split(' ', 50) %}
-                                {% if words|default|raw %}
-                                <p>{{ words[0]|default }}
-                                {{ words[1]|default }}
-                                {{ words[2]|default }}
-                                {{ words[3]|default }}
-                                {{ words[4]|default }}
-                                {{ words[5]|default }}
-                                {{ words[6]|default }}
-                                {{ words[7]|default }}
-                                {{ words[8]|default }}
-                                {{ words[9]|default }}
-                                    {{ words[10]|default }} ...</p>
-                                {% endif %}
-
-                            <!--<p class="card-text">{{ trick.description }}</p>-->
-                            <a href="/view-trick/{{ trick.slug }}" class="btn btn-primary">En savoir plus</a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <!-- Footer -->
-            <footer class="page-footer font-small blue pt-4">
-
-                <!-- Footer Links -->
-                <div class="container-fluid text-center text-md-left">
-
-                    <!-- Grid row -->
-                    <div class="row">
-
-                        <!-- Grid column -->
-                        <div class="col-md-6 mt-md-0 mt-3">
-
-                            <!-- Content -->
-                            <h5 class="text-uppercase">Snow Tricks</h5>
-                            <p>Qu'elles soient "old school" ou "new school", <br>les prouesses aériennes du snowboard
-                                sont toujours d'une beauté à couper le souffle.<br> la preuve en images.</p>
-
-                        </div>
-                        <!-- Grid column -->
-
-                        <hr class="clearfix w-100 d-md-none pb-3">
-
-                        <!-- Grid column -->
-                        <div class="col-md-3 mb-md-0 mb-3">
-
-                            <!-- Links -->
-                            <h5 class="text-uppercase">Menu</h5>
-
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="{{ path('home') }}">Accueil</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('home') }}">Tricks</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('login') }}">Login</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('user_registration') }}">Register</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <!-- Grid column -->
-
-                        <!-- Grid column -->
-                        <div class="col-md-3 mb-md-0 mb-3">
-
-                            <!-- Links -->
-                            <h5 class="text-uppercase">Liens Utiles</h5>
-
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="https://fr.wikipedia.org/wiki/Snowboard">Wikipedia</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.skiclub-legrandbornand.com/content/lexique-du-snowboarder-0">Lexique
-                                        du snowboarder</a>
-                                </li>
-                                <li>
-                                    <a href="https://www.redbull.com/ch-fr/les-tricks-typiques-de-snowboard">Les tricks
-                                        typiques de snowboard</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.skipass.com/forums/sports/snowboard/sujet-67154.html">Forum</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <!-- Grid column -->
-
-                    </div>
-                    <!-- Grid row -->
-
-                </div>
-                <!-- Footer Links -->
-
-                <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">© 2018 Copyright :
-                    <a href="https://p6.hamda.ch"> www.hamda.ch</a>
-                </div>
-                <!-- Copyright -->
-
-            </footer>
-            <!-- Footer -->
         </div>
     </div>
-    <script>
 
-
-        //home page
-        window.addEventListener('scroll', function (e) {
-            let windowScrollTop = this.scrollY;
-            let imgPos = (windowScrollTop / -2 + 'px');
-            let titlePos = (windowScrollTop / -1 + 'px');
-
-            document.getElementById('main-header').style.transform = "translate(0, " + imgPos + ")";
-            document.getElementById('header-title').style.transform = "translate(" + titlePos + " ,0)";
-
-        });
-
-
-        // hide messages on click close button
-        document.getElementById('message-btn').addEventListener('click', function (event) {
-            event.preventDefault();
-            hide(document.querySelectorAll('.message'));
-        });
-
-
-    </script>
+    {% block javascripts %}
+        <script src="{{ asset('build/js/app_home.js') }}"></script>
+    {% endblock javascripts %}
 
 
 {% endblock content %}

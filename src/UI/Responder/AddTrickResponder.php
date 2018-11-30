@@ -52,7 +52,7 @@ class AddTrickResponder implements AddTrickResponderInterface
             $response = new RedirectResponse($this->urlGenerator->generate($redirect));
         } else {
             $response = new Response($this->twig->render(
-                'frontend/addTrick.html.twig',
+                'frontend/newAddTrick.html.twig',
                 array('form' => $viewForm,'errors' => $errors)
             ));
         }

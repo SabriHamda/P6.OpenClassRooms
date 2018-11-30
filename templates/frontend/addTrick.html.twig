@@ -1,10 +1,6 @@
 {% extends 'frontend/layout.html.twig' %}
 {% block content %}
-    <!=====----- navigation -----=====>
-    {% include('frontend/parts/navigation.html.twig') %}
-    <!=====----- navigation end-----=====>
-
-    <div class="main-container container-fluid">
+ <div class="main-container container-fluid">
 
         <div class="main-content row" style="top:100px">
             <div class="single-trick">
@@ -195,6 +191,38 @@
         </div>
     </div>
         <script type="text/javascript">
+            let message =  $('.custom-error .invalid-feedback .form-error-message').html();
+            if(message){
+                $('.custom-error').append('<span class="invalid-feedback d-block"><span class="d-block">\n' +
+                    '                    <span class="form-error-icon badge badge-danger text-uppercase">Erreur</span> <span class="form-error-message">'+ message +'</span>\n' +
+                    '                </span></span>')
+            }
+
+            //Page add-trick,detect origin of embed videos, show preview of video
+            $('.view-video-btn').click(function () {
+                let videoAttr = $(this).attr('data-video');
+                let videoSrc = $(this).parent('div').children('input').val();
+
+                let regexYoutube = /youtube/g;
+                let regexDailymotion = /dailymotion/g;
+                let youtube = videoSrc.match(regexYoutube);
+                let dailymotion = videoSrc.match(regexDailymotion);
+
+
+                if (videoSrc && youtube) {
+
+                    let finalYoutube = videoSrc.replace("watch?v=", "embed/");
+                    $('.preview-video-' + videoAttr).attr('src', finalYoutube);
+                } else if (videoSrc && dailymotion) {
+                    let finalDailymotion = videoSrc.replace("video", "embed/video");
+                    $('.preview-video-' + videoAttr).attr('src', finalDailymotion);
+                } else {
+                    $('.preview-video-' + videoAttr).attr('src', 'img/default/default-video.jpg');
+
+                }
+
+            });
+
             function readURL(input) {
                 let images = input.files.length;
                 if (images > 9){

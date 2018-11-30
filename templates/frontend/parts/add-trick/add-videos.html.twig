@@ -1,0 +1,24 @@
+{% block updateVideos %}
+    <div class="mt-2 form-group">
+        <div class="col-12 text-center" style="background: #5c6378;padding: 20px 10px 20px 10px;border: 1px solid #fff;">
+            <h5 class="card-title">Ajouter une ou plusieurs videos</h5>
+            <h6 class="card-title">Veuillez saisir url de votre video Youtube ou Dailymotion.</h6>
+            <div class="input-videos-block">
+                <div class="input-group mb-3 input-video-component_0 component">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Url youtube ou Dailymotion</span>
+                    </div>
+                    <input type="text" class="form-control" id="add_trick_videos_0"
+                           name="add_trick[videos][0]">
+                    <div id="ajax-video-error" class="col-12"></div>
+                </div>
+            </div>
+            <button class="btn btn-primary add-video-btn"><i id="upload-img-loading" class="fas fa-spinner fa-2x"></i>
+                <i id="upload-img-plus" class="upload-img-plus fas fa-plus fa-2x"></i></button>
+            {{ form_errors(form.videos) }}
+        </div>
+        <div class="row text-center view-videos-block">
+            <!-- videos will be embed here -->
+        </div>
+    </div>
+{% endblock updateVideos %}

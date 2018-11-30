@@ -6,12 +6,10 @@
 namespace App\UI\Form\Type;
 
 use App\Domain\DTO\AddTrickDTO;
-use App\Domain\Repository\CategoryRepository;
 use App\Domain\Repository\Interfaces\CategoryRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -49,19 +47,15 @@ class AddTrickType extends AbstractType
                 ]
             ])
             ->add('image', FileType::class, [
-                'required' => true,
+                'required' => false,
                 'multiple' => true,
                 'label' => null,
-                'attr' => [
-                    'onchange' => 'readURL(this);'
-                ],
             ])
             ->add('videos', CollectionType::class, array(
                     'entry_type' => TextType::class,
                         'prototype' => false,
                         'allow_add' => true,
                         'allow_delete' => true,
-                    'prototype_data' => 'moi',
                     'prototype_name' => 'videos',
                     'label' => false,
                     'required' => false,
@@ -73,6 +67,7 @@ class AddTrickType extends AbstractType
                 'label' => false,
                 'multiple' => false,
                 'choices' => $this->getCategories(),
+                'choice_translation_domain' => false
 
             ));
 

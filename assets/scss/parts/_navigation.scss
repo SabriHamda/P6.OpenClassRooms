@@ -1,0 +1,43 @@
+// Main navigation
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: $main_darken_color !important;
+  z-index: 999;
+  .site-name {
+    margin-top: -16px;
+    margin-bottom: -40px;
+    color: $color_soapstone_approx;
+    font-family: $street_brush, $arial, $sans_serif;
+    font-size: 40px;
+    font-weight: 500;
+    text-transform: capitalize;
+    word-spacing: 5px;
+    @include rotate(-4deg);
+  }
+  .nav-profile {
+    text-transform: capitalize;
+    line-height: 30px;
+    color: $white_50;
+  }
+  &:before {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 3.35vw solid $main_darken_color;
+    border-right: 100vw solid transparent;
+  }
+  ul li {
+
+    @include rotate(-4deg);
+    .dropdown-menu {
+
+      @include rotate(4deg);
+    }
+  }
+}

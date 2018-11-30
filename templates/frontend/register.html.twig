@@ -1,10 +1,6 @@
 {% extends 'frontend/layout.html.twig' %}
 
 {% block content %}
-    <!=====----- navigation -----=====>
-    {% include('frontend/parts/navigation.html.twig') %}
-    <!=====----- navigation end-----=====>
-
     <div class="main-container container-fluid col-sm-12 col-md-12 col-lg-6">
 
         {{ form_start(form,{'attr':{'class':'register-form','method':'post'}}) }}
@@ -30,7 +26,7 @@
                     {{ form_widget(form.email,{ 'attr': {'class': 'pimp'} }) }}
                     <span class="form-loader"></span>
                     {{ form_errors(form.email) }}
-                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small class="form-text text-muted">Votre adresse email ne sera pas retransmise à des tiers.</small>
                 </div>
                 <div class="form-group">
                     <label>* Mot de passe</label>
@@ -44,30 +40,23 @@
                     <span class="form-loader"></span>
                     {{ form_errors(form.password.second) }}
                 </div>
-
             </div>
             <div class="col-md-6 text-center">
                 <div class="form-group form-control-file">
                     <label>Image de profile</label><br>
                     <div class="img-rounded">
-                        <img id="preview" src="{{ asset('img/default/default-user-avatar.png') }}" alt="image"
-                             class="text-center" style="max-height:150px;width:150px;height:150px;border-radius:150px;">
+                        <img id="preview" src="{{ asset('img/default/default-user-avatar.png') }}" alt="image" class="text-center" style="max-height:150px;width:150px;height:150px;border-radius:150px;">
                     </div>
                     <br><br>
                     {{ form_widget(form.image) }}
-
                     {{ form_errors(form.image) }}
-
                 </div>
-
-
                 <button type="submit" class="btn btn-primary">S'enregistrer</button>
-
                 {{ form_end(form) }}
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <small> Les articles marqués avec un asterisque (*) sont obligatoires.</small>
+                    <small> Les champs marqués avec un asterisque (*) sont obligatoires.</small>
                 </div>
                 <div class="form-group text-right">
                     <small><a href="{{ path('login') }}"><i class="fas fa-sign-in-alt"></i> &nbsp; deja un compte ? </a></small>
@@ -76,7 +65,11 @@
         </div>
 
 
+
     </div>
+    <!=====----- footer -----=====>
+    {% include('frontend/parts/footer.html.twig') %}
+    <!=====----- footer end -----=====>
 
 
     <script type="text/javascript">

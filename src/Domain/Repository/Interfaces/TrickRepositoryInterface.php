@@ -18,14 +18,38 @@ interface TrickRepositoryInterface
     public function findAll();
 
     /**
-     * @param int $id
+     * @param string $id
      * @return mixed
      */
-    public function getTrickById(int $id);
+    public function getTrickById(string $id);
+
+    /**
+     * @param string $slug
+     * @return mixed
+     */
+    public function getTrickBySlug(string $slug);
 
     /**
      * @param $trick
      * @return mixed|void
      */
     public function save($trick);
+
+    /**
+     * @param $trick
+     * @return mixed|void
+     */
+    public function persist($trick);
+
+    /**
+     * @param string $userId
+     * @return array
+     */
+    public function getTricksByUserId(string $userId) :array ;
+
+    /**
+     * @param $trick
+     * @return mixed
+     */
+    public function remove($trick);
 }

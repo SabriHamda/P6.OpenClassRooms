@@ -1,0 +1,47 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block content %}
+    <div class="main-container container-fluid">
+    <!=====----- delete-media popin -----=====>
+    {% include('messages/delete-media.html.twig') %}
+    <!=====----- delete-media popin end -----=====>
+
+    <!=====----- form-errors popin -----=====>
+    {% include('messages/form-errors.html.twig') %}
+    <!=====----- form-errors popin end -----=====>
+
+    <div class="main-content row" style="top:100px">
+        <div class="single-trick">
+            <div class="card mb-3 center-block">
+                {{ form_start(form,{'attr':{'class':'update-trick-form','method':'post'}}) }}
+
+                    <!=====----- form-header part -----=====>
+                    {% include('frontend/parts/update-trick/update-header.html.twig') %}
+                    <!=====----- form-header part end -----=====>
+
+                    <!=====----- images part -----=====>
+                    {% include('frontend/parts/update-trick/update-images.html.twig') %}
+                    <!=====----- images part end -----=====>
+
+                    <!=====----- videos part -----=====>
+                    {% include('frontend/parts/update-trick/update-videos.html.twig') %}
+                    <!=====----- videos part end -----=====>
+
+                    <!=====----- content part -----=====>
+                    {% include('frontend/parts/update-trick/update-content.html.twig') %}
+                    <!=====----- content part end -----=====>
+
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+                    <!=====----- footer -----=====>
+                    {% include('frontend/parts/footer.html.twig') %}
+                    <!=====----- footer end -----=====>
+        </div>
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('build/js/app_up.js') }}"></script>
+    {% endblock %}
+{% endblock content %}
+

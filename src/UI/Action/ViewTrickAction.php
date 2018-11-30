@@ -7,6 +7,7 @@ namespace App\UI\Action;
 
 
 use App\Domain\Repository\Interfaces\TrickRepositoryInterface;
+use App\Services\EmbedURL;
 use App\UI\Responder\Interfaces\ViewTrickResponderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;

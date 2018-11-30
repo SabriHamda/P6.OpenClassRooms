@@ -8,6 +8,7 @@ namespace App\UI\Action;
 
 use App\UI\Form\Handler\AddTrickHandler;
 use App\UI\Form\Type\AddTrickType;
+use App\UI\Form\Type\ImagesType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,15 +70,12 @@ class AddTrickAction
 
         if ($this->handler->new($form)) {
             // redirect to home page with success message
-            $trick = $this->handler->getTrick();
-            $slug = $trick->getSlug();
-            $request->attributes->set('redirect','home');
-            $this->session->getFlashBag()->add('success', 'Trick créé avec succé');
-            return $responder($request,null);
+            $request->attributes->set('redirect', 'home');
+            $this->session->getFlashBag()->add('success', 'Trick créé avec succès');
+            return $responder($request, null);
         } else {
             return $responder($request, $viewForm, $this->handler->getErrors());
         }
-
 
         return $responder($request, $viewForm);
     }

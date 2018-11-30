@@ -15,13 +15,12 @@
         <field name="publicUrl" type="string" column="public_url" length="200" nullable="true"/>
         <field name="createdAt" type="datetime_immutable" column="created_at" nullable="false"/>
 
-        <many-to-one field="trick" target-entity="App\Domain\Entity\Trick" inversed-by="media" >
-            <cascade>
-                <cascade-remove />
-            </cascade>
+        <many-to-one field="trick" target-entity="App\Domain\Entity\Trick" inversed-by="media">
             <join-column name="trick_id" referenced-column-name="id" on-delete="CASCADE"/>
         </many-to-one>
 
-        <field name="trickId" type="uuid" nullable="true" />
+        <!--<field name="trickId" type="uuid" nullable="true"/>-->
+        <field name="userId" type="uuid" column="user_id" nullable="true"/>
+
     </entity>
 </doctrine-mapping>

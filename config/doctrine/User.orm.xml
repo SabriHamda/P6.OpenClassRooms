@@ -49,10 +49,5 @@
                 <cascade-persist/>
             </cascade>
         </one-to-one>
-        <one-to-many field="trick" target-entity="App\Domain\Entity\Trick" mapped-by="user" >
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-        </one-to-many>
     </entity>
 </doctrine-mapping>

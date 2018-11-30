@@ -43,4 +43,23 @@ class MediaRepository extends ServiceEntityRepository implements MediaRepository
         $this->_em->persist($media);
     }
 
+    /**
+     * @param array $criteria
+     * @param array|null $orderBy
+     * @return null|object
+     */
+    public function findOneBy(array $criteria, array $orderBy = null)
+    {
+        return parent::findOneBy($criteria, $orderBy);
+    }
+
+    /**
+     * @param $media
+     */
+    public function removeMedia($media)
+    {
+        $this->_em->remove($media);
+        $this->_em->flush();
+    }
+
 }

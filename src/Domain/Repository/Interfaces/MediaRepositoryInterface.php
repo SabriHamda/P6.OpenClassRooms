@@ -28,4 +28,18 @@ interface MediaRepositoryInterface
      */
     public function persist(Media $media);
 
+    /**
+     * @param array $criteria
+     * @param array|null $orderBy
+     * @return mixed
+     */
+    public function findOneBy(array $criteria, array $orderBy = null);
+
+    /**
+     * @param $media
+     * @return mixed
+     */
+    public function removeMedia($media);
+
+
 }

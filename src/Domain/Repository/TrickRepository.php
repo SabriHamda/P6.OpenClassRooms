@@ -36,11 +36,11 @@ class TrickRepository extends ServiceEntityRepository implements TrickRepository
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getTrickById(int $id)
+    public function getTrickById(string $id)
     {
         return $this->createQueryBuilder('u')
             ->where('u.id = :id')
@@ -72,4 +72,38 @@ class TrickRepository extends ServiceEntityRepository implements TrickRepository
         $this->_em->persist($trick);
         $this->_em->flush();
     }
+
+    /**
+     * @param $trick
+     * @return mixed|void
+     */
+    public function persist($trick)
+    {
+        $this->_em->persist($trick);
+    }
+
+    /**
+     * @param string $userid
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getTricksByUserId(string $userId): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getArrayResult();
+
+    }
+
+    /**
+     * @param $trick
+     */
+    public function remove($trick)
+    {
+        $this->_em->remove($trick);
+        $this->_em->flush();
+    }
+
 }

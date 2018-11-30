@@ -1,0 +1,38 @@
+{% block updateVideos %}
+    <div class="mt-2 form-group">
+        <h5 class="card-title">Ajouter une ou plusieurs videos</h5>
+        <h6 class="card-title">Veuillez saisir url de votre video Youtube ou Dailymotion.</h6>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Url youtube ou Dailymotion</span>
+                </div>
+                <input type="text" class="form-control" id="update_trick_videos"
+                       name="update_trick[videos][0]">
+                <span class="view-video-btn" id="add-video-btn"><a  href="javascript:void(0)"
+                                                role="button"><i id="upload-video-loading" class="fas fa-spinner"></i> <i id="upload-video-plus" class="fas fa-plus"></i></a></span>
+                <div id="ajax-video-error" class="col-12"></div>
+            </div>
+
+        <div class="custom-error">
+            <div style="display:none"> {{ form_row(form.videos) }}</div>
+            {{ form_errors(form.videos) }}
+        </div>
+        <div class="row text-center">
+            {% for media in trick.media if media.type == 'video' %}
+                <div class="mt-4 col-sm-12 col-md-6 col-lg-6" style="display: inline-block;min-height: 400px">
+                <div class="mt-2 col-12" style="height: 100%;">
+                    <iframe width="100%" height="100%"
+                        src="{{ media.publicUrl }}">
+                </iframe>
+                </div>
+                    <div class="mt-2 col-12">
+                    <a class="btn btn-primary delete-media-btn delete-media-video-btn" href="javascript:void(0)"
+                       btn-action="{{ path('delete-media', {'mediaId': media.id}) }}" role="button" data-toggle="modal"
+                       data-target="#delete-media" style="margin-top:-70px"><i class="far fa-trash-alt"></i></a>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock updateVideos %}

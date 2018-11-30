@@ -1,0 +1,55 @@
+{% block listTricks %}
+    <div id="list-tricks" class="list-tricks row-fluid text-center">
+        {% for trick in tricks %}
+            <div class="card trick-card col-sm-12 col-lg-3 col-md-3">
+            <span class="card-pattern">
+               <ul>
+                   {% if app.user %}
+                       {% if trick.user.username == app.user.username %}
+                           <li><a id="del-trick-btn" btn-action="{{ path('delete-trick',{ slug : trick.slug }) }}"
+                                  href="javascript:void(0)" data-toggle="tooltip" title="Suprimer"
+                                  data-placement="left"><i class="far fa-trash-alt"></i></a></li>
+                           <li><a href="{{ path('update-trick',{ slug : trick.slug }) }}" data-toggle="tooltip"
+                                  title="Modifier" data-placement="left"><i class="far fa-edit"></i></a></li>
+                       {% endif %}
+                   {% endif %}
+                   <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost%3A8000/{{ trick.slug }}"
+                          data-toggle="tooltip" title="Partager" data-placement="left"><i
+                                   class="far fa-share-square"></i></a></li>
+                   <li><a href="view-trick/{{ trick.slug }}" data-toggle="tooltip" title="Voir" data-placement="left"><i
+                                   class="fas fa-search-plus"></i></a></li>
+               </ul>
+            </span>
+
+                <img class="card-img-top"
+                        {% for media in trick.media if media.type == 'image' %}
+                            src="{{ media.publicUrl }}"
+                        {% endfor %}
+                     alt="card trick-card image cap" width="300px">
+
+                <div class="card-body">
+                    <small class="text-muted"></small>
+                    <a href="#" class="badge badge-danger">{{ trick.category.name }}</a>
+                    <h5 class="card-title">{{ trick.name }}</h5>
+                    {% set words = trick.description|raw|split(' ', 50) %}
+                    {% if words|default|raw %}
+                        <p>{{ words[0]|default }}
+                            {{ words[1]|default }}
+                            {{ words[2]|default }}
+                            {{ words[3]|default }}
+                            {{ words[4]|default }}
+                            {{ words[5]|default }}
+                            {{ words[6]|default }}
+                            {{ words[7]|default }}
+                            {{ words[8]|default }}
+                            {{ words[9]|default }}
+                            {{ words[10]|default }} ...</p>
+                    {% endif %}
+
+                    <!--<p class="card-text">{{ trick.description }}</p>-->
+                    <a href="/view-trick/{{ trick.slug }}" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock listTricks %}

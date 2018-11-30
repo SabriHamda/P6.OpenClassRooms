@@ -1,0 +1,20 @@
+{% block formErrors %}
+    <div class="modal fade" id="form-errors-popin" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><span class="badge badge-danger">Attention! </span> Le formulaire comporte des erreurs</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="error-message"></div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0)" role="button" id="close-form-errors-popin" class="btn btn-secondary" data-dismiss="modal">Fermer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock formErrors %}

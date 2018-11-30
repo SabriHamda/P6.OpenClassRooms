@@ -17,7 +17,7 @@
                 {% if is_granted('ROLE_USER') %}
                     <li>
                         <a class="navbar-brand nav-profile" href="#">
-                            <img src="{{ app.user.image.publicUrl }}" width="40" height="40"
+                            <img src="{{ asset(app.user.image.publicUrl) }}" width="40" height="40"
                                  class="d-inline-block align-top" alt="" style="border-radius:40px;margin-top:-3px;">
                             &nbsp;{{ app.user.username }}
                         </a>

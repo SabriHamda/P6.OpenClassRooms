@@ -5,7 +5,7 @@
 
 namespace App\Domain\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Services\EmbedURL;
 use App\Domain\Entity\Interfaces\MediaInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -57,9 +57,23 @@ class Media implements MediaInterface
     private $trickId;
 
     /**
+     * @var string
+     */
+    private $userId;
+
+    /**
      * @var
      */
     private $videos;
+
+    /**
+     * Media constructor.
+     * @param $userId
+     */
+    public function __construct($userId = null)
+    {
+        $this->userId = $userId;
+    }
 
 
     /**
@@ -140,6 +154,13 @@ class Media implements MediaInterface
     }
 
     /**
+     * @return string
+     */
+    public function getUserId(){
+        return $this->userId;
+    }
+
+    /**
      * @param $name
      * @param $extension
      * @param $size
@@ -169,17 +190,17 @@ class Media implements MediaInterface
      * @param $video
      * @throws \Exception
      */
-    public function createVideoMedia($trick,$video)
+    public function createVideoMedia($trick, $video)
     {
-        $this->trick = $trick;
-        $this->id = Uuid::uuid4();
-        $this->trickId = $this->trick->getId();
-        $this->name = 'embed_video';
-        $this->extension = 'mp4';
-        $this->type = 'video';
-        $this->size = 0000;
-        $this->publicUrl = $video;
-        $this->createdAt = new \DateTimeImmutable();
-
+            $this->trick = $trick;
+            $this->id = Uuid::uuid4();
+            $this->trickId = $this->trick->getId();
+            $this->name = 'embed_video';
+            $this->extension = 'mp4';
+            $this->type = 'video';
+            $this->size = 0000;
+            $embedUrl = new EmbedURL($video);
+            $this->publicUrl = $embedUrl->getEmbedUrl();
+            $this->createdAt = new \DateTimeImmutable();
     }
 }

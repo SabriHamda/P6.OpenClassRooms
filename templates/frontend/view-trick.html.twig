@@ -1,149 +1,102 @@
 {% extends 'frontend/layout.html.twig' %}
 {% block content %}
-    <!=====----- navigation -----=====>
-    {% include('frontend/parts/navigation.html.twig') %}
-    <!=====----- navigation end-----=====>
-
-    <div class="main-container container-fluid">
-
-        <div class="main-content row" style="top:100px">
-            <div class="single-trick">
-
-                <div class="card mb-3 center-block">
-                    {% for image in trick.media if image.type == 'image' %}
-                        {% if loop.first %}
-                    <img class="card-img-top" src="{{ asset(image.publicUrl)  }}" alt="Card image cap">
-                        {% else %}
-                        {% endif %}
-                    {% endfor %}
-                    <div class="card-body" style="height: auto">
+<div class="main-container container-fluid">
+    <div class="main-content row" style="top:100px">
+        <div class="single-trick">
+            <div class="card mb-3 center-block update-trick-form">
+                <div class="row-fluid">
+                    <div class="street-titles col-12">
+                        <h1>{{ trick.name }}
+                        </h1>
+                    </div>
+                    <p>
+                        <small class="text-muted"><strong>Auteur :</strong> {{ trick.user.username }}</small>
+                        <br>
+                        <small class="text-muted">
+                            <strong>Crée le :
+                            </strong>
+                            <span id="to-day">{{ trick.createdAt|date('d/m/Y') }}</span>
+                        </small>
+                    </p>
+                    <h5 class="card-title">Nom: {{ trick.name }}</h5>
+                    <h6 class="card-title">Category :
+                        <a href="#"
+                           class="badge badge-danger"> {{ trick.category.name }}
+                        </a>
+                    </h6>
+                    <p>
+                        {% for media in trick.media if media.type == 'image' %}
+                            {% if loop.first %}
+                                <img id="uploaded-image-0" class="card-img-top" src="{{ asset(media.publicUrl) }}" alt="Card image cap">
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <div class="card-group ">
+                        <h5 class="card-title">Description</h5>
+                        <p>{{ trick.description }}</p>
+                    </div>
+                    <div class="street-titles">
+                        <h2>Autre images</h2>
+                    </div>
+                    <div class="add-trick-content">
                         <div class="list-tricks-images col text-center">
-                            {% for image in trick.media if image.type == 'image' %}
+                            {% for media in trick.media if media.type == 'image' %}
                                 {% if not loop.first %}
-                            <img src="{{ asset(image.publicUrl) }}" alt="trick-image" class="img-thumbnail" width="200px" height="200px">
+                                    <div class="preview-smallest" class="col-lg-3">
+                                        <img id="uploaded-image-{{ loop.index0 }}" src="{{ asset(media.publicUrl) }}" alt="trick-image" class="preview img-thumbnail" width="200px" height="200px">
+                                    </div>
                                 {% endif %}
                             {% endfor %}
                         </div>
 
-                        <br>
-                        <h5 class="card-title">{{ trick.name }}</h5>
-                        <p>
-                        <small class="text-muted"><strong>Auteur : </strong> {{ trick.user.username }}</small>
-                            <br>
-                        <small class="text-muted"><strong>Categorie : </strong></small> <a href="#" class="badge badge-danger">{{ trick.category.name }}</a>
-                        </p>
-                        <br>
-                        <h5 class="card-title">Description</h5>
-                        <p class="card-text">{{ trick.description }}</p>
-                        <p class="card-text">
-                            <small class="text-muted"><strong>Crée le : </strong> {{ trick.createdAt|date("m/d/Y") }}</small>
-                        </p>
-                        <div class="col" style="width:100%">
-                            <h5 class="card-title">Commentaires</h5>
-                            <ul class="list-unstyled">
-                                <li class="media">
-                                    <img class="mr-3" src="https://via.placeholder.com/64x64" alt="profile-image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1">Morgan68</h5>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam interdum tellus a tincidunt dictum. Etiam a ipsum justo. In lacinia convallis tempor. Nullam iaculis et quam non suscipit. Aliquam erat volutpat. Vestibulum non vulputate dui.
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="street-titles">
+                            <h2>Videos</h2>
+                        </div>
+                        <div class="list-tricks-videos col text-center">
+                            {% for video in trick.media if video.type == 'video' %}
+                                {% if video.publicUrl %}
+                            <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe width="200" height="200" src="{{ video.publicUrl }}"></iframe>
+                            </div>
+                                    <br>
+                                {% else %}
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="street-titles col-12">
+                            <h1>Commentaires</h1>
+                        </div>
+                        <ul class="list-group-item-text">
+                            <li class="media">
+                                <img class="mr-3" src="{{ asset('img/default/default-user-avatar.png') }}" width="64px" height="64px" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">List-based media object</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </li>
+                            <li class="media my-4">
+                                <img class="mr-3" src="{{ asset('img/default/default-user-avatar.png') }}" width="64px" height="64px" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">List-based media object</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3" src="{{ asset('img/default/default-user-avatar.png') }}" width="64px" height="64px" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">List-based media object</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
-
             </div>
-            <!-- Footer -->
-            <footer class="page-footer font-small blue pt-4">
-
-                <!-- Footer Links -->
-                <div class="container-fluid text-center text-md-left">
-
-                    <!-- Grid row -->
-                    <div class="row">
-
-                        <!-- Grid column -->
-                        <div class="col-md-6 mt-md-0 mt-3">
-
-                            <!-- Content -->
-                            <h5 class="text-uppercase">Snow Tricks</h5>
-                            <p>Qu'elles soient "old school" ou "new school", <br>les prouesses aériennes du snowboard
-                                sont toujours d'une beauté à couper le souffle.<br> la preuve en images.</p>
-
-                        </div>
-                        <!-- Grid column -->
-
-                        <hr class="clearfix w-100 d-md-none pb-3">
-
-                        <!-- Grid column -->
-                        <div class="col-md-3 mb-md-0 mb-3">
-
-                            <!-- Links -->
-                            <h5 class="text-uppercase">Menu</h5>
-
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="{{ path('home') }}">Accueil</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('home') }}">Tricks</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('login') }}">Login</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('user_registration') }}">Register</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <!-- Grid column -->
-
-                        <!-- Grid column -->
-                        <div class="col-md-3 mb-md-0 mb-3">
-
-                            <!-- Links -->
-                            <h5 class="text-uppercase">Liens Utiles</h5>
-
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="https://fr.wikipedia.org/wiki/Snowboard">Wikipedia</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.skiclub-legrandbornand.com/content/lexique-du-snowboarder-0">Lexique
-                                        du snowboarder</a>
-                                </li>
-                                <li>
-                                    <a href="https://www.redbull.com/ch-fr/les-tricks-typiques-de-snowboard">Les tricks
-                                        typiques de snowboard</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.skipass.com/forums/sports/snowboard/sujet-67154.html">Forum</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <!-- Grid column -->
-
-                    </div>
-                    <!-- Grid row -->
-
-                </div>
-                <!-- Footer Links -->
-
-                <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">© 2018 Copyright :
-                    <a href="https://p6.hamda.ch"> www.hamda.ch</a>
-                </div>
-                <!-- Copyright -->
-
-            </footer>
-            <!-- Footer -->
         </div>
+        <!=====----- footer -----=====>
+        {% include('frontend/parts/footer.html.twig') %}
+        <!=====----- footer end -----=====>
     </div>
-
-
-{% endblock content %}
-
+    {% endblock content %}

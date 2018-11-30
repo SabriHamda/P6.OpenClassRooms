@@ -58,8 +58,14 @@ class Trick
      */
     private $category;
 
+    /**
+     * @var
+     */
     private $user;
 
+    /**
+     * @var string
+     */
     private $userId;
 
     /**
@@ -185,6 +191,22 @@ class Trick
         $this->media []= $media;
         $this->description = $description;
         $this->createdAt = new \DateTimeImmutable();
+        $this->category = $category;
+        $this->categoryId = $this->category->getId();
+        $this->user = $user;
+        $this->userId = $user->getId();
+
+    }
+
+    public function update(string $name,string $description,$media = null, CategoryInterface $category,User $user)
+    {
+        $this->name = $name;
+        $this->slug = Slugify::slugify($name);
+        if ($media){
+            $this->media []= $media;
+        }
+        $this->description = $description;
+        $this->updatedAt = new \DateTimeImmutable();
         $this->category = $category;
         $this->categoryId = $this->category->getId();
         $this->user = $user;

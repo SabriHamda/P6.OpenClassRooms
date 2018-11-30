@@ -142,7 +142,6 @@ class AddTrickHandler
 
         // handle the submit
         if ($form->isSubmitted() && $form->isValid()) {
-
             // Get current user
             $user = $this->security->getUser();
             $this->trick = new Trick();
@@ -157,14 +156,16 @@ class AddTrickHandler
 
             // Set videos
             foreach ($videos as $video) {
-                $media = new Media();
-                $media->createVideoMedia($this->trick, $video);
-                $this->mediaRepository->persist($media);
+                if (!\is_null($video)){
+                    $media = new Media($this->security->getUser()->getId());
+                    $media->createVideoMedia($this->trick, $video);
+                    $this->mediaRepository->persist($media);
+                }
             }
 
             // Set images
             foreach ($images as $image) {
-                $media = new Media();
+                $media = new Media($this->security->getUser()->getId());
                 // get file informations
                 $trickImage = new File($image);
                 $hashedFileName = md5(uniqid()) . '.' . $image->guessExtension();
@@ -186,8 +187,6 @@ class AddTrickHandler
             // Trick validator to validate form
             $errors = $this->validator
                 ->validate($this->trick);
-            dd($errors);
-
             if (\count($errors) > 0) {
                 $this->session->getFlashBag()->add('errors', (string)$errors);
                 return false;
