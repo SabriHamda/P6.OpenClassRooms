@@ -5,11 +5,11 @@
 
 namespace App\UI\Action;
 
-use App\Repository\UserRepository;
+use App\Domain\Repository\UserRepository;
 use App\UI\Responder\TokenValidationResponder;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 
@@ -25,11 +25,6 @@ class TokenValidation
     private $twig;
 
     /**
-     * @var FlashBagInterface
-     */
-    private $flash;
-
-    /**
      * @var UserRepository
      */
     private $userRepository;
@@ -40,18 +35,23 @@ class TokenValidation
     private $manager;
 
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * TokenValidation constructor.
      * @param \Twig_Environment $twig
      * @param ManagerRegistry $manager
      * @param UserRepository $userRepository
-     * @param FlashBagInterface $flash
+     * @param SessionInterface $session
      */
-    public function __construct(\Twig_Environment $twig, ManagerRegistry $manager, UserRepository $userRepository, FlashBagInterface $flash)
+    public function __construct(\Twig_Environment $twig, ManagerRegistry $manager, UserRepository $userRepository, SessionInterface $session)
     {
         $this->twig = $twig;
-        $this->flash = $flash;
         $this->userRepository = $userRepository;
         $this->manager = $manager;
+        $this->session = $session;
     }
 
     /**
@@ -71,16 +71,19 @@ class TokenValidation
             //if token existe in DB since 24h, remove user go to registration
             if ($user->validationDateDiff() > 0) {
                 $this->userRepository->remove($user);
-                $this->flash->add('danger', 'Désolé <strong>temp écoulé</strong> , vous disposez de 24h pour valider votre adresse mail<br>Pour vous renregistrer merci de <a href="/register">cliquez ici</a>.');
+                $this->session->getFlashBag()->add('warning', 'Désolé vous disposez de 24h pour valider votre adresse mail.');
+                return $responder($user);
             } else {
                 $user->validate();
                 $this->userRepository->update();
-                $this->flash->add('success', 'Votre compte a été valider avec succé, vous pouvez vous loguer en cliquant <a href="/login">ici</a>.');
+                $this->session->getFlashBag()->add('info', 'Votre compte a été valider avec succé.');
+                return $responder($user);
             }
         } else {
-            $this->flash->add('danger', 'Ce compte n\'existe pas.');
+            $this->session->getFlashBag()->add('danger', 'Ce compte n\'existe pas.');
+            return $responder();
         }
 
-        return $responder($user, $this->flash);
+        return $responder();
     }
 }

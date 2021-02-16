@@ -7,7 +7,7 @@ namespace App\UI\Action;
 
 
 use App\Mailer\Interfaces\ResetPasswordMailerInterface;
-use App\Repository\Interfaces\UserRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Responder\Interfaces\ResetPasswordResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,11 +79,11 @@ class ResetPassword
                     $user->setResetPasswordToken($resetPasswordToken);
                     $userRepository->update();
                     $mailer->sendTo($user->getEmail(), $user->getUsername(), $resetPasswordToken);
-                    $this->session->getFlashBag()->add('success', 'Pour confirmer votre email et modifier votre mot de passe, merci de vous rendre dans votre boite mail.');
+                    $this->session->getFlashBag()->add('success', 'Merci de vous rendre dans votre boite mail pour confirmation.');
                     return new RedirectResponse($this->redirectResponse->generate('home'));
                 }
             }else{
-                $this->session->getFlashBag()->add('errors', 'Cet email n\'existe pas, si vous vous étes trompé merci de renouveler votre demande.' );
+                $this->session->getFlashBag()->add('errors', 'Cet email n\'existe pas' );
 
                 return new RedirectResponse($this->redirectResponse->generate('reset-password'));
             }

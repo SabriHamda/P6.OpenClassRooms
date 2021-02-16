@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="App\Domain\DTO\UpdateTrickDTO">
+        <property name="name">
+            <!--<constraint name="App\Validator\Constraints\UniqueNamePDOConstraint" />-->
+            <constraint name="NotBlank">
+                <option name="message">Tous les champs doivent être remplis.</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">4</option>
+                <option name="max">50</option>
+                <option name="minMessage">
+                    Le nom de la figure doit contenir plus de {{ limit }} characters.
+                </option>
+                <option name="maxMessage">
+                    Le nom de la figure ne dois pas contenir plus de {{ limit }} characters.
+                </option>
+            </constraint>
+        </property>
+        <property name="description">
+            <constraint name="NotBlank">
+                <option name="message">Tous les champs doivent être remplis.</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">50</option>
+                <option name="minMessage">
+                    La description doit contenir plus de {{ limit }} characters.
+                </option>
+                <option name="maxMessage">
+                    La description ne dois pas contenir plus de {{ limit }} characters.
+                </option>
+            </constraint>
+        </property>
+        <property name="videos">
+            <constraint name="All">
+                <constraint name="App\Validator\Constraints\VideoExistPDOConstraint" />
+
+                <constraint name="Length">
+                    <option name="min">20</option>
+                    <option name="max">100</option>
+                    <option name="minMessage">
+                        Le lien video doit contenir plus de {{ limit }} characters.
+                    </option>
+                    <option name="maxMessage">
+                        Le lien video ne dois pas contenir plus de {{ limit }} characters.
+                    </option>
+                </constraint>
+            </constraint>
+        </property>
+        <property name="image">
+            <constraint name="App\Validator\Constraints\MaxArrayLengthPDOConstraint" />
+            <constraint name="All">
+                <constraint name="Image">
+                    <option name="mimeTypesMessage">
+                        le format du fichier n'est pas supporté, veuillez selectioner une image valide
+                    </option>
+                </constraint>
+            </constraint>
+
+        </property>
+        <property name="category">
+            <constraint name="NotBlank">
+                <option name="message">Veuillez selectioner une category.</option>
+            </constraint>
+
+        </property>
+    </class>
+</constraint-mapping>

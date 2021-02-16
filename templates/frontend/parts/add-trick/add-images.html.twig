@@ -1,0 +1,46 @@
+{% block imagesForm %}
+    <div class="mt-2 form-group">
+        {#{% for media in trick.media if media.type == 'image' or 'fixture' %}#}
+            {#{% if loop.first %}#}
+
+                {#<img id="uploaded-image-0" class="card-img-top" src="{{ asset('img/default/726x400.jpg') }}"#}
+                     {#alt="Card image cap">#}
+
+                {#<a class="btn btn-primary delete-media-btn" href="javascript:void(0)"#}
+                   {#btn-action="" role="button" data-toggle="modal"#}
+                   {#data-target="#delete-media" style="margin-top:-70px"><i class="far fa-trash-alt"></i></a>#}
+            {#{% endif %}#}
+        {#{% endfor %}#}
+        <div class="add-trick-content">
+            <div class="list-tricks-images row text-center">
+                {#{% for media in trick.media if media.type == 'image' or 'fixture' %}#}
+                    {#{% if not loop.first %}#}
+                        <div id="default-img" class="col-md-4">
+                            <div class="thumbnail">
+                                <img id="uploaded-image-0" src="{{ asset('img/default/726x400.jpg') }}" alt="trick-image"
+                                     class="preview">
+                                {#<a class="btn btn-primary delete-media-btn" href="javascript:void(0)"#}
+                                   {#btn-action="" role="button"#}
+                                   {#data-toggle="modal" data-target="#delete-media"#}
+                                   {#><i class="far fa-trash-alt"></i></a>#}
+                            </div>
+                        </div>
+                    {#{% endif %}#}
+                {#{% endfor %}#}
+            </div>
+            <div class="input-image-blocks">
+                <div class="input-image-block form-group-lg">
+                    <div class="col-12 text-center">
+                        <h5 class="card-title">Ajouter une ou plusieurs images</h5>
+                        <h6 class="card-title">Veuillez cliquer sur le bouton si-desous pour ajouter une ou plusieurs
+                            images.</h6>
+                        <span style="display:none">{{ form_widget(form.image) }}</span>
+                        <button class="btn btn-primary add-image-btn"><i id="upload-img-loading" class="fas fa-spinner fa-2x"></i>
+                            <i id="upload-img-plus" class="upload-img-plus fas fa-plus fa-2x"></i></button>
+                        {{ form_errors(form.image) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock imagesForm %}

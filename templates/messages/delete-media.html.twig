@@ -1,0 +1,22 @@
+{% block deleteMedia %}
+<div class="modal fade" id="delete-media" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Suprimer le media</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Voulez vou vraiment suprimer ce media ?</p>
+                <p><span class="badge badge-danger">Attention!</span><span class="text-muted"> Cette action est irréversible.</span></p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" role="button" class="btn btn-secondary" data-dismiss="modal">Fermer</a>
+                <a href="javascript:void(0)" id="popin-delete-media-btn" data-img-id="" class="btn btn-primary">Suprimer</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock deleteMedia %}

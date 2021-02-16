@@ -1,0 +1,107 @@
+@font-face {
+  font-family: $orbitron;
+  src: $orbitron_url;
+}
+
+.main-header .header-title h1 {
+  color: #fffafa;
+  font-size: 50px;
+  text-align: left;
+  font-weight: 600;
+  line-height: 70px;
+  padding-bottom: 30px;
+  position: relative;
+  font-family: $orbitron, sans-serif;
+}
+
+.main-content {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100vw;
+  height: auto;
+  margin: 0;
+  background: $main_secondary_color;
+  z-index: 1;
+  &:before {
+    position: absolute;
+    content: '';
+    top: -3.30vw;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 3.35vw solid $main_secondary_color;
+    border-left: 100vw solid transparent;
+  }
+}
+
+#scroll-top {
+  display: none;
+  position: fixed;
+  bottom: 200px;
+  right: 20px;
+  padding: 10px 15px;
+  z-index: 8888;
+}
+
+.load-more-btn {
+  padding: 10px 15px;
+}
+
+#load-more-loading {
+  display: none;
+}
+
+#notification-badge {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 9999;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 0;
+  opacity: .80;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  i {
+    margin-right: 10px;
+    font-size: larger;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+  .trick-card {
+    width: auto;
+    height: auto;
+    max-width: -webkit-fill-available;
+    .btn {
+      position: initial;
+    }
+    img {
+      height: auto;
+    }
+    .card-body {
+      position: initial;
+      height: auto;
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+
+}

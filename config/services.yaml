@@ -7,6 +7,10 @@ parameters:
     locale: 'fr'
     avatars_directory: '%kernel.project_dir%/public/img/avatar'
     public_web_avatar_directory: 'img/avatar/'
+    tricks_img_directory: '%kernel.project_dir%/public/img/tricks'
+    public_web_tricks_directory: 'img/tricks/'
+    default_img_directory: '%kernel.project_dir%/public/img/default'
+    public_web_default_directory: 'img/default/'
 
 services:
     # default configuration for services in *this* file
@@ -20,6 +24,10 @@ services:
                     # $configPath: '%kernel.project_dir%/config/'
                     $targetDirectory: '%avatars_directory%'
                     $publicAvatarDirectory: '%public_web_avatar_directory%'
+                    $targetTricksDirectory: '%tricks_img_directory%'
+                    $publicTricksDirectory: '%public_web_tricks_directory%'
+                    $targetDefaultDirectory: '%default_img_directory%'
+                    $publicDefaultDirectory: '%public_web_default_directory%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

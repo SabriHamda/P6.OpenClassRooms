@@ -5,9 +5,9 @@
 
 namespace App\UI\Action;
 
-use App\Entity\User;
+use App\Domain\Entity\User;
 use App\UI\Form\Type\ResetPasswordDoType;
-use App\Repository\Interfaces\UserRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Responder\Interfaces\ResetPasswordDoResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -104,11 +104,10 @@ class ResetPasswordDo
 
 
                     return $responder($request, $viewForm);
-                    dd($this->session->getFlashBag());
                 } else {
                     $user->updatePassword($encryptedPassword);
                     $this->userRepository->update();
-                    $this->session->getFlashBag()->add('success', 'Votre mot de passe a bien été modifié, vous pouvez dès à présent vous connecter en cliquant <a href="/login">ici</a>.');
+                    $this->session->getFlashBag()->add('success', 'Votre mot de passe a bien été modifié.');
                     return new RedirectResponse($this->redirectRoute->generate('home'));
                 }
             }

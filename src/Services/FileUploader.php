@@ -18,26 +18,19 @@ class FileUploader implements FileUploaderInterface
     /**
      * @var string
      */
-    private $targetDirectory;
-
-    /**
-     * FileUploader constructor.
-     * @param $targetDirectory
-     */
-    public function __construct(string $targetDirectory)
-    {
-        $this->targetDirectory = $targetDirectory;
-    }
+    private $directory;
 
     /**
      * @param File $image
      * @param string $hashedFileName
+     * @param string $directory
      * @return mixed|string
      */
-    public function upload(File $image, string $hashedFileName)
+    public function upload(File $image, string $hashedFileName, string $directory)
     {
+        $this->directory = $directory;
         try {
-            $image->move($this->getTargetDirectory(), $hashedFileName);
+            $image->move($this->directory, $hashedFileName);
         } catch (FileException $e) {
             return $e->getMessage();
         }
@@ -45,11 +38,4 @@ class FileUploader implements FileUploaderInterface
         return $hashedFileName;
     }
 
-    /**
-     * @return string
-     */
-    public function getTargetDirectory():string
-    {
-        return $this->targetDirectory;
-    }
 }

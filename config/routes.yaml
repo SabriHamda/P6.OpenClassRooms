@@ -1,2 +1,5 @@
 logout:
     path: /logout
+
+view-trick:
+    path: /view-trick/{slug}

@@ -1,10 +1,10 @@
 security:
     encoders:
-        App\Entity\User: bcrypt
+        App\Domain\Entity\User: bcrypt
     providers:
         in_database:
             entity:
-                class: App\Entity\User
+                class: App\Domain\Entity\User
                 property: email
     firewalls:
         dev:
@@ -35,3 +35,5 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+          - { path: ^/add-trick, roles: ROLE_USER }
+          - { path: ^/update-trick, roles: ROLE_USER }

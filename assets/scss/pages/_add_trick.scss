@@ -1,0 +1,164 @@
+.active {
+  color: $color_thunderbird_approx;
+}
+
+@font-face {
+  font-family: $street_brush;
+  src: url($street_brush_url);
+}
+
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $titillium_web, $sans_serif;
+  background: $color_silver_approx;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: $color_soapstone_approx;
+}
+
+.modal {
+  top: 200px;
+}
+
+.street-titles {
+
+  @include rotate(-4deg);
+  margin-bottom: 60px;
+  margin-left: 20px;
+  font-family: $street_brush, $arial, $sans_serif;
+  font-size: 60px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.single-trick {
+  margin: 100px auto auto;
+  width: 1000px;
+  .card {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.btn {
+  background: $color_thunderbird_approx;
+  border-color: $color_thunderbird_approx;
+
+  @include border-radius(0);
+  padding: 10px 30px;
+  margin-top: 50px;
+  &:hover {
+    color: $white;
+    background-color: $color_thunderbird_approx;
+    border-color: $color_thunderbird_approx;
+  }
+}
+
+footer {
+  width: 100vw;
+  margin-top: 100px;
+  color: $color_soapstone_approx;
+  background-color: $main_footer_color;
+  a {
+    color: $white_50;
+    &:hover {
+      text-decoration: none;
+      color: $color_soapstone_approx;
+    }
+  }
+  .footer-copyright {
+    background-color: $main_darken_color;
+  }
+}
+
+.add-trick-form {
+  background: $main_darken_color;
+  padding: 1em;
+  color: $color_soapstone_approx;
+  .form-control {
+    border: 0;
+
+    @include box-shadow(none);
+  }
+  .view-video-btn {
+    width: 50px;
+    background: $color_thunderbird_approx;
+    text-align: center;
+    line-height: 40px;
+    &:hover {
+      cursor: pointer;
+      background: $color_thunderbird_approx;
+    }
+  }
+  .delete-media-btn {
+    margin-top: -75px !important;
+    padding: 10px 20px;
+  }
+  .delete-media-video-btn {
+    display: inline-block;
+    width: 100%;
+    margin-top: 200px;
+  }
+  .add-image-btn, .add-video-btn {
+    padding: 20px 30px;
+    &:focus {
+
+      @include box-shadow(none);
+    }
+  }
+  .preview {
+    width: 100%;
+    min-height: 200px;
+  }
+  #upload-img-loading {
+    display: none;
+  }
+  #upload-video-loading {
+    display: none;
+  }
+  .input-group > .form-control {
+    height: 40px;
+  }
+  #add-video-btn:hover {
+    color: $white;
+  }
+}
+
+#components {
+  display: none;
+}
+
+select {
+  width: 200px;
+}
+
+.add-trick-content {
+  height: auto;
+  margin-top: 20px;
+}
+
+iframe {
+  overflow: hidden;
+}
+
+.card-pattern > :before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: -50px;
+  width: 0;
+  height: 0;
+  border-bottom: 190px solid $black_70;
+  border-left: 50px solid transparent;
+}

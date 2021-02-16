@@ -1,0 +1,22 @@
+{% block updateHeader %}
+    <div class="my-4 col-12">
+        <div class="street-titles col-12">
+            <h1>Modifer une Figure</h1>
+        </div>
+        <p>
+            <small class="text-muted"><strong>Auteur :</strong> {{ trick.user.username }}</small>
+            <br>
+            <small class="text-muted">
+                <strong>Crée le :
+                </strong>
+                <span id="to-day">{{ trick.createdAt|date('d/m/Y') }}</span>
+            </small>
+        </p>
+        <h5 class="card-title">Nom: {{ trick.name }}</h5>
+        <h6 class="card-title">Category :
+            <a href="#"
+               class="badge badge-danger"> {{ trick.category.name }}
+            </a>
+        </h6>
+    </div>
+{% endblock updateHeader%}

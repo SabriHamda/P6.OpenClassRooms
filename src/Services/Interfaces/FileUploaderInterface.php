@@ -15,22 +15,11 @@ interface FileUploaderInterface
 {
 
     /**
-     * FileUploaderInterface constructor.
-     * @param string $targetDirectory
-     */
-    public function __construct(string $targetDirectory);
-
-
-    /**
      * @param File $image
      * @param string $hashedFileName
+     * @param string $directory
      * @return mixed
      */
-    public function upload(File $image, string $hashedFileName);
+    public function upload(File $image, string $hashedFileName,string $directory);
 
-
-    /**
-     * @return string
-     */
-    public function getTargetDirectory(): string;
 }

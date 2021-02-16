@@ -10,6 +10,7 @@ namespace App\UI\Responder;
 use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Twig\Environment;
 
 /**
@@ -22,9 +23,12 @@ class HomeResponder implements HomeResponderInterface
      */
     private $twig;
 
-    public function __construct(Environment $twig)
+    private $session;
+
+    public function __construct(Environment $twig,SessionInterface $session)
     {
         $this->twig = $twig;
+        $this->session = $session;
     }
 
     /**

@@ -1,0 +1,14 @@
+//fonts
+$street_brush: Street Brush;
+$titillium_web: Titillium Web;
+$orbitron : orbitron;
+$sans_serif: sans-serif;
+$arial: Arial;
+$font_awesome: 'Font Awesome 5 Free';
+//urls
+$titilium_url: 'https://fonts.googleapis.com/css?family=Titillium+Web:400,600,600i,700,900';
+$orbitron_url: 'https://fonts.googleapis.com/css?family=Orbitron:400,500,700,900';
+$street_brush_url: './../fonts/Streetbrush.otf';
+
+@import url($titilium_url);
+@import url($orbitron_url);

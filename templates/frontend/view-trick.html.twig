@@ -1,0 +1,102 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block content %}
+<div class="main-container container-fluid">
+    <div class="main-content row" style="top:100px">
+        <div class="single-trick">
+            <div class="card mb-3 center-block update-trick-form">
+                <div class="row-fluid">
+                    <div class="street-titles col-12">
+                        <h1>{{ trick.name }}
+                        </h1>
+                    </div>
+                    <p>
+                        <small class="text-muted"><strong>Auteur :</strong> {{ trick.user.username }}</small>
+                        <br>
+                        <small class="text-muted">
+                            <strong>Crée le :
+                            </strong>
+                            <span id="to-day">{{ trick.createdAt|date('d/m/Y') }}</span>
+                        </small>
+                    </p>
+                    <h5 class="card-title">Nom: {{ trick.name }}</h5>
+                    <h6 class="card-title">Category :
+                        <a href="#"
+                           class="badge badge-danger"> {{ trick.category.name }}
+                        </a>
+                    </h6>
+                    <p>
+                        {% for media in trick.media if media.type == 'image' or 'fixture' %}
+                            {% if loop.first %}
+                                <img id="uploaded-image-0" class="card-img-top" src="{{ asset(media.publicUrl) }}" alt="Card image cap">
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <div class="card-group ">
+                        <h5 class="card-title">Description</h5>
+                        <p>{{ trick.description }}</p>
+                    </div>
+                    <div class="street-titles">
+                        <h2>Autre images</h2>
+                    </div>
+                    <div class="add-trick-content">
+                        <div class="list-tricks-images col text-center">
+                            {% for media in trick.media if media.type == 'image' or 'fixture' %}
+                                {% if not loop.first %}
+                                    <div class="preview-smallest" class="col-lg-3">
+                                        <img id="uploaded-image-{{ loop.index0 }}" src="{{ asset(media.publicUrl) }}" alt="trick-image" class="preview img-thumbnail" width="200px" height="200px">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="street-titles">
+                            <h2>Videos</h2>
+                        </div>
+                        <div class="list-tricks-videos col text-center">
+                            {% for video in trick.media if video.type == 'video' %}
+                                {% if video.publicUrl %}
+                            <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe width="200" height="200" src="{{ video.publicUrl }}"></iframe>
+                            </div>
+                                    <br>
+                                {% else %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="street-titles col-12">
+                            <h1>Commentaires</h1>
+                        </div>
+                        <ul class="list-group-item-text">
+                            <li class="media">
+                                <img class="mr-3" src="{{ asset('img/default/default-user-avatar.png') }}" width="64px" height="64px" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">List-based media object</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </li>
+                            <li class="media my-4">
+                                <img class="mr-3" src="{{ asset('img/default/default-user-avatar.png') }}" width="64px" height="64px" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">List-based media object</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3" src="{{ asset('img/default/default-user-avatar.png') }}" width="64px" height="64px" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">List-based media object</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!=====----- footer -----=====>
+        {% include('frontend/parts/footer.html.twig') %}
+        <!=====----- footer end -----=====>
+    </div>
+    {% endblock content %}

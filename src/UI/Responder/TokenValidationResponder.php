@@ -6,7 +6,9 @@
 namespace App\UI\Responder;
 
 use App\UI\Responder\Interfaces\TokenValidationResponderInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 
@@ -23,26 +25,28 @@ class TokenValidationResponder implements TokenValidationResponderInterface
     private $twig;
 
     /**
+     * @var UrlGeneratorInterface
+     */
+    private $urlGenerator;
+
+    /**
      * TokenValidationResponder constructor.
      * @param Environment $twig
+     * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator)
     {
         $this->twig = $twig;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
-     * @param $user
-     * @param $flash
+     * @param null $user
      * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
-    public function __invoke($user, $flash) :Response
+    public function __invoke($user = null): Response
     {
-        $response = new Response($this->twig->render('frontend/registerTokenValidation.html.twig',['user'=> $user,'message' => $flash, 'button' => true]));
-
+        $response = new RedirectResponse($this->urlGenerator->generate('home'));
         return $response;
     }
 }

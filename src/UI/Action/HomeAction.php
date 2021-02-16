@@ -7,7 +7,7 @@
 
 namespace App\UI\Action;
 
-use App\Repository\TrickRepository;
+use App\Domain\Repository\TrickRepository;
 use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,8 +48,8 @@ class HomeAction
      */
     public function __invoke(Request $request, HomeResponderInterface $responder)
     {
-        $tricks = $this->trickRepository->findAll();
 
+        $tricks = $this->trickRepository->findAll();
         return $responder($request, $tricks);
     }
 }

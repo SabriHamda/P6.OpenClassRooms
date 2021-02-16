@@ -1,0 +1,24 @@
+{% block updateContent %}
+    <div class="my-5 form-group">
+        <div class="mt-2 form-item">
+        <h5 class="card-title">Groupe :</h5>
+        <h6>Veuillez selectionner une categorie</h6>
+        {{ form_widget(form.category) }}
+        {{ form_errors(form.category) }}
+        </div>
+
+        <div class="mt-2 form-item">
+        <h5 class="card-title">Nom de la figure</h5>
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+        </div>
+
+        <div class="mt-2 form-item">
+        <h5 class="card-title">Description</h5>
+        <p class="card-text">
+            {{ form_widget(form.description) }}
+            {{ form_errors(form.description) }}
+        </p>
+        </div>
+    </div>
+{% endblock updateContent %}
